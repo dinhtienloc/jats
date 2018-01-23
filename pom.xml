@@ -5,17 +5,30 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>vn.locdt</groupId>
-    <artifactId>Jat</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>jats</artifactId>
+    <name>JATS (Java Assistant Tools)</name>
+    <version>1.0.0</version>
+
+    <properties>
+        <jdk.version>1.8</jdk.version>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-tools -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-tools</artifactId>
-            <version>5.2.8.Final</version>
-        </dependency>
 
+        <!--<dependency>-->
+            <!--<groupId>org.hibernate</groupId>-->
+            <!--<artifactId>hibernate-tools</artifactId>-->
+            <!--<version>5.2.8.Final</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.3</version>
+        </dependency>
     </dependencies>
 
 </project>

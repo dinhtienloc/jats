@@ -1,4 +1,4 @@
-package internal.generate;
+package vn.locdt.jats.internal.generate;
 
 /**
  * Created by locdt on 1/21/2018.

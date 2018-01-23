@@ -1,7 +1,6 @@
-package internal.database;
+package vn.locdt.jats.internal.database;
 
-import constants.Message;
-import util.AppUtils;
+import vn.locdt.jats.constants.Message;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -14,10 +13,15 @@ import java.util.List;
  * Created by locdt on 1/21/2018.
  */
 public class DatabaseReader {
+    private Connection conn;
+    public DatabaseReader(Connection conn) {
+        this.conn = conn;
+    }
 
     public List<String> getDatabaseTableList() {
+        if (conn == null) return null;
+
         List<String> tables = new ArrayList<>();
-        Connection conn = AppUtils.checkConnection();
         try {
             DatabaseMetaData meta = conn.getMetaData();
             ResultSet rs = meta.getTables(null, null, null, new String[]{"TABLE"});

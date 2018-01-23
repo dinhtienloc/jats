@@ -1,4 +1,4 @@
-package constants;
+package vn.locdt.jats.constants;
 
 /**
  * Created by locdt on 1/21/2018.
