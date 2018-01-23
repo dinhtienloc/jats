@@ -4,6 +4,7 @@
 
 #Maven
 target/
+classes/
 
 #Resources
 *.log
