@@ -1,11 +1,8 @@
 package vn.locdt.jats.util;
 
 import org.apache.commons.lang.SystemUtils;
-import vn.locdt.jats.config.Configuration;
-import vn.locdt.jats.constants.Message;
 
 import java.nio.file.Paths;
-import java.sql.Connection;
 
 /**
  * Created by locdt on 1/21/2018.

@@ -1,8 +1,5 @@
 package vn.locdt.jats.question;
 
-import vn.locdt.jats.config.Configuration;
-import vn.locdt.jats.config.ConfigurationData;
-
 /**
  * Created by locdt on 1/21/2018.
  */

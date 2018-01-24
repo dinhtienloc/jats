@@ -1,7 +1,6 @@
 package vn.locdt.jats;
 
-import vn.locdt.jats.config.Configuration;
-import vn.locdt.jats.config.ConfigurationData;
+import vn.locdt.jats.config.SettingData;
 import vn.locdt.jats.exception.MismatchArgumentQuestionFactoryException;
 import vn.locdt.jats.module.database.*;
 
@@ -11,7 +10,7 @@ import vn.locdt.jats.module.database.*;
 public class Main {
     public static void main(String[] args) {
         printLogo();
-        new ConfigurationData().loadConfiguration();
+        new SettingData().loadConfiguration();
 
         try {
             DatabaseQuestionFactory dbQuestionFactory = new DatabaseQuestionFactory();

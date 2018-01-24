@@ -7,12 +7,13 @@ import java.util.Properties;
 /**
  * Created by locdt on 1/23/2018.
  */
-public class ProjectConfiguration extends Configuration {
+public class ProjectSetting extends Setting {
     protected String rootPackage;
+    protected String entityFolder;
 
-    public ProjectConfiguration() {super();}
+    public ProjectSetting() {super();}
 
-    public ProjectConfiguration(Properties prop) {
+    public ProjectSetting(Properties prop) {
         this.rootPackage = prop.getProperty(PropertiesConstants.ROOTPACKAGE);
     }
 
@@ -22,5 +23,13 @@ public class ProjectConfiguration extends Configuration {
 
     public void setRootPackage(String rootPackage) {
         this.rootPackage = rootPackage;
+    }
+
+    public String getEntityFolder() {
+        return entityFolder;
+    }
+
+    public void setEntityFolder(String entityFolder) {
+        this.entityFolder = entityFolder;
     }
 }

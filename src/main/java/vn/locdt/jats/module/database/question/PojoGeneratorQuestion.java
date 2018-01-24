@@ -1,12 +1,10 @@
 package vn.locdt.jats.module.database.question;
 
-import vn.locdt.jats.config.Configuration;
-import vn.locdt.jats.config.ConfigurationData;
-import vn.locdt.jats.config.DatabaseConfiguration;
+import vn.locdt.jats.config.SettingData;
 import vn.locdt.jats.internal.database.DatabaseReader;
+import vn.locdt.jats.internal.generate.POJOGenerator;
 import vn.locdt.jats.question.QuestionCLI;
 import vn.locdt.jquestion.JQuestion;
-import vn.locdt.jats.exception.*;
 
 import java.util.List;
 
@@ -30,14 +28,14 @@ public class PojoGeneratorQuestion extends QuestionCLI {
     @Override
     protected RunStatus run() {
         String chosenTable = askForTableName();
-//        POJOGenerator generator = new POJOGenerator(chosenTable);
-//        generator.generate();
+        POJOGenerator generator = new POJOGenerator();
+        generator.generate();
         return RunStatus.CONTINUE;
     }
 
     private String askForTableName(){
         String chosenTable = null;
-        DatabaseReader dbReader = new DatabaseReader(ConfigurationData.getDatabaseConfiguration().getConnection());
+        DatabaseReader dbReader = new DatabaseReader(SettingData.getDatabaseSetting().getConnection());
         List<String> tables = dbReader.getDatabaseTableList();
 
         if (tables != null) {

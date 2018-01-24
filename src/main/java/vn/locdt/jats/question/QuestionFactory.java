@@ -1,10 +1,8 @@
 package vn.locdt.jats.question;
 
-import vn.locdt.jats.config.Configuration;
 import vn.locdt.jats.exception.MismatchArgumentQuestionFactoryException;
 
 import java.lang.reflect.Constructor;
-import java.util.Collection;
 import java.util.List;
 
 /**

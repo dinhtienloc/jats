@@ -14,5 +14,5 @@ import java.util.Properties;
 /**
  * Created by locdt on 1/21/2018.
  */
-public abstract class Configuration {
+public abstract class Setting {
 }

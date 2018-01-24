@@ -1,11 +1,11 @@
 package vn.locdt.jats.config;
 
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 import vn.locdt.jats.constants.Constants;
 import vn.locdt.jats.constants.PropertiesConstants;
-import vn.locdt.jats.util.Utils;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
@@ -13,22 +13,27 @@ import java.util.Properties;
 /**
  * Created by locdt on 1/23/2018.
  */
-public class DatabaseConfiguration extends Configuration {
-    private String dbType;
-    private String dbUrl;
-    private String dbUser;
-    private String dbPass;
-    private Connection connection = null;
+public class DatabaseSetting extends Setting {
+    private static String dbType;
+    private static String dbUrl;
+    private static String dbUser;
+    private static String dbPass;
+    private static Connection connection = null;
+    private static Configuration hbmConfiguration;
 
-    public DatabaseConfiguration() {
-        super();
-    }
-
-    public DatabaseConfiguration(Properties prop) {
+    public DatabaseSetting(Properties prop) {
         this.dbType = prop.getProperty(PropertiesConstants.DBTYPE);
         this.dbUrl = prop.getProperty(PropertiesConstants.DBURL);
         this.dbUser = prop.getProperty(PropertiesConstants.DBUSER);
         this.dbPass = prop.getProperty(PropertiesConstants.DBPASS);
+
+        this.hbmConfiguration = new Configuration(new MetadataSources(
+            new StandardServiceRegistryBuilder()
+                .applySetting("hibernate.connection.driver_class", Constants.DBType.valueOf(dbType).getDriver())
+                .applySetting("hibernate.connection.url", dbUrl)
+                .applySetting("hibernate.connection.username", dbUser)
+                .applySetting("hibernate.connection.password", dbPass)
+                .build()));
     }
 
     public String getDbType() {
@@ -61,6 +66,14 @@ public class DatabaseConfiguration extends Configuration {
 
     public void setDbPass(String dbPass) {
         this.dbPass = dbPass;
+    }
+
+    public Configuration getHbmConfiguration() {
+        return hbmConfiguration;
+    }
+
+    public void setHbmConfiguration(Configuration hbmConfiguration) {
+        DatabaseSetting.hbmConfiguration = hbmConfiguration;
     }
 
     public void loadDriver(String type) {

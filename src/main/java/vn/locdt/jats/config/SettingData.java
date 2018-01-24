@@ -1,38 +1,36 @@
 package vn.locdt.jats.config;
 
-import org.apache.commons.lang.SystemUtils;
 import vn.locdt.jats.constants.PropertiesConstants;
 import vn.locdt.jats.util.Utils;
 
 import java.io.*;
-import java.nio.file.Paths;
 import java.util.Properties;
 
 /**
  * Created by locdt on 1/22/2018.
  */
-public class ConfigurationData {
-    private static ProjectConfiguration projectConfig = null;
-    private static DatabaseConfiguration dbConfig = null;
+public class SettingData {
+    private static ProjectSetting projectSetting = null;
+    private static DatabaseSetting dbSetting = null;
     private static Properties properties;
 
     static {
         properties = new Properties();
     }
 
-    public static ProjectConfiguration getProjectConfiguration() {
-        return projectConfig;
+    public static ProjectSetting getProjectSetting() {
+        return projectSetting;
     }
 
-    public static DatabaseConfiguration getDatabaseConfiguration() {
-        return dbConfig;
+    public static DatabaseSetting getDatabaseSetting() {
+        return dbSetting;
     }
 
     public static void loadConfiguration() {
         Properties properties = getConfigProperties();
         if (properties != null) {
-            dbConfig = new DatabaseConfiguration(properties);
-            projectConfig = new ProjectConfiguration(properties);
+            dbSetting = new DatabaseSetting(properties);
+            projectSetting = new ProjectSetting(properties);
         }
     }
 
@@ -50,17 +48,21 @@ public class ConfigurationData {
     public static void save() {
         try {
             // Project properties
-            properties.setProperty(PropertiesConstants.ROOTPACKAGE, projectConfig.getRootPackage());
+            properties.setProperty(PropertiesConstants.ROOTPACKAGE, projectSetting.getRootPackage());
 
             // Database properties
-            properties.setProperty(PropertiesConstants.DBTYPE, dbConfig.getDbType());
-            properties.setProperty(PropertiesConstants.DBURL, dbConfig.getDbUrl());
-            properties.setProperty(PropertiesConstants.DBUSER, dbConfig.getDbUser());
-            properties.setProperty(PropertiesConstants.DBPASS, dbConfig.getDbPass());
+            properties.setProperty(PropertiesConstants.DBTYPE, dbSetting.getDbType());
+            properties.setProperty(PropertiesConstants.DBURL, dbSetting.getDbUrl());
+            properties.setProperty(PropertiesConstants.DBUSER, dbSetting.getDbUser());
+            properties.setProperty(PropertiesConstants.DBPASS, dbSetting.getDbPass());
 
             properties.store(new FileOutputStream(Utils.getConfigurationPath()), null);
         } catch (IOException e) {
             System.out.println("Error when saving configuration setting.");
         }
+    }
+
+    public static String getEntityDirectoryPath() {
+        return SettingData.projectSetting.getRootPackage() + "\\" + SettingData.projectSetting.getEntityFolder();
     }
 }
