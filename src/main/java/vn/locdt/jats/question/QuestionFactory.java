@@ -1,7 +1,5 @@
 package vn.locdt.jats.question;
 
-import vn.locdt.jats.exception.MismatchArgumentQuestionFactoryException;
-
 import java.lang.reflect.Constructor;
 import java.util.List;
 
@@ -10,8 +8,8 @@ import java.util.List;
  */
 public abstract class QuestionFactory {
 
-    protected abstract List<Class> create() throws MismatchArgumentQuestionFactoryException;
-    public void start() throws MismatchArgumentQuestionFactoryException {
+    protected abstract List<Class> create();
+    public void start() {
         List<Class> questionCollection = create();
         questionCollection.forEach(QuestionFactory::createAndStartQuestionInstance);
     }

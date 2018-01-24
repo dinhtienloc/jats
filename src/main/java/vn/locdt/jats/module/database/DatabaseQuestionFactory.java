@@ -1,6 +1,5 @@
 package vn.locdt.jats.module.database;
 
-import vn.locdt.jats.exception.MismatchArgumentQuestionFactoryException;
 import vn.locdt.jats.module.database.question.PojoGeneratorQuestion;
 import vn.locdt.jats.question.QuestionFactory;
 import vn.locdt.jats.module.database.question.ConnectionQuestion;
@@ -13,8 +12,7 @@ import java.util.List;
 public class DatabaseQuestionFactory extends QuestionFactory {
 
     @Override
-    protected List<Class> create() throws MismatchArgumentQuestionFactoryException {
-
+    protected List<Class> create() {
         return Arrays.asList(
                 ConnectionQuestion.class,
                 PojoGeneratorQuestion.class);
