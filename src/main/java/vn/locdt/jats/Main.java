@@ -1,6 +1,6 @@
 package vn.locdt.jats;
 
-import vn.locdt.jats.config.SettingData;
+import vn.locdt.jats.setting.SettingData;
 import vn.locdt.jats.module.database.*;
 
 /**

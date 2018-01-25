@@ -12,6 +12,7 @@ public abstract class QuestionFactory {
     public void start() {
         List<Class> questionCollection = create();
         questionCollection.forEach(QuestionFactory::createAndStartQuestionInstance);
+        System.exit(1);
     }
 
     private static void createAndStartQuestionInstance(Class clazz)  {

@@ -1,7 +1,7 @@
 package vn.locdt.jats.internal.generate;
 
 import org.hibernate.tool.hbm2x.POJOExporter;
-import vn.locdt.jats.config.SettingData;
+import vn.locdt.jats.setting.SettingData;
 
 import java.io.File;
 
@@ -13,6 +13,7 @@ public class POJOGenerator implements Generator {
 
     @Override
     public void generate() {
+        System.out.println("Root package: " + SettingData.getEntityDirectoryPath());
         exporter.setConfiguration(SettingData.getDatabaseSetting().getHbmConfiguration());
         exporter.setOutputDirectory(new File(SettingData.getEntityDirectoryPath()));
         exporter.setTemplatePath(new String[0]);

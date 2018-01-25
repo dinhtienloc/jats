@@ -1,6 +1,6 @@
 package vn.locdt.jats.module.database.question;
 
-import vn.locdt.jats.config.SettingData;
+import vn.locdt.jats.setting.SettingData;
 import vn.locdt.jats.internal.database.DatabaseReader;
 import vn.locdt.jats.internal.generate.POJOGenerator;
 import vn.locdt.jats.question.QuestionCLI;

@@ -1,4 +1,4 @@
-package vn.locdt.jats.config;
+package vn.locdt.jats.setting;
 
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -27,13 +27,17 @@ public class DatabaseSetting extends Setting {
         this.dbUser = prop.getProperty(PropertiesConstants.DBUSER);
         this.dbPass = prop.getProperty(PropertiesConstants.DBPASS);
 
-        this.hbmConfiguration = new Configuration(new MetadataSources(
-            new StandardServiceRegistryBuilder()
-                .applySetting("hibernate.connection.driver_class", Constants.DBType.valueOf(dbType).getDriver())
-                .applySetting("hibernate.connection.url", dbUrl)
-                .applySetting("hibernate.connection.username", dbUser)
-                .applySetting("hibernate.connection.password", dbPass)
-                .build()));
+        this.hbmConfiguration = new Configuration();
+        hbmConfiguration.setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
+        hbmConfiguration.setProperty("hibernate.connection.driver_class", Constants.DBType.enumOf(dbType).getDriver());
+        hbmConfiguration.setProperty("hibernate.connection.url", dbUrl);
+        hbmConfiguration.setProperty("hibernate.connection.username", dbUser);
+        hbmConfiguration.setProperty("hibernate.connection.password", dbPass);
+
+        // disable hibernate log
+        hbmConfiguration.setProperty("hibernate.show_sql", "false");
+        hbmConfiguration.setProperty("hibernate.generate_statistics", "false");
+        hbmConfiguration.setProperty("hibernate.use_sql_comments", "false");
     }
 
     public String getDbType() {

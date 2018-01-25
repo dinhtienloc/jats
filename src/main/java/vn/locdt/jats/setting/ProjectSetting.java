@@ -1,4 +1,4 @@
-package vn.locdt.jats.config;
+package vn.locdt.jats.setting;
 
 import vn.locdt.jats.constants.PropertiesConstants;
 

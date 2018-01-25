@@ -1,7 +1,7 @@
 package vn.locdt.jats.module.database.question;
 
-import vn.locdt.jats.config.SettingData;
-import vn.locdt.jats.config.DatabaseSetting;
+import vn.locdt.jats.setting.SettingData;
+import vn.locdt.jats.setting.DatabaseSetting;
 import vn.locdt.jats.constants.Constants;
 import vn.locdt.jats.question.QuestionCLI;
 import vn.locdt.jquestion.JQuestion;
@@ -46,7 +46,7 @@ public class ConnectionQuestion extends QuestionCLI {
     }
 
     private void askForDatabaseType() {
-        String type = JQuestion.select("What is your database type?", "dbType", Constants.getDatabaseTypes()).getValue();
+        String type = JQuestion.select("What is your database type?", "dbType", Constants.DBType.getTypes()).getValue();
         SettingData.getDatabaseSetting().loadDriver(type);
     }
 
