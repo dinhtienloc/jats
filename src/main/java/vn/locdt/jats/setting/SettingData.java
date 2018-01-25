@@ -10,8 +10,8 @@ import java.util.Properties;
  * Created by locdt on 1/22/2018.
  */
 public class SettingData {
-    private static ProjectSetting projectSetting = null;
-    private static DatabaseSetting dbSetting = null;
+    private static ProjectSetting projectSetting = new ProjectSetting();
+    private static DatabaseSetting dbSetting = new DatabaseSetting();
     private static Properties properties;
 
     static {
@@ -64,5 +64,9 @@ public class SettingData {
 
     public static String getEntityDirectoryPath() {
         return SettingData.projectSetting.getRootPackage() + "\\" + SettingData.projectSetting.getEntityFolder();
+    }
+
+    public static boolean isHbmConfigurationCreated() {
+        return SettingData.getDatabaseSetting().getHbmConfiguration() != null;
     }
 }

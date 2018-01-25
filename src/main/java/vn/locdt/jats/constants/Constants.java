@@ -8,6 +8,7 @@ import java.util.Map;
  * Created by locdt on 1/21/2018.
  */
 public class Constants {
+    public static final String SHELL_PROMPT = "jats";
     public enum DBType {
         MYSQL("MySQL", "com.mysql.jdbc.Driver"),
         ORACLE("Oracle", "oracle.jdbc.driver.OracleDriver");

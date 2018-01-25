@@ -1,7 +1,7 @@
 package vn.locdt.jats;
 
+import vn.locdt.jats.question.DatabaseQuestionFactory;
 import vn.locdt.jats.setting.SettingData;
-import vn.locdt.jats.module.database.*;
 
 /**
  * Created by locdt on 1/20/2018.

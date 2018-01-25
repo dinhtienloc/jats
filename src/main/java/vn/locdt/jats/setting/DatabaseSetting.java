@@ -21,6 +21,8 @@ public class DatabaseSetting extends Setting {
     private static Connection connection = null;
     private static Configuration hbmConfiguration;
 
+    public DatabaseSetting() {}
+
     public DatabaseSetting(Properties prop) {
         this.dbType = prop.getProperty(PropertiesConstants.DBTYPE);
         this.dbUrl = prop.getProperty(PropertiesConstants.DBURL);

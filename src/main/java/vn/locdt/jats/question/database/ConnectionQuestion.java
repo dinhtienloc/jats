@@ -1,4 +1,4 @@
-package vn.locdt.jats.module.database.question;
+package vn.locdt.jats.question.database;
 
 import vn.locdt.jats.setting.SettingData;
 import vn.locdt.jats.setting.DatabaseSetting;

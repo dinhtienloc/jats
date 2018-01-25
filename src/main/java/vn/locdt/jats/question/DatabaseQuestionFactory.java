@@ -1,8 +1,8 @@
-package vn.locdt.jats.module.database;
+package vn.locdt.jats.question;
 
-import vn.locdt.jats.module.database.question.PojoGeneratorQuestion;
+import vn.locdt.jats.question.database.PojoGeneratorQuestion;
 import vn.locdt.jats.question.QuestionFactory;
-import vn.locdt.jats.module.database.question.ConnectionQuestion;
+import vn.locdt.jats.question.database.ConnectionQuestion;
 import java.util.Arrays;
 import java.util.List;
 
