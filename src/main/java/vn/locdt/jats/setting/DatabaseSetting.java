@@ -31,6 +31,7 @@ public class DatabaseSetting extends Setting {
         this.dbUser = prop.getProperty(PropertiesConstants.DBUSER);
         this.dbPass = prop.getProperty(PropertiesConstants.DBPASS);
 
+        Utils.printDebugLog(this.hbmConfiguration);
         if (dbType != null && dbUrl != null && dbUser != null && dbPass != null) {
             this.hbmConfiguration = new Configuration();
             hbmConfiguration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");

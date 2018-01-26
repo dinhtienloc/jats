@@ -7,6 +7,7 @@ import vn.locdt.jats.internal.generate.POJOGenerator;
 import vn.locdt.jats.question.database.DatabaseQuestionFactory;
 import vn.locdt.jats.question.QuestionStatus;
 import vn.locdt.jats.setting.SettingData;
+import vn.locdt.jats.util.Utils;
 
 /**
  * Created by locdt on 1/26/2018.
@@ -16,6 +17,7 @@ import vn.locdt.jats.setting.SettingData;
 public class CreatePojoCommand implements CommandMarker {
     @CliCommand(value = { "entity:gen"})
     public String entityGenerate() {
+        Utils.printLog("Generating entity...");
         if (!SettingData.isHbmConfigurationCreated()) {
             QuestionStatus status = new DatabaseQuestionFactory().start();
             if (status.equals(QuestionStatus.STOP)) return null;

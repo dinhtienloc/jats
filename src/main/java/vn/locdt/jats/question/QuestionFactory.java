@@ -3,7 +3,10 @@ package vn.locdt.jats.question;
 import vn.locdt.jats.setting.SettingData;
 import vn.locdt.jats.util.Utils;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -11,17 +14,26 @@ import java.util.List;
  */
 public abstract class QuestionFactory {
 
-    protected abstract List<Class> create();
     public QuestionStatus start() {
-        List<Class> questionCollection = create();
-        for (Class clazz : questionCollection) {
-            QuestionStatus status = createAndStartQuestionInstance(clazz);
-//            Utils.printDebugLog("Class: " + clazz.getCanonicalName() + " | Status: " + status.name());
-            if (status.equals(QuestionStatus.STOP))
-                return QuestionStatus.STOP;
+        QuestionStatus status = QuestionStatus.FINISHED;
+        try {
+            Class<?>[] questions = getImportedQuestions();
+            Utils.printDebugLog(questions.length);
+            for (Class clazz : questions) {
+                status = createAndStartQuestionInstance(clazz);
+                Utils.printDebugLog("Class: " + clazz.getCanonicalName() + " | Status: " + status.name());
+                if (QuestionStatus.STOP.equals(status))
+                    break;
+            }
+        } catch (Exception e) {
+            Utils.printErrorLog("Error occurs when create questions in " + getClass().getCanonicalName());
+            status = QuestionStatus.STOP;
         }
-        SettingData.save();
-        return QuestionStatus.FINISHED;
+
+        if (QuestionStatus.FINISHED.equals(status))
+            SettingData.save();
+
+        return status;
     }
 
     private static QuestionStatus createAndStartQuestionInstance(Class clazz)  {
@@ -35,5 +47,13 @@ public abstract class QuestionFactory {
         }
 
         return status;
+    }
+
+    private Class<?>[] getImportedQuestions() throws Exception{
+        for (Annotation a: getClass().getAnnotations()) {
+//            Class<? extends Annotation> type = a.annotationType();
+            return (Class<?>[]) a.getClass().getMethod("value").invoke(a);
+        }
+        return new Class<?>[]{};
     }
 }

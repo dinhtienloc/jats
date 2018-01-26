@@ -1,11 +1,13 @@
 package vn.locdt.jats.util;
 
 import org.apache.commons.lang.SystemUtils;
+import org.apache.tools.ant.types.LogLevel;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 import org.springframework.shell.support.logging.HandlerUtils;
 
 import java.nio.file.Paths;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static org.fusesource.jansi.Ansi.ansi;
@@ -15,6 +17,7 @@ import static org.fusesource.jansi.Ansi.ansi;
  */
 public class Utils {
     private static final Logger logger = HandlerUtils.getLogger(Utils.class);
+    public final static boolean DEBUG_MODE = true;
 
     public static String getUserDir() {
         String currentLocation = null;
@@ -53,6 +56,7 @@ public class Utils {
     }
 
     public static void printDebugLog(Object message) {
-        logger.info(ansi().fg(Ansi.Color.MAGENTA).a("[DEBUG] ").fg(Ansi.Color.WHITE).a(message).fg(Ansi.Color.DEFAULT).toString());
+        if (!DEBUG_MODE) return;
+        logger.warning(ansi().fg(Ansi.Color.MAGENTA).a("[DEBUG] ").fg(Ansi.Color.WHITE).a(message).fg(Ansi.Color.DEFAULT).toString());
     }
 }
