@@ -4,7 +4,7 @@ import org.springframework.shell.core.CommandMarker;
 import org.springframework.shell.core.annotation.CliCommand;
 import org.springframework.shell.core.annotation.CliOption;
 import org.springframework.stereotype.Component;
-import vn.locdt.jats.question.init.InitQuestionFactory;
+import vn.locdt.jats.question.factory.InitQuestionFactory;
 import vn.locdt.jats.setting.SettingData;
 import vn.locdt.jats.util.Utils;
 

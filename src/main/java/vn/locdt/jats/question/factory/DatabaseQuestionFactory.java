@@ -1,7 +1,9 @@
-package vn.locdt.jats.question.database;
+package vn.locdt.jats.question.factory;
 
 import vn.locdt.jats.question.QuestionImports;
-import vn.locdt.jats.question.QuestionFactory;
+import vn.locdt.jats.question.database.ConnectionQuestion;
+import vn.locdt.jats.question.database.EntityPackageNameQuestion;
+import vn.locdt.jats.question.database.PojoGeneratorQuestion;
 
 /**
  * Created by locdt on 1/22/2018.

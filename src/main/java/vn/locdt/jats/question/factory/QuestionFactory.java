@@ -1,5 +1,7 @@
-package vn.locdt.jats.question;
+package vn.locdt.jats.question.factory;
 
+import vn.locdt.jats.question.QuestionCLI;
+import vn.locdt.jats.question.QuestionStatus;
 import vn.locdt.jats.setting.SettingData;
 import vn.locdt.jats.util.Utils;
 

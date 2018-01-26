@@ -1,7 +1,7 @@
-package vn.locdt.jats.question.init;
+package vn.locdt.jats.question.factory;
 
-import vn.locdt.jats.question.QuestionFactory;
 import vn.locdt.jats.question.QuestionImports;
+import vn.locdt.jats.question.init.RootPackageQuestion;
 
 /**
  * Created by locdt on 1/27/2018.

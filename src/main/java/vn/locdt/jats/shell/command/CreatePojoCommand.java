@@ -4,7 +4,7 @@ import org.springframework.shell.core.CommandMarker;
 import org.springframework.shell.core.annotation.CliCommand;
 import org.springframework.stereotype.Component;
 import vn.locdt.jats.internal.generate.POJOGenerator;
-import vn.locdt.jats.question.database.DatabaseQuestionFactory;
+import vn.locdt.jats.question.factory.DatabaseQuestionFactory;
 import vn.locdt.jats.question.QuestionStatus;
 import vn.locdt.jats.setting.SettingData;
 import vn.locdt.jats.util.Utils;
