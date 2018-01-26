@@ -4,7 +4,8 @@ import org.springframework.shell.core.CommandMarker;
 import org.springframework.shell.core.annotation.CliCommand;
 import org.springframework.stereotype.Component;
 import vn.locdt.jats.internal.generate.POJOGenerator;
-import vn.locdt.jats.question.DatabaseQuestionFactory;
+import vn.locdt.jats.question.database.DatabaseQuestionFactory;
+import vn.locdt.jats.question.QuestionStatus;
 import vn.locdt.jats.setting.SettingData;
 
 /**
@@ -16,7 +17,8 @@ public class CreatePojoCommand implements CommandMarker {
     @CliCommand(value = { "entity:gen"})
     public String entityGenerate() {
         if (!SettingData.isHbmConfigurationCreated()) {
-            new DatabaseQuestionFactory().start();
+            QuestionStatus status = new DatabaseQuestionFactory().start();
+            if (status.equals(QuestionStatus.STOP)) return null;
         }
 
         new POJOGenerator().generate();

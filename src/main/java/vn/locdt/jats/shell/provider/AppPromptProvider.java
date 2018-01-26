@@ -28,7 +28,7 @@ import static vn.locdt.jats.constants.Constants.SHELL_PROMPT;
  */
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class ExamplePromptProvider extends DefaultPromptProvider {
+public class AppPromptProvider extends DefaultPromptProvider {
 
     @Override
     public String getPrompt() {

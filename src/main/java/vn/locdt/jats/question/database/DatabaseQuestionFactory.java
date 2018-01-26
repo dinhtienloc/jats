@@ -1,5 +1,6 @@
-package vn.locdt.jats.question;
+package vn.locdt.jats.question.database;
 
+import vn.locdt.jats.question.database.EntityPackageNameQuestion;
 import vn.locdt.jats.question.database.PojoGeneratorQuestion;
 import vn.locdt.jats.question.QuestionFactory;
 import vn.locdt.jats.question.database.ConnectionQuestion;
@@ -15,6 +16,7 @@ public class DatabaseQuestionFactory extends QuestionFactory {
     protected List<Class> create() {
         return Arrays.asList(
                 ConnectionQuestion.class,
+                EntityPackageNameQuestion.class,
                 PojoGeneratorQuestion.class);
     }
 }

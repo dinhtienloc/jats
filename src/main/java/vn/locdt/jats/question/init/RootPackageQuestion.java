@@ -1,6 +1,7 @@
 package vn.locdt.jats.question.init;
 
 import vn.locdt.jats.question.QuestionCLI;
+import vn.locdt.jats.question.QuestionStatus;
 import vn.locdt.jats.setting.SettingData;
 import vn.locdt.jquestion.JQuestion;
 
@@ -9,19 +10,19 @@ import vn.locdt.jquestion.JQuestion;
  */
 public class RootPackageQuestion extends QuestionCLI {
     @Override
-    protected RunStatus preQuestion() {
-        return RunStatus.CONTINUE;
+    protected QuestionStatus preQuestion() {
+        return QuestionStatus.CONTINUE;
     }
 
     @Override
-    protected RunStatus postQuestion() {
-        return RunStatus.FINISHED;
+    protected QuestionStatus postQuestion() {
+        return QuestionStatus.FINISHED;
     }
 
     @Override
-    protected RunStatus run() {
+    protected QuestionStatus run() {
         askForRootPackage();
-        return RunStatus.CONTINUE;
+        return QuestionStatus.CONTINUE;
     }
 
     private void askForRootPackage() {

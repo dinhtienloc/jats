@@ -1,10 +1,14 @@
 package vn.locdt.jats.question.database;
 
+import vn.locdt.jats.question.QuestionStatus;
 import vn.locdt.jats.setting.SettingData;
 import vn.locdt.jats.setting.DatabaseSetting;
 import vn.locdt.jats.constants.Constants;
 import vn.locdt.jats.question.QuestionCLI;
+import vn.locdt.jats.util.Utils;
 import vn.locdt.jquestion.JQuestion;
+
+import java.sql.SQLException;
 
 /**
  * Created by locdt on 1/21/2018.
@@ -14,35 +18,37 @@ public class ConnectionQuestion extends QuestionCLI {
     public ConnectionQuestion() {super();}
 
     @Override
-    protected RunStatus preQuestion() {
-        if (SettingData.getDatabaseSetting() == null) {
-            System.out.println("This is the first time you run Jats.");
+    protected QuestionStatus preQuestion() {
+        QuestionStatus status = QuestionStatus.CONTINUE;
 
+        if (!SettingData.isHbmConfigurationCreated()) {
             askForDatabaseType();
             askForDatabaseUrl();
             askForDatabaseUsername();
             askForDatabasePassword();
-
-            return RunStatus.CONTINUE;
         }
         else {
-            System.out.println("Restored last run configuration...");
             DatabaseSetting dbConfig = SettingData.getDatabaseSetting();
-            dbConfig.loadDriver(dbConfig.getDbType());
-            dbConfig.createConnection();
-            return RunStatus.FINISHED;
+            if (!dbConfig.loadDriver(dbConfig.getDbType()))
+                status = QuestionStatus.STOP;
+            else if (!dbConfig.createConnection())
+                status = QuestionStatus.STOP;
         }
+
+        return status;
     }
 
     @Override
-    protected RunStatus postQuestion() {
-        return RunStatus.FINISHED;
+    protected QuestionStatus postQuestion() {
+        return QuestionStatus.FINISHED;
     }
 
     @Override
-    protected RunStatus run() {
-        SettingData.getDatabaseSetting().createConnection();
-        return RunStatus.CONTINUE;
+    protected QuestionStatus run() {
+        if (SettingData.getDatabaseSetting().createConnection())
+            return QuestionStatus.CONTINUE;
+        else
+            return QuestionStatus.STOP;
     }
 
     private void askForDatabaseType() {

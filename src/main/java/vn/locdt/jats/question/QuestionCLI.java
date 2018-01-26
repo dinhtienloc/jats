@@ -6,22 +6,17 @@ package vn.locdt.jats.question;
 public abstract class QuestionCLI {
     public QuestionCLI() {}
 
-    protected abstract RunStatus preQuestion();
-    protected abstract RunStatus postQuestion();
-    protected abstract RunStatus run();
+    protected abstract QuestionStatus preQuestion();
+    protected abstract QuestionStatus postQuestion();
+    protected abstract QuestionStatus run();
 
-    public void start() {
-        RunStatus status = preQuestion();
-        if (status == RunStatus.CONTINUE) {
+    public QuestionStatus start() {
+        QuestionStatus status = preQuestion();
+        if (status == QuestionStatus.CONTINUE) {
             status = run();
-            if (status == RunStatus.CONTINUE)
-                postQuestion();
+            if (status == QuestionStatus.CONTINUE)
+                status = postQuestion();
         }
-
-    }
-
-    protected enum RunStatus {
-        CONTINUE,
-        FINISHED
+        return status;
     }
 }

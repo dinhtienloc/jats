@@ -5,9 +5,11 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import vn.locdt.jats.constants.Constants;
 import vn.locdt.jats.constants.PropertiesConstants;
+import vn.locdt.jats.util.Utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 
 /**
@@ -29,17 +31,19 @@ public class DatabaseSetting extends Setting {
         this.dbUser = prop.getProperty(PropertiesConstants.DBUSER);
         this.dbPass = prop.getProperty(PropertiesConstants.DBPASS);
 
-        this.hbmConfiguration = new Configuration();
-        hbmConfiguration.setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
-        hbmConfiguration.setProperty("hibernate.connection.driver_class", Constants.DBType.enumOf(dbType).getDriver());
-        hbmConfiguration.setProperty("hibernate.connection.url", dbUrl);
-        hbmConfiguration.setProperty("hibernate.connection.username", dbUser);
-        hbmConfiguration.setProperty("hibernate.connection.password", dbPass);
+        if (dbType != null && dbUrl != null && dbUser != null && dbPass != null) {
+            this.hbmConfiguration = new Configuration();
+            hbmConfiguration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+            hbmConfiguration.setProperty("hibernate.connection.driver_class", Constants.DBType.enumOf(dbType).getDriver());
+            hbmConfiguration.setProperty("hibernate.connection.url", dbUrl);
+            hbmConfiguration.setProperty("hibernate.connection.username", dbUser);
+            hbmConfiguration.setProperty("hibernate.connection.password", dbPass);
 
-        // disable hibernate log
-        hbmConfiguration.setProperty("hibernate.show_sql", "false");
-        hbmConfiguration.setProperty("hibernate.generate_statistics", "false");
-        hbmConfiguration.setProperty("hibernate.use_sql_comments", "false");
+            // disable hibernate log
+            hbmConfiguration.setProperty("hibernate.show_sql", "false");
+            hbmConfiguration.setProperty("hibernate.generate_statistics", "false");
+            hbmConfiguration.setProperty("hibernate.use_sql_comments", "false");
+        }
     }
 
     public String getDbType() {
@@ -82,30 +86,33 @@ public class DatabaseSetting extends Setting {
         DatabaseSetting.hbmConfiguration = hbmConfiguration;
     }
 
-    public void loadDriver(String type) {
+    public boolean loadDriver(String type) {
         for (Constants.DBType dbType : Constants.DBType.values()) {
             try {
                 if (dbType.getType().equals(type)) {
                     Class.forName(dbType.getDriver());
-                    System.out.println(dbType.getType() + " Driver Loaded...");
+                    Utils.printLog(dbType.getType() + " Driver Loaded...");
                     this.setDbType(type);
+                    return true;
                 }
             } catch (ClassNotFoundException e) {
-                System.out.println(dbType.getType() + " Driver Not Found...");
-                System.exit(1);
+                Utils.printErrorLog(dbType.getType() + " Driver Not Found...");
             }
         }
+        return false;
     }
 
-    public void createConnection() {
-        System.out.print("Check connection...");
+    public boolean createConnection(){
         try {
+            Utils.printLog("Establish connection...");
             this.connection = DriverManager.getConnection(dbUrl, dbUser, dbPass);
-            System.out.println("Connect successfully!");
+            Utils.printSuccessLog("Connecting successfully!");
+            return true;
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Connect unsuccessfully!");
+//            e.printStackTrace();
+            Utils.printErrorLog("Connecting unsuccessfully", e.getMessage());
         }
+        return false;
     }
 
     public Connection getConnection()  {

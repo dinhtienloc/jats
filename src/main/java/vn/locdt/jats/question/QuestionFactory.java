@@ -1,5 +1,8 @@
 package vn.locdt.jats.question;
 
+import vn.locdt.jats.setting.SettingData;
+import vn.locdt.jats.util.Utils;
+
 import java.lang.reflect.Constructor;
 import java.util.List;
 
@@ -9,19 +12,28 @@ import java.util.List;
 public abstract class QuestionFactory {
 
     protected abstract List<Class> create();
-    public void start() {
+    public QuestionStatus start() {
         List<Class> questionCollection = create();
-        questionCollection.forEach(QuestionFactory::createAndStartQuestionInstance);
-        System.exit(1);
+        for (Class clazz : questionCollection) {
+            QuestionStatus status = createAndStartQuestionInstance(clazz);
+//            Utils.printDebugLog("Class: " + clazz.getCanonicalName() + " | Status: " + status.name());
+            if (status.equals(QuestionStatus.STOP))
+                return QuestionStatus.STOP;
+        }
+        SettingData.save();
+        return QuestionStatus.FINISHED;
     }
 
-    private static void createAndStartQuestionInstance(Class clazz)  {
+    private static QuestionStatus createAndStartQuestionInstance(Class clazz)  {
+        QuestionStatus status;
         try {
             Constructor constructor = clazz.getConstructor();
-            QuestionCLI question = (QuestionCLI) constructor.newInstance();
-            question.start();
+            QuestionCLI q = (QuestionCLI) constructor.newInstance();
+            status = q.start();
         } catch (Exception e) {
-            return;
+            status = QuestionStatus.STOP;
         }
+
+        return status;
     }
 }

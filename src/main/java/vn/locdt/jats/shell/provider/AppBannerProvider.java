@@ -27,27 +27,32 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class ExampleBannerProvider extends DefaultBannerProvider {
+public class AppBannerProvider extends DefaultBannerProvider {
 
     public String getBanner() {
         StringBuffer buf = new StringBuffer();
         buf.append(OsUtils.LINE_SEPARATOR);
-        buf.append("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄").append(OsUtils.LINE_SEPARATOR);
-        buf.append("             _   _    ____ _____ ").append(OsUtils.LINE_SEPARATOR);
-        buf.append("            | | / \\  / ___|_   _|").append(OsUtils.LINE_SEPARATOR);
-        buf.append("         _  | |/ _ \\ \\___ \\ | |  ").append(OsUtils.LINE_SEPARATOR);
-        buf.append("        | |_| / ___ \\ ___) || |  ").append(OsUtils.LINE_SEPARATOR);
-        buf.append("         \\___/_/   \\_|____/ |_|  ").append(OsUtils.LINE_SEPARATOR);
-        buf.append(" * Welcome to JATS (Java Assistant Tools) *").append(OsUtils.LINE_SEPARATOR);
-        buf.append("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀").append(OsUtils.LINE_SEPARATOR);
+        buf.append("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄").append(OsUtils.LINE_SEPARATOR);
+        buf.append("                _   _    ____ _____").append(OsUtils.LINE_SEPARATOR);
+        buf.append("               | | / \\  / ___|_   _|").append(OsUtils.LINE_SEPARATOR);
+        buf.append("            _  | |/ _ \\ \\\\___  | |").append(OsUtils.LINE_SEPARATOR);
+        buf.append("           | |_| / ___ \\ ___)| | |").append(OsUtils.LINE_SEPARATOR);
+        buf.append("            \\___/_/   \\_|____/ |_|").append(OsUtils.LINE_SEPARATOR);
         buf.append(OsUtils.LINE_SEPARATOR);
+        buf.append("    * Welcome to JATS - Java Assistant Tools *").append(OsUtils.LINE_SEPARATOR);
+        buf.append("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀").append(OsUtils.LINE_SEPARATOR);
+        buf.append("    (For assistance type \"hint\" then hit ENTER)").append(OsUtils.LINE_SEPARATOR);
         return buf.toString();
 
     }
 
     @Override
     public String getProviderName() {
-        return "Welcome to JATS";
+        return "JATS";
+    }
+
+    public String getWelcomeMessage() {
+        return null;
     }
 
 }

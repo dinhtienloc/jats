@@ -1,5 +1,6 @@
 package vn.locdt.jats.question.database;
 
+import vn.locdt.jats.question.QuestionStatus;
 import vn.locdt.jats.setting.SettingData;
 import vn.locdt.jats.internal.database.DatabaseReader;
 import vn.locdt.jats.internal.generate.POJOGenerator;
@@ -15,22 +16,22 @@ public class PojoGeneratorQuestion extends QuestionCLI {
     public PojoGeneratorQuestion() {super();}
 
     @Override
-    protected RunStatus preQuestion() {
-        return RunStatus.CONTINUE;
+    protected QuestionStatus preQuestion() {
+        return QuestionStatus.CONTINUE;
     }
 
     @Override
-    protected RunStatus postQuestion() {
+    protected QuestionStatus postQuestion() {
         System.out.println("Generated successfully");
-        return RunStatus.FINISHED;
+        return QuestionStatus.FINISHED;
     }
 
     @Override
-    protected RunStatus run() {
+    protected QuestionStatus run() {
         String chosenTable = askForTableName();
         POJOGenerator generator = new POJOGenerator();
         generator.generate();
-        return RunStatus.CONTINUE;
+        return QuestionStatus.CONTINUE;
     }
 
     private String askForTableName(){
