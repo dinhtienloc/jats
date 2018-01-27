@@ -20,6 +20,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.shell.plugin.support.DefaultBannerProvider;
 import org.springframework.shell.support.util.OsUtils;
+import org.springframework.shell.support.util.VersionUtils;
 import org.springframework.stereotype.Component;
 
 /**
@@ -47,10 +48,16 @@ public class AppBannerProvider extends DefaultBannerProvider {
     }
 
     @Override
+    public String getVersion() {
+        return VersionUtils.versionInfo();
+    }
+
+    @Override
     public String getProviderName() {
         return "JATS";
     }
 
+    @Override
     public String getWelcomeMessage() {
         return null;
     }
