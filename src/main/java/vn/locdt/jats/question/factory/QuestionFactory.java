@@ -1,6 +1,7 @@
 package vn.locdt.jats.question.factory;
 
 import vn.locdt.jats.question.QuestionCLI;
+import vn.locdt.jats.question.QuestionImports;
 import vn.locdt.jats.question.QuestionStatus;
 import vn.locdt.jats.setting.SettingData;
 import vn.locdt.jats.util.Utils;
@@ -53,8 +54,8 @@ public abstract class QuestionFactory {
 
     private Class<?>[] getImportedQuestions() throws Exception{
         for (Annotation a: getClass().getAnnotations()) {
-//            Class<? extends Annotation> type = a.annotationType();
-            return (Class<?>[]) a.getClass().getMethod("value").invoke(a);
+            if (a.getClass().equals(QuestionImports.class))
+                return (Class<?>[]) a.getClass().getMethod("value").invoke(a);
         }
         return new Class<?>[]{};
     }
