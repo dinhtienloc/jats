@@ -1,12 +1,16 @@
 # JATS
-JATS (Java Assistant Tools) provides many various command-line utilities to rapidly develop Java Web Application
+JATS (Java Assistant Tools) using [JQuestion](https://github.com/dinhtienloc/jquestion) to provide many various command-line utilities to rapidly develop Java Web Application
 
-# Building
+## Requirement
+* JDK 8
+* Maven 2.3.2
+
+## Building
 ```
 mvn package
 ```
 
-# Running
+## Running
 * Create a bat file named as `jats.bat`:
 ```
 @echo off
