@@ -17,7 +17,7 @@ import static org.fusesource.jansi.Ansi.ansi;
  */
 public class Utils {
     private static final Logger logger = HandlerUtils.getLogger(Utils.class);
-    public final static boolean DEBUG_MODE = true;
+    public final static boolean DEBUG_MODE = false;
 
     public static String getUserDir() {
         String currentLocation = null;
