@@ -13,7 +13,7 @@
     <modules>
         <module>addon-entity-generation</module>
         <module>addon-terminal-question</module>
-        <module>core</module>
+        <module>core-module</module>
     </modules>
 
     <dependencies>
