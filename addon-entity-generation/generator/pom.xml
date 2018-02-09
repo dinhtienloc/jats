@@ -9,7 +9,15 @@
         <version>1.0.0</version>
         <relativePath>../../addon-entity-generation</relativePath>
     </parent>
-    <artifactId>addon.entity.modeling</artifactId>
-    <name>JATS-Addon: Entity Generation - Modeling</name>
+    <artifactId>addon.entity.generator</artifactId>
+    <name>JATS-Addon: Entity Generation - Generator</name>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>vn.locdt.jats</groupId>
+            <artifactId>addon.entity.modeling</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
 </project>

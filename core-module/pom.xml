@@ -38,10 +38,9 @@
 
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 
-
         <dependency>
             <groupId>vn.locdt.jats</groupId>
-            <artifactId>addon.question</artifactId>
+            <artifactId>bundle.question</artifactId>
             <version>1.0.0</version>
         </dependency>
 
@@ -53,7 +52,7 @@
 
         <dependency>
             <groupId>vn.locdt.jats</groupId>
-            <artifactId>addon.entity.generation</artifactId>
+            <artifactId>addon.entity.generator</artifactId>
             <version>1.0.0</version>
         </dependency>
 

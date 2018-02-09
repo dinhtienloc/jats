@@ -1,10 +1,9 @@
 package vn.locdt.jats.core.question.database;
 
+import vn.locdt.jats.core.question.JQuestion;
 import vn.locdt.jats.core.QuestionCLI;
 import vn.locdt.jats.core.QuestionStatus;
 import vn.locdt.jats.core.setting.SettingData;
-import vn.locdt.jats.addon.question.JQuestion;
-
 /**
  * Created by locdt on 1/26/2018.
  */

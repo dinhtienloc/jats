@@ -1,7 +1,7 @@
 package vn.locdt.jats.core.question.factory;
 
-import vn.locdt.jats.core.QuestionImports;
 import vn.locdt.jats.core.question.database.ConnectionQuestion;
+import vn.locdt.jats.core.QuestionImports;
 import vn.locdt.jats.core.question.database.EntityPackageNameQuestion;
 import vn.locdt.jats.core.question.database.PojoGeneratorQuestion;
 
