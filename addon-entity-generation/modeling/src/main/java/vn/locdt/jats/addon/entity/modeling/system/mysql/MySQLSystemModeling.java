@@ -5,7 +5,7 @@ import vn.locdt.jats.addon.entity.modeling.system.ResultSetExtractor;
 import vn.locdt.jats.addon.entity.modeling.system.SystemModeling;
 import vn.locdt.jats.addon.entity.modeling.exception.SchemaNotSupportException;
 import vn.locdt.jats.addon.entity.modeling.util.SQL;
-import vn.locdt.jats.addon.entity.modeling.util.Utils;
+import vn.locdt.jats.addon.entity.modeling.util.DatabaseUtils;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -110,10 +110,10 @@ public class MySQLSystemModeling extends SystemModeling {
     public ForeignKey modelForeignKey(Catalog catalog, ResultSet rs) {
         ForeignKey fk = extractor.foreignKey(rs);
 
-        Column pkColumn = Utils.findColumnInTableByName(catalog, fk.getReferencedTableName(), fk.getReferencedColumnName());
+        Column pkColumn = DatabaseUtils.findColumnInTableByName(catalog, fk.getReferencedTableName(), fk.getReferencedColumnName());
         if (pkColumn == null) return null;
 
-        Column fkColumn = Utils.findColumnInTableByName(catalog, fk.getReferencingTableName(), fk.getReferencingColumnName());
+        Column fkColumn = DatabaseUtils.findColumnInTableByName(catalog, fk.getReferencingTableName(), fk.getReferencingColumnName());
         if (fkColumn == null) return null;
 
         fk.setReferencedColumn(pkColumn);

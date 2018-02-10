@@ -1,5 +1,8 @@
 package vn.locdt.jats.addon.entity.modeling.model;
 
+import vn.locdt.jats.addon.entity.modeling.system.mysql.MySQLDataTypeMapping;
+import vn.locdt.jats.addon.entity.modeling.util.StringUtils;
+
 /**
  * Created by locdt on 1/29/2018.
  */
@@ -12,6 +15,7 @@ public class Column extends Model {
     protected boolean autoIncrement;
     protected boolean generated;
     protected boolean nullable;
+
 
     public Column() {
         super();
@@ -84,6 +88,8 @@ public class Column extends Model {
     public void setGenerated(boolean generated) {
         this.generated = generated;
     }
+
+    public String getJavaType() { return MySQLDataTypeMapping.getJavaType(dataTypeCode);}
 
     @Override
     public String toString() {

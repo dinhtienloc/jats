@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
     <artifactId>core</artifactId>
-    <name>JATS-Addon: Core Module</name>
+    <name>JATS-Core: Core Module</name>
     <packaging>jar</packaging>
 
     <properties>

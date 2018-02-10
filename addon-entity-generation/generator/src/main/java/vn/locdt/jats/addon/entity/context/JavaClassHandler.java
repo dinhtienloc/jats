@@ -10,9 +10,9 @@ public interface JavaClassHandler {
 
     String getClassName();
 
-    String getExtensionClass();
+    String getExtendStatement();
 
-    String getImplementClasses();
+    String getImplementStatement();
 
-    void importClass(String canonicalName);
+    String importClass(String canonicalName);
 }

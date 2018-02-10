@@ -1,5 +1,10 @@
-${entity.getPackage()}
+${context.getPackage()}
 
+public class ${context.getClassName()}${context.getExtendStatement()}${context.getImplementStatement()} {
+<#foreach column in context.getMappingAttribute().getColumns()>
+    private ${column.getJavaType()} ${stringutils.convertSqlNameToVariableName(column.getName())};
+</#foreach>
+}
 <#--<#assign classbody>-->
 <#--<#include "PojoTypeDeclaration.ftl"/> {-->
 

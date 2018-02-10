@@ -21,9 +21,9 @@ public class EntityGeneration {
 
         TemplateProducer producer = TemplateProducer.createProducer("templates/entity");
         EntityGenerator gen = new EntityGenerator(catalogs.get(0).getTables().get(0));
-        gen.setOutputDir("test-generate/generator");
+        gen.setOutputDir("output/generator");
         gen.setOutputName("test");
-        gen.setTemplateName("Pojo.ftl");
+        gen.setTemplateName("Entity.ftl");
         gen.generate(producer);
     }
 

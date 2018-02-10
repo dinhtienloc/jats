@@ -9,6 +9,6 @@
         <version>1.0.0</version>
     </parent>
     <artifactId>bundle.question</artifactId>
-    <name>JATS-Addon: Console Question</name>
+    <name>JATS-Bundle: Console Question</name>
     <packaging>jar</packaging>
 </project>

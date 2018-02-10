@@ -1,10 +1,12 @@
 package vn.locdt.jats.addon.entity.context;
 
 import vn.locdt.jats.addon.entity.FileType;
-import vn.locdt.jats.addon.entity.StringUtils;
+import vn.locdt.jats.addon.entity.modeling.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -13,16 +15,19 @@ import java.util.stream.Collectors;
 public abstract class JavaClassContext extends GenerationContext implements JavaClassHandler {
     protected static final String IMPORT_STATEMENT = "import %s;";
     protected static final String PACKAGE_STATEMENT = "package %s;";
-    protected List<String> importDeclarations;
+    protected static final String EXTEND_STATEMENT = "extends %s;";
+    protected static final String IMPLEMENT_STATEMENT = "implements %s;";
+
+    protected Map<String, String> importsMapping;
 
     public JavaClassContext(String outputDir, String outputName) {
         super(outputDir, outputName, FileType.JAVA);
-        this.importDeclarations = new ArrayList<>();
+        this.importsMapping = new HashMap<>();
     }
 
     public JavaClassContext() {
         super(FileType.JAVA);
-        this.importDeclarations = new ArrayList<>();
+        this.importsMapping = new HashMap<>();
     }
 
     @Override
@@ -33,12 +38,41 @@ public abstract class JavaClassContext extends GenerationContext implements Java
 
     @Override
     public String getImports() {
-        return importDeclarations.stream().collect(Collectors.joining("\n"));
+        return importsMapping.entrySet()
+                .stream()
+                .filter( e -> !e.getKey().equals(e.getValue()))
+                .map(e -> String.format(IMPORT_STATEMENT, e.getValue()))
+                .collect(Collectors.joining("\n"));
     }
 
     @Override
-    public void importClass(String canonicalName) {
-        String importStatement = String.format(IMPORT_STATEMENT, canonicalName);
-        importDeclarations.add(importStatement);
+    public String importClass(String canonicalName) {
+        String[] data = StringUtils.getSimpleName(canonicalName);
+        boolean printSimpleName = put(data);
+        if (printSimpleName)
+            return data[0];
+        else
+            return data[1];
+    }
+
+    private boolean put(String[] data) {
+        String simpleName = data[0];
+        String canonicalName = data[1];
+        boolean printSimpleName;
+
+        String existCanonicalName = importsMapping.get(simpleName);
+        if (existCanonicalName != null) {
+            if (existCanonicalName.equals(canonicalName))
+                printSimpleName = true;
+            else {
+                printSimpleName = false;
+                importsMapping.put(canonicalName, canonicalName);
+            }
+        }
+        else {
+            printSimpleName = true;
+            importsMapping.put(simpleName, canonicalName);
+        }
+        return printSimpleName;
     }
 }

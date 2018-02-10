@@ -3,6 +3,7 @@ package vn.locdt.jats.core.util;
 import org.apache.commons.lang.SystemUtils;
 import org.fusesource.jansi.Ansi;
 import org.springframework.shell.support.logging.HandlerUtils;
+import vn.locdt.jats.addon.entity.modeling.util.DatabaseUtils;
 
 import java.nio.file.Paths;
 import java.util.logging.Logger;
@@ -13,7 +14,7 @@ import static org.fusesource.jansi.Ansi.ansi;
  * Created by locdt on 1/21/2018.
  */
 public class Utils {
-    private static final Logger logger = HandlerUtils.getLogger(vn.locdt.jats.addon.entity.modeling.util.Utils.class);
+    private static final Logger logger = HandlerUtils.getLogger(DatabaseUtils.class);
     public final static boolean DEBUG_MODE = false;
 
     public static String getUserDir() {

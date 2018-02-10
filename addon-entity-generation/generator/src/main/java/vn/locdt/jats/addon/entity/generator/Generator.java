@@ -1,9 +1,8 @@
 package vn.locdt.jats.addon.entity.generator;
 
-import vn.locdt.jats.addon.entity.StringUtils;
+import vn.locdt.jats.addon.entity.modeling.util.StringUtils;
 import vn.locdt.jats.addon.entity.context.GenerationContext;
 import vn.locdt.jats.addon.entity.generator.exception.GeneratorException;
-import vn.locdt.jats.addon.entity.modeling.model.Model;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,27 +17,28 @@ import java.util.logging.Logger;
 /**
  * Created by locdt on 2/7/2018.
  */
-public abstract class Generator {
+public abstract class Generator<D, C extends GenerationContext> {
     private static final Logger log = Logger.getLogger(Generator.class.getName());
-    protected Model model;
+    protected D data;
     protected String templateName;
     protected Map<String, Object> dataMapping;
-    protected GenerationContext context;
+    protected C context;
 
     public Generator() {
         this.dataMapping = new HashMap<>();
     }
 
-    public Generator(Model model) {
-        this.model = model;
+    public Generator(D data) {
+        this();
+        this.data = data;
     }
 
-    public Model getModel() {
-        return model;
+    public D getData() {
+        return data;
     }
 
-    public void setModel(Model model) {
-        this.model = model;
+    public void setData(D data) {
+        this.data = data;
     }
 
     public String getTemplateName() {
@@ -49,11 +49,11 @@ public abstract class Generator {
         this.templateName = templateName;
     }
 
-    public GenerationContext getContext() {
+    public C getContext() {
         return context;
     }
 
-    public void setContext(GenerationContext context) {
+    public void setContext(C context) {
         this.context = context;
     }
 

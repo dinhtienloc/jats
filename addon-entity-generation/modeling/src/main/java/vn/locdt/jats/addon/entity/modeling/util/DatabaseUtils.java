@@ -7,13 +7,10 @@ import vn.locdt.jats.addon.entity.modeling.model.Table;
 /**
  * Created by locdt on 2/2/2018.
  */
-public class Utils {
-    public static boolean isValidString(String str) {
-        return str != null && str.length() > 0;
-    }
+public class DatabaseUtils {
 
     public static Table findTableByName(Catalog catalog, String name) {
-        if (!Utils.isValidString(name)) return null;
+        if (!StringUtils.isStringValid(name)) return null;
         for (Table table : catalog.getTables())
             if (name.equals(table.getName())) return table;
         return null;

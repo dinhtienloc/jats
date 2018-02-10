@@ -1,11 +1,7 @@
 package vn.locdt.jats.addon.entity.context;
 
-import vn.locdt.jats.addon.entity.FileType;
-import vn.locdt.jats.addon.entity.StringUtils;
+import vn.locdt.jats.addon.entity.modeling.util.StringUtils;
 import vn.locdt.jats.addon.entity.modeling.model.Table;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by locdt on 2/9/2018.
@@ -25,18 +21,22 @@ public class EntityContext extends JavaClassContext {
 
     @Override
     public String getClassName() {
-        return null;
+        return model.getJavaName();
     }
 
     @Override
-    public String getExtensionClass() {
-        return null;
+    public String getExtendStatement() {
+        return "";
     }
 
     @Override
-    public String getImplementClasses() {
-        return null;
+    public String getImplementStatement() {
+        return "";
     }
 
+    public Table getMappingAttribute() {return this.model;}
 
+    public Table getModel() {
+        return model;
+    }
 }
