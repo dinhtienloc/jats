@@ -1,4 +1,4 @@
-package vn.locdt.jats.addon.entity.modeling.system;
+package vn.locdt.jats.addon.entity.modeling;
 
 import vn.locdt.jats.addon.entity.modeling.model.*;
 

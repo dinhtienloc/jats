@@ -1,5 +1,6 @@
 package vn.locdt.jats.addon.entity.modeling.system;
 
+import vn.locdt.jats.addon.entity.modeling.ResultSetExtractor;
 import vn.locdt.jats.addon.entity.modeling.exception.CatalogNotSupportException;
 import vn.locdt.jats.addon.entity.modeling.exception.SchemaNotSupportException;
 import vn.locdt.jats.addon.entity.modeling.model.*;

@@ -1,7 +1,8 @@
 package vn.locdt.jats.addon.entity.modeling.system.mysql;
 
 import vn.locdt.jats.addon.entity.modeling.model.*;
-import vn.locdt.jats.addon.entity.modeling.system.ResultSetExtractor;
+import vn.locdt.jats.addon.entity.modeling.ResultSetExtractor;
+import vn.locdt.jats.addon.entity.modeling.strategy.IdentityStrategy;
 import vn.locdt.jats.addon.entity.modeling.util.SQL;
 
 import java.sql.ResultSet;
@@ -40,7 +41,7 @@ public class MySQLResultSetExtractor extends ResultSetExtractor {
             int columnSize = rs.getInt("COLUMN_SIZE");
             boolean nullable = rs.getBoolean("NULLABLE");
             boolean autoIncremented = "YES".equals(rs.getString("IS_AUTOINCREMENT"));
-            boolean generated = "YES".equals(rs.getString("IS_GENERATEDCOLUMN"));
+            boolean generatedColumn = "YES".equals(rs.getString("IS_GENERATEDCOLUMN"));
 
             Column col = new Column(columnName);
             col.setDataTypeCode(dataTypeCode);
@@ -48,7 +49,10 @@ public class MySQLResultSetExtractor extends ResultSetExtractor {
             col.setSize(columnSize);
             col.setNullable(nullable);
             col.setAutoIncrement(autoIncremented);
-            col.setGenerated(generated);
+            col.setGeneratedColumn(generatedColumn);
+
+            if (autoIncremented)
+                col.setGeneratedStrategy(new IdentityStrategy());
             return col;
         });
     }

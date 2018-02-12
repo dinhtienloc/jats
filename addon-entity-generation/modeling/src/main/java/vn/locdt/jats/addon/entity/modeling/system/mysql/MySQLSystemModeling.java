@@ -1,7 +1,7 @@
 package vn.locdt.jats.addon.entity.modeling.system.mysql;
 
 import vn.locdt.jats.addon.entity.modeling.model.*;
-import vn.locdt.jats.addon.entity.modeling.system.ResultSetExtractor;
+import vn.locdt.jats.addon.entity.modeling.ResultSetExtractor;
 import vn.locdt.jats.addon.entity.modeling.system.SystemModeling;
 import vn.locdt.jats.addon.entity.modeling.exception.SchemaNotSupportException;
 import vn.locdt.jats.addon.entity.modeling.util.SQL;
