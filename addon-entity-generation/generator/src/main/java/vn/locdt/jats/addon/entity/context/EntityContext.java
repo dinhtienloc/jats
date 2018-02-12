@@ -1,27 +1,26 @@
 package vn.locdt.jats.addon.entity.context;
 
-import vn.locdt.jats.addon.entity.modeling.util.StringUtils;
 import vn.locdt.jats.addon.entity.modeling.model.Table;
 
 /**
  * Created by locdt on 2/9/2018.
  */
 public class EntityContext extends JavaClassContext {
-    private Table model;
+    private Table contextModel;
 
-    public EntityContext(Table model, String outputDir, String outputName) {
+    public EntityContext(Table contextModel, String outputDir, String outputName) {
         super(outputDir, outputName);
-        this.model = model;
+        this.contextModel = contextModel;
     }
 
-    public EntityContext(Table model) {
+    public EntityContext(Table contextModel) {
         super();
-        this.model = model;
+        this.contextModel = contextModel;
     }
 
     @Override
     public String getClassName() {
-        return model.getJavaName();
+        return contextModel.getJavaName();
     }
 
     @Override
@@ -34,9 +33,7 @@ public class EntityContext extends JavaClassContext {
         return "";
     }
 
-    public Table getMappingAttribute() {return this.model;}
-
-    public Table getModel() {
-        return model;
+    public Table getContextModel() {
+        return contextModel;
     }
 }

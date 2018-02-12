@@ -4,4 +4,4 @@
         strategy = ${context.importClass("javax.persistence.GenerationType")}.${column.generatedStrategy.strategyType}
     )
 </#if>
-    @${context.importClass("javax.persistence.Column")}(name = ${column.name})
+    @${context.importClass("javax.persistence.Column")}(name = "${column.name}")

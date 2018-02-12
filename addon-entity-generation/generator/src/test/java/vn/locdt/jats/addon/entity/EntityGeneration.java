@@ -20,7 +20,7 @@ public class EntityGeneration {
         List<Catalog> catalogs = readCatalog("sakila", wrapper);
 
         TemplateProducer producer = TemplateProducer.createProducer("templates/entity");
-        EntityGenerator gen = new EntityGenerator(catalogs.get(0).getTables().get(0));
+        EntityGenerator gen = new EntityGenerator(catalogs.get(0).findTableByName("store"));
         gen.setOutputDir("output/generator");
         gen.setOutputName("test");
         gen.setTemplateName("Entity.ftl");
