@@ -31,6 +31,12 @@ public class Catalog extends Model {
         if (t != null) this.tables.add(t);
     }
 
+    public Table findTableByName(String name) {
+        return tables.stream()
+                .filter(t -> t.name.equals(name))
+                .findFirst().orElse(null);
+    }
+
     @Override
     public String toString() {
         return "Catalog{" +

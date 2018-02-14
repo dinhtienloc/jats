@@ -63,27 +63,27 @@ public class MySQLResultSetExtractor extends ResultSetExtractor {
     }
 
     @Override
-    public ForeignKey foreignKey(ResultSet rs) {
+    public Relation relation(ResultSet rs) {
         return SQL.wrap(() -> {
-            ForeignKey fk = new ForeignKey();
+            Relation relation = new Relation();
 
-            String pkTableName = rs.getString("PKTABLE_NAME");
-            fk.setReferencedTableName(pkTableName);
-            String pkColumnName = rs.getString("PKCOLUMN_NAME");
-            fk.setReferencedColumnName(pkColumnName);
+            String parentTableName = rs.getString("PKTABLE_NAME");
+            relation.setParentTableName(parentTableName);
+            String parentColumnName = rs.getString("PKCOLUMN_NAME");
+            relation.setParentColumnName(parentColumnName);
 
-            String fkTableName = rs.getString("FKTABLE_NAME");
-            fk.setReferencingTableName(fkTableName);
-            String fkColumnName = rs.getString("FKCOLUMN_NAME");
-            fk.setReferencingColumnName(fkColumnName);
+            String childTableName = rs.getString("FKTABLE_NAME");
+            relation.setChildTableName(childTableName);
+            String childColumnName = rs.getString("FKCOLUMN_NAME");
+            relation.setChildColumnName(childColumnName);
 
             short updateRule = rs.getShort("UPDATE_RULE");
-            fk.setUpdateRule(updateRule);
+            relation.setUpdateRule(updateRule);
 
             short deleteRule = rs.getShort("DELETE_RULE");
-            fk.setDeleteRule(deleteRule);
+            relation.setDeleteRule(deleteRule);
 
-            return fk;
+            return relation;
         });
     }
 }

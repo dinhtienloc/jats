@@ -17,10 +17,10 @@ import java.util.List;
 public class EntityGeneration {
     public static void main(String[] args) throws Exception{
         DatabaseMetadataWrapper wrapper = createDatabaseMetadataWrapper();
-        List<Catalog> catalogs = readCatalog("sakila", wrapper);
+        List<Catalog> catalogs = readCatalog("thesis", wrapper);
 
         TemplateProducer producer = TemplateProducer.createProducer("templates/entity");
-        EntityGenerator gen = new EntityGenerator(catalogs.get(0).findTableByName("store"));
+        EntityGenerator gen = new EntityGenerator(catalogs.get(0).findTableByName("thesis_revision"));
         gen.setOutputDir("output/generator");
         gen.setOutputName("test");
         gen.setTemplateName("Entity.ftl");

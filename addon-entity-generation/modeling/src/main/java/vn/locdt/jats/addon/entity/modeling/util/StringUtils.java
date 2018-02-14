@@ -17,7 +17,9 @@ public class StringUtils {
         return !isNullString(str) && str.length() > 0;
     }
     public static String getCanonicalNameFromPath(String path) {
-        return path.replace('/', '.').replace('\\', '.');
+        if (StringUtils.isStringValid(path))
+            return path.replace('/', '.').replace('\\', '.');
+        return "";
     }
 
     public static boolean containPackageInvalidCharacters(String name) {
@@ -35,7 +37,10 @@ public class StringUtils {
 
         char[] charArr = name.toCharArray();
         charArr[0] = Character.toLowerCase(charArr[0]);
-        return new String(charArr);
+        String varName = new String(charArr);
+        if ("class".equals(varName))
+            return "clazz";
+        return varName;
     }
 
     public static String[] getSimpleName(String canonicalName) {

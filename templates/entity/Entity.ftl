@@ -4,7 +4,7 @@ ${context.packageStatement}
 @${context.importClass("javax.persistence.Entity")}
 @${context.importClass("javax.persistence.Table")}(name="${context.contextModel.name}")
 public class ${context.className}${context.extendStatement}${context.implementStatement} {
-<#include "DefaultAttribute.ftl" />
+<#include "EntityAttribute.ftl" />
 ${fields}
 ${getset}
 }

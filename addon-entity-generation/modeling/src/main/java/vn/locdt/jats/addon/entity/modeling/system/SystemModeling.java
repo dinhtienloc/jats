@@ -61,5 +61,5 @@ public abstract class SystemModeling {
 
     public abstract void modelPrimaryKey(Table table, ResultSet pk);
 
-    public abstract ForeignKey modelForeignKey(Catalog catalog, ResultSet fk);
+    public abstract Relation modelForeignKey(Catalog catalog, ResultSet fk);
 }

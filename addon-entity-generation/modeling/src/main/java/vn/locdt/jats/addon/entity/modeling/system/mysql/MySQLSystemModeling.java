@@ -107,19 +107,26 @@ public class MySQLSystemModeling extends SystemModeling {
     }
 
     @Override
-    public ForeignKey modelForeignKey(Catalog catalog, ResultSet rs) {
-        ForeignKey fk = extractor.foreignKey(rs);
+    public Relation modelForeignKey(Catalog catalog, ResultSet rs) {
+        Relation relation = extractor.relation(rs);
 
-        Column pkColumn = DatabaseUtils.findColumnInTableByName(catalog, fk.getReferencedTableName(), fk.getReferencedColumnName());
+        Column pkColumn = DatabaseUtils.findColumnInTableByName(catalog,
+                                                relation.getParentTableName(),
+                                                relation.getParentColumnName());
         if (pkColumn == null) return null;
 
-        Column fkColumn = DatabaseUtils.findColumnInTableByName(catalog, fk.getReferencingTableName(), fk.getReferencingColumnName());
+        Column fkColumn = DatabaseUtils.findColumnInTableByName(catalog,
+                                                relation.getChildTableName(),
+                                                relation.getChildColumnName());
         if (fkColumn == null) return null;
 
-        fk.setReferencedColumn(pkColumn);
-        fk.setReferencingColumn(fkColumn);
-        fkColumn.getTable().addForeignKey(fk);
-        return fk;
+        relation.setParentColumn(pkColumn);
+        relation.setChildColumn(fkColumn);
+
+        fkColumn.addRelation(relation);
+        pkColumn.addRelation(relation);
+
+        return relation;
     }
 
 }

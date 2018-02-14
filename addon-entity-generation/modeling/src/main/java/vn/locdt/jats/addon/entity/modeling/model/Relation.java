@@ -3,62 +3,62 @@ package vn.locdt.jats.addon.entity.modeling.model;
 /**
  * Created by locdt on 2/2/2018.
  */
-public class ForeignKey extends Model {
-    private String referencedTableName;
-    private String referencedColumnName;
-    private String referencingTableName;
-    private String referencingColumnName;
-    private Column referencedColumn;
-    private Column referencingColumn;
+public class Relation extends Model {
+    private String parentTableName;
+    private String parentColumnName;
+    private String childTableName;
+    private String childColumnName;
+    private Column parentColumn;
+    private Column childColumn;
     private UpdateRule updateRule;
     private DeleteRule deleteRule;
 
-    public String getReferencedTableName() {
-        return referencedTableName;
+    public String getParentTableName() {
+        return parentTableName;
     }
 
-    public void setReferencedTableName(String referencedTableName) {
-        this.referencedTableName = referencedTableName;
+    public void setParentTableName(String parentTableName) {
+        this.parentTableName = parentTableName;
     }
 
-    public String getReferencedColumnName() {
-        return referencedColumnName;
+    public String getParentColumnName() {
+        return parentColumnName;
     }
 
-    public void setReferencedColumnName(String referencedColumnName) {
-        this.referencedColumnName = referencedColumnName;
+    public void setParentColumnName(String parentColumnName) {
+        this.parentColumnName = parentColumnName;
     }
 
-    public String getReferencingTableName() {
-        return referencingTableName;
+    public String getChildTableName() {
+        return childTableName;
     }
 
-    public void setReferencingTableName(String referencingTableName) {
-        this.referencingTableName = referencingTableName;
+    public void setChildTableName(String childTableName) {
+        this.childTableName = childTableName;
     }
 
-    public String getReferencingColumnName() {
-        return referencingColumnName;
+    public String getChildColumnName() {
+        return childColumnName;
     }
 
-    public void setReferencingColumnName(String referencingColumnName) {
-        this.referencingColumnName = referencingColumnName;
+    public void setChildColumnName(String childColumnName) {
+        this.childColumnName = childColumnName;
     }
 
-    public Column getReferencedColumn() {
-        return referencedColumn;
+    public Column getParentColumn() {
+        return parentColumn;
     }
 
-    public void setReferencedColumn(Column referencedColumn) {
-        this.referencedColumn = referencedColumn;
+    public void setParentColumn(Column parentColumn) {
+        this.parentColumn = parentColumn;
     }
 
-    public Column getReferencingColumn() {
-        return referencingColumn;
+    public Column getChildColumn() {
+        return childColumn;
     }
 
-    public void setReferencingColumn(Column referencingColumn) {
-        this.referencingColumn = referencingColumn;
+    public void setChildColumn(Column childColumn) {
+        this.childColumn = childColumn;
     }
 
     public UpdateRule getUpdateRule() {
@@ -83,6 +83,18 @@ public class ForeignKey extends Model {
 
     public void setDeleteRule(short type) {
         this.deleteRule = DeleteRule.enumOf(type);
+    }
+
+    @Override
+    public String toString() {
+        return "ForeignKey{" +
+                "parentTableName='" + parentTableName + '\'' +
+                ", parentColumnName='" + parentColumnName + '\'' +
+                ", childTableName='" + childTableName + '\'' +
+                ", childColumnName='" + childColumnName + '\'' +
+                ", updateRule=" + updateRule +
+                ", deleteRule=" + deleteRule +
+                '}';
     }
 
     public enum UpdateRule {

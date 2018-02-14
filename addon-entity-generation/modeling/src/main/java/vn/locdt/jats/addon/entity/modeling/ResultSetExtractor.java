@@ -18,5 +18,5 @@ public abstract class ResultSetExtractor {
 
     public abstract String primaryKey(ResultSet rs);
 
-    public abstract ForeignKey foreignKey(ResultSet rs);
+    public abstract Relation relation(ResultSet rs);
 }

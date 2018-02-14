@@ -1,5 +1,7 @@
 package vn.locdt.jats.addon.entity.context;
 
+import vn.locdt.jats.addon.entity.modeling.model.Column;
+
 /**
  * Created by locdt on 2/9/2018.
  */

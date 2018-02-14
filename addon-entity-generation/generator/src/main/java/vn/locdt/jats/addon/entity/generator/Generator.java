@@ -29,6 +29,7 @@ public abstract class Generator<D, C extends GenerationContext> {
     }
 
     public Generator(D data) {
+        // TODO: Handle null data
         this();
         this.data = data;
     }
