@@ -20,6 +20,6 @@ public class FileUtils {
     }
 
     public static String getConfigurationPath() {
-        return getUserDir() + "\\jats.properties";
+        return "jats.properties";
     }
 }

@@ -20,12 +20,13 @@ public class InitQuestionCommand extends QuestionCommand implements CommandMarke
 
     @CliCommand(value = { "init"})
     public String runCommand(
-        @CliOption(key = "rootPackage")
+        @CliOption(key = "rootPkg")
         @QuestionCliOption(RootPackageQuestion.class) String rootPackage
     ) {
+        LogUtils.printDebugLog("Option: " + rootPackage);
         resolveOptionValues(rootPackage);
 
-        LogUtils.printDebugLog(rootPackage);
+        LogUtils.printDebugLog("Root package: " + rootPackage);
         if (rootPackage != null)
             SettingData.getProjectSetting().setRootPackage(rootPackage);
 

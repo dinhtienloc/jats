@@ -10,19 +10,9 @@ import vn.locdt.jats.module.shell.setting.SettingData;
  */
 public class RootPackageQuestion extends QuestionCLI {
     @Override
-    protected QuestionStatus preQuestion() {
-        return QuestionStatus.CONTINUE;
-    }
-
-    @Override
-    protected QuestionStatus postQuestion() {
-        return QuestionStatus.FINISHED;
-    }
-
-    @Override
-    protected QuestionStatus run() {
+    protected void run() {
         askForRootPackage();
-        return QuestionStatus.CONTINUE;
+        status = QuestionStatus.CONTINUE;
     }
 
     private void askForRootPackage() {

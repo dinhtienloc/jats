@@ -4,18 +4,27 @@ package vn.locdt.jats.module.shell.question;
  * Created by locdt on 1/21/2018.
  */
 public abstract class QuestionCLI {
+    protected QuestionStatus status;
+
     public QuestionCLI() {}
 
-    protected abstract QuestionStatus preQuestion();
-    protected abstract QuestionStatus postQuestion();
-    protected abstract QuestionStatus run();
+    protected void preQuestion() {
+        status = QuestionStatus.CONTINUE;
+    }
+
+    protected void postQuestion() {
+        if (status != QuestionStatus.STOP)
+            status = QuestionStatus.FINISHED;
+    }
+
+    protected abstract void run();
 
     public QuestionStatus start() {
-        QuestionStatus status = preQuestion();
+        preQuestion();
         if (status == QuestionStatus.CONTINUE) {
-            status = run();
+            run();
             if (status == QuestionStatus.CONTINUE)
-                status = postQuestion();
+                postQuestion();
         }
         return status;
     }

@@ -10,19 +10,9 @@ import vn.locdt.jats.module.shell.setting.SettingData;
  */
 public class EntityPackageNameQuestion extends QuestionCLI {
     @Override
-    protected QuestionStatus preQuestion() {
-        return QuestionStatus.CONTINUE;
-    }
-
-    @Override
-    protected QuestionStatus postQuestion() {
-        return QuestionStatus.FINISHED;
-    }
-
-    @Override
-    protected QuestionStatus run() {
+    protected void run() {
         askForEntityPackageName();
-        return QuestionStatus.CONTINUE;
+        status = QuestionStatus.CONTINUE;
     }
 
     private void askForEntityPackageName() {

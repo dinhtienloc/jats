@@ -9,7 +9,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 public class LogUtils {
     private static final Logger logger = HandlerUtils.getLogger(LogUtils.class);
-    public final static boolean DEBUG_MODE = false;
+    public final static boolean DEBUG_MODE = true;
 
     public static String createLog(Object message) {
         return ansi().fg(Ansi.Color.CYAN).a(message)

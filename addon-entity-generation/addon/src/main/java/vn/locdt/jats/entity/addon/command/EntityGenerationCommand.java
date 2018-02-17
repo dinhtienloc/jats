@@ -28,6 +28,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class EntityGenerationCommand extends QuestionCommand implements CommandMarker {
     @CliCommand(value = { "entity:gen"})
     public String runCommand() {
+        resolveOptionValues();
 
         if (SettingData.getProjectSetting().getRootPackage() == null)
             return LogUtils.createWarningLog("Please use 'init' command to setup jats with your project first!");

@@ -12,12 +12,8 @@ import vn.locdt.jats.module.shell.setting.SettingData;
  */
 public class ConnectionQuestion extends QuestionCLI {
 
-    public ConnectionQuestion() {super();}
-
     @Override
-    protected QuestionStatus preQuestion() {
-        QuestionStatus status = QuestionStatus.CONTINUE;
-
+    protected void run() {
         if (!SettingData.isHbmConfigurationCreated()) {
             askForDatabaseType();
             askForDatabaseUrl();
@@ -28,24 +24,12 @@ public class ConnectionQuestion extends QuestionCLI {
             DatabaseSetting dbConfig = SettingData.getDatabaseSetting();
             if (!dbConfig.loadDriver(dbConfig.getDbType()))
                 status = QuestionStatus.STOP;
-            else if (!dbConfig.createConnection())
-                status = QuestionStatus.STOP;
         }
 
-        return status;
-    }
-
-    @Override
-    protected QuestionStatus postQuestion() {
-        return QuestionStatus.FINISHED;
-    }
-
-    @Override
-    protected QuestionStatus run() {
         if (SettingData.getDatabaseSetting().createConnection())
-            return QuestionStatus.CONTINUE;
+            status = QuestionStatus.CONTINUE;
         else
-            return QuestionStatus.STOP;
+            status = QuestionStatus.STOP;
     }
 
     private void askForDatabaseType() {

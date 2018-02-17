@@ -4,10 +4,7 @@ import vn.locdt.jats.module.shell.constants.PropertiesConstants;
 import vn.locdt.jats.util.FileUtils;
 import vn.locdt.jats.util.LogUtils;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Properties;
 
 /**
@@ -38,7 +35,7 @@ public class SettingData {
         Properties properties = getConfigProperties();
         LogUtils.printDebugLog(properties);
         if (properties != null) {
-            LogUtils.printLog("Loading last run setting...");
+            LogUtils.printLog("Loading saved setting...");
             dbSetting = new DatabaseSetting(properties);
             projectSetting = new ProjectSetting(properties);
 
@@ -52,7 +49,9 @@ public class SettingData {
     private static Properties getConfigProperties() {
         Properties properties = new Properties();
         LogUtils.printDebugLog(FileUtils.getConfigurationPath());
-        try (InputStream input = new FileInputStream(FileUtils.getConfigurationPath())) {
+        File propertiesFile = new File(FileUtils.getConfigurationPath());
+        LogUtils.printDebugLog(propertiesFile.getAbsolutePath());
+        try (InputStream input = new FileInputStream(propertiesFile)) {
             // load a properties file
             properties.load(input);
             return properties;
