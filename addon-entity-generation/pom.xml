@@ -8,12 +8,13 @@
         <artifactId>jats</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>addon.entity</artifactId>
+    <artifactId>entity</artifactId>
     <name>JATS-Addon: Entity Generation</name>
     <packaging>pom</packaging>
 
     <modules>
         <module>generator</module>
         <module>modeling</module>
+        <module>addon</module>
     </modules>
 </project>

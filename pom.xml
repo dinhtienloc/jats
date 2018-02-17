@@ -11,9 +11,18 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>core-module</module>
+        <!-- Core Modules-->
+        <module>core</module>
+        <module>util</module>
+
+        <!-- Bundle Modules-->
+        <module>bundle-question</module>
+
+        <!-- Main Modules-->
+        <module>module-shell</module>
+
+        <!-- Addon Modules-->
         <module>addon-entity-generation</module>
-        <module>terminal-question</module>
     </modules>
 
     <dependencies>
@@ -61,11 +70,11 @@
             <version>2.3</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.ddlutils</groupId>
-            <artifactId>ddlutils</artifactId>
-            <version>1.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.ddlutils</groupId>-->
+            <!--<artifactId>ddlutils</artifactId>-->
+            <!--<version>1.0</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>net.java.dev.jna</groupId>
