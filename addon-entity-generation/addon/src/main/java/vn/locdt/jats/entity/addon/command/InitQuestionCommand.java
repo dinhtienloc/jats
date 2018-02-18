@@ -9,7 +9,10 @@ import vn.locdt.jats.module.shell.question.annotation.QuestionCliOption;
 import vn.locdt.jats.module.shell.question.annotation.QuestionImports;
 import vn.locdt.jats.module.shell.question.init.RootPackageQuestion;
 import vn.locdt.jats.module.shell.setting.SettingData;
+import vn.locdt.jats.util.FileUtils;
 import vn.locdt.jats.util.LogUtils;
+
+import java.nio.file.Path;
 
 /**
  * Created by locdt on 1/27/2018.
@@ -27,8 +30,16 @@ public class InitQuestionCommand extends QuestionCommand implements CommandMarke
         resolveOptionValues(rootPackage);
 
         LogUtils.printDebugLog("Root package: " + rootPackage);
-        if (rootPackage != null)
-            SettingData.getProjectSetting().setRootPackage(rootPackage);
+        if (rootPackage != null) {
+            Path rootPkgPath = FileUtils.findFileWithPackageName(rootPackage);
+            if (rootPkgPath == null) {
+                LogUtils.printErrorLog("Package '" + rootPackage + "' does not exist.");
+            }
+            else {
+                SettingData.getProjectSetting().setRootPackage(rootPackage);
+                SettingData.getProjectSetting().setRootPackagePath(rootPkgPath);
+            }
+        }
 
         startQuestions();
         return null;

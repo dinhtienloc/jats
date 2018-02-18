@@ -4,8 +4,8 @@ import vn.locdt.jats.bundle.question.JQuestion;
 import vn.locdt.jats.module.shell.constants.Constants;
 import vn.locdt.jats.module.shell.question.QuestionCLI;
 import vn.locdt.jats.module.shell.question.QuestionStatus;
-import vn.locdt.jats.module.shell.setting.DatabaseSetting;
 import vn.locdt.jats.module.shell.setting.SettingData;
+import vn.locdt.jats.util.LogUtils;
 
 /**
  * Created by locdt on 1/21/2018.
@@ -14,22 +14,18 @@ public class ConnectionQuestion extends QuestionCLI {
 
     @Override
     protected void run() {
-        if (!SettingData.isHbmConfigurationCreated()) {
+        if (!SettingData.isConnectionEstablished()) {
             askForDatabaseType();
             askForDatabaseUrl();
             askForDatabaseUsername();
             askForDatabasePassword();
         }
-        else {
-            DatabaseSetting dbConfig = SettingData.getDatabaseSetting();
-            if (!dbConfig.loadDriver(dbConfig.getDbType()))
-                status = QuestionStatus.STOP;
-        }
-
-        if (SettingData.getDatabaseSetting().createConnection())
+        else if (SettingData.getDatabaseSetting().getConnection() != null)
             status = QuestionStatus.CONTINUE;
-        else
+        else {
+            LogUtils.createErrorLog("Could not establish connection.");
             status = QuestionStatus.STOP;
+        }
     }
 
     private void askForDatabaseType() {

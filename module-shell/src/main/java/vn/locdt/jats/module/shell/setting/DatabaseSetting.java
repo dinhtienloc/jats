@@ -89,6 +89,12 @@ public class DatabaseSetting extends Setting {
     }
 
     public Connection getConnection()  {
+        try {
+            if (connection != null && connection.isClosed())
+                createConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return connection;
     }
 }

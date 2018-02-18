@@ -1,5 +1,6 @@
 package vn.locdt.jats.addon.entity.generator;
 
+import vn.locdt.jats.addon.entity.TemplateProducer;
 import vn.locdt.jats.addon.entity.modeling.util.StringUtils;
 import vn.locdt.jats.addon.entity.context.GenerationContext;
 import vn.locdt.jats.addon.entity.generator.exception.GeneratorException;
@@ -66,7 +67,7 @@ public abstract class Generator<D, C extends GenerationContext> {
         this.context.setOutputName(name);
     }
 
-    public void generate(TemplateProducer producer) {
+    public boolean generate(TemplateProducer producer) {
         String outputDir = context.getOutputDir();
 
         if (StringUtils.containPackageInvalidCharacters(outputDir))
@@ -89,9 +90,10 @@ public abstract class Generator<D, C extends GenerationContext> {
                 Files.createFile(des);
             }
 
-            producer.produce(dataMapping, templateName, des, ext);
+            return producer.produce(dataMapping, templateName, des);
         } catch (IOException e) {
             log.log(Level.INFO, "Error create entity file " + outputDir + File.separator + outputName);
         }
+        return false;
     }
 }

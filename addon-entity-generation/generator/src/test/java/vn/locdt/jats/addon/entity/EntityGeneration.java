@@ -1,7 +1,6 @@
 package vn.locdt.jats.addon.entity;
 
 import vn.locdt.jats.addon.entity.generator.EntityGenerator;
-import vn.locdt.jats.addon.entity.generator.TemplateProducer;
 import vn.locdt.jats.addon.entity.modeling.DatabaseMetadataWrapper;
 import vn.locdt.jats.addon.entity.modeling.DatabaseReaderFactory;
 import vn.locdt.jats.addon.entity.modeling.model.Catalog;
@@ -9,7 +8,6 @@ import vn.locdt.jats.addon.entity.modeling.system.SystemModeling;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.List;
 
 /**
  * Created by locdt on 2/9/2018.
@@ -17,10 +15,10 @@ import java.util.List;
 public class EntityGeneration {
     public static void main(String[] args) throws Exception{
         DatabaseMetadataWrapper wrapper = createDatabaseMetadataWrapper();
-        List<Catalog> catalogs = readCatalog("thesis", wrapper);
+        Catalog catalog = readCatalog("thesis", wrapper);
 
         TemplateProducer producer = TemplateProducer.createProducer("templates/entity");
-        EntityGenerator gen = new EntityGenerator(catalogs.get(0).findTableByName("thesis_revision"));
+        EntityGenerator gen = new EntityGenerator(catalog.findTableByName("thesis_revision"));
         gen.setOutputDir("output/generator");
         gen.setOutputName("test");
         gen.setTemplateName("Entity.ftl");
@@ -40,7 +38,7 @@ public class EntityGeneration {
         return wrapper;
     }
 
-    private static List<Catalog> readCatalog(String catalogName, DatabaseMetadataWrapper wrapper) {
+    private static Catalog readCatalog(String catalogName, DatabaseMetadataWrapper wrapper) {
         SystemModeling reader = DatabaseReaderFactory.createSystemReader("MySQL", wrapper);
         reader.setCatalog(catalogName);
         return reader.model();

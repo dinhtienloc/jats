@@ -5,6 +5,7 @@ import vn.locdt.jats.util.FileUtils;
 import vn.locdt.jats.util.LogUtils;
 
 import java.io.*;
+import java.sql.Connection;
 import java.util.Properties;
 
 /**
@@ -42,7 +43,7 @@ public class SettingData {
             boolean loaded = dbSetting.loadDriver(dbSetting.getDbType());
             if (!loaded) return;
             dbSetting.createConnection();
-            LogUtils.printLog("Load successfully!");
+            LogUtils.printSuccessLog("Load successfully!");
         }
     }
 
@@ -86,7 +87,22 @@ public class SettingData {
         return SettingData.projectSetting.getRootPackage() + "\\" + SettingData.projectSetting.getEntityFolder();
     }
 
-    public static boolean isHbmConfigurationCreated() {
-        return false;
+    public static boolean isConnectionEstablished() {
+        return getConnection() != null;
+    }
+
+    public static void closeConnection() {
+        Connection conn = getDatabaseSetting().getConnection();
+        try {
+            if (conn != null && !conn.isClosed()) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Connection getConnection()  {
+        return getDatabaseSetting().getConnection();
     }
 }

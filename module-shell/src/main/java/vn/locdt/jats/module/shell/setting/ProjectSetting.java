@@ -1,7 +1,11 @@
 package vn.locdt.jats.module.shell.setting;
 
 import vn.locdt.jats.module.shell.constants.PropertiesConstants;
+import vn.locdt.jats.util.FileUtils;
+import vn.locdt.jats.util.LogUtils;
 
+import java.io.File;
+import java.nio.file.Path;
 import java.util.Properties;
 
 /**
@@ -10,11 +14,17 @@ import java.util.Properties;
 public class ProjectSetting extends Setting {
     protected String rootPackage;
     protected String entityFolder;
+    protected Path rootPackagePath;
 
     public ProjectSetting() {super();}
 
     public ProjectSetting(Properties prop) {
         this.rootPackage = prop.getProperty(PropertiesConstants.ROOTPACKAGE);
+        Path pkgPath = FileUtils.findFileWithPackageName(rootPackage);
+        if (pkgPath == null)
+            LogUtils.printErrorLog("Package '" + rootPackage + "' does not exist.");
+        else
+            this.rootPackagePath = pkgPath;
     }
 
     public String getRootPackage() {
@@ -31,5 +41,13 @@ public class ProjectSetting extends Setting {
 
     public void setEntityFolder(String entityFolder) {
         this.entityFolder = entityFolder;
+    }
+
+    public Path getRootPackagePath() {
+        return rootPackagePath;
+    }
+
+    public void setRootPackagePath(Path rootPackagePath) {
+        this.rootPackagePath = rootPackagePath;
     }
 }

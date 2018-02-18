@@ -39,6 +39,8 @@ public abstract class SystemModeling {
         this.extractor = extractor;
     }
 
+    public abstract SystemModeling addExtractor(ResultSetExtractor extractor);
+
     public String getCatalog() {
         return catalog;
     }
@@ -47,9 +49,9 @@ public abstract class SystemModeling {
         this.catalog = catalog;
     }
 
-    public abstract SystemModeling addExtractor(ResultSetExtractor extractor);
+    public abstract Catalog model();
 
-    public abstract List<Catalog> model();
+    public abstract Catalog model(String catalogName);
 
     public abstract Catalog modelCatalog(ResultSet catalog) throws CatalogNotSupportException;
 

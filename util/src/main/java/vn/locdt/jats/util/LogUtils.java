@@ -57,6 +57,9 @@ public class LogUtils {
         logger.info(createErrorLog(message));
     }
 
+    public static void printWarningLog(Object message) {
+        logger.info(createWarningLog(message));
+    }
     public static void printDebugLog(Object message) {
         if (!DEBUG_MODE) return;
         logger.warning(createDebugLog(message));

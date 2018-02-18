@@ -19,23 +19,38 @@ public class DatabaseReader {
         this.conn = conn;
     }
 
-    public List<String> getDatabaseTableList() {
+    public List<String> getDatabaseTableList(String catalogName) {
         if (conn == null) return null;
 
         List<String> tables = new ArrayList<>();
         try {
             DatabaseMetaData meta = conn.getMetaData();
-            ResultSet rs = meta.getTables(null, null, null, new String[]{"TABLE"});
+            ResultSet rs = meta.getTables(catalogName, null, null, new String[]{"TABLE"});
             while (rs.next()) {
                 String tableName = rs.getString("TABLE_NAME");
                 tables.add(tableName);
             }
-
-            conn.close();
         } catch (SQLException e) {
             System.out.println(ERROR_EXECUTING_SQL);
         }
 
         return tables;
+    }
+
+    public List<String> getCatalogList() {
+        if (conn == null) return null;
+
+        List<String> catalogs = new ArrayList<>();
+        try {
+            DatabaseMetaData meta = conn.getMetaData();
+            ResultSet rs = meta.getCatalogs();
+            while (rs.next()) {
+                String tableName = rs.getString("TABLE_CAT");
+                catalogs.add(tableName);
+            }
+        } catch (SQLException e) {
+            System.out.println(ERROR_EXECUTING_SQL);
+        }
+        return catalogs;
     }
 }

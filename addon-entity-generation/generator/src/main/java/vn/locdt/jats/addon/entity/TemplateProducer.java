@@ -1,9 +1,10 @@
-package vn.locdt.jats.addon.entity.generator;
+package vn.locdt.jats.addon.entity;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
 import vn.locdt.jats.addon.entity.generator.exception.TemplateException;
+import vn.locdt.jats.util.LogUtils;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -28,12 +29,15 @@ public class TemplateProducer {
             } else {
                 this.templateFolder = templateFolder;
                 configuration = new Configuration(Configuration.VERSION_2_3_23);
-                configuration.setDirectoryForTemplateLoading(new File(templateFolder));
+//                File f = new File("");
+//                LogUtils.printDebugLog(getClass().getResourceAsStream(""));
+//                configuration.setDirectoryForTemplateLoading(f);
+                configuration.setClassForTemplateLoading(this.getClass(), "template");
                 configuration.setDefaultEncoding("UTF-8");
                 configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
                 configuration.setLogTemplateExceptions(false);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException("Error while initializing TemplateProducer", e);
         }
     }
@@ -54,18 +58,19 @@ public class TemplateProducer {
         return producer;
     }
 
-    public void produce(Map<String, Object> context, String templateName, Path destination, String fileType) {
+    public boolean produce(Map<String, Object> context, String templateName, Path destination) {
+        boolean result = false;
         try (FileWriter fw = new FileWriter(destination.toFile())) {
-            String result = processTemplate(context, templateName);
+            String content = processTemplate(context, templateName);
 
-            if (result.length() == 0) {
-                log.warning("Empty file " + destination + ". Skip creating file!");
-                return;
+            if (content.length() == 0) {
+                LogUtils.printWarningLog("Empty file " + destination.toAbsolutePath() + ". Skip creating file!");
+                return result;
             }
 
-            log.log(Level.INFO, "Writing " + destination + " successfully!");
-            fw.write(result);
-
+            LogUtils.printSuccessLog("Writing " + destination.toAbsolutePath() + " successfully!");
+            fw.write(content);
+            return result;
         } catch (Exception e) {
             throw new TemplateException("Error while writing entity file", e);
         }

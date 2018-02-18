@@ -31,5 +31,20 @@
             <artifactId>util</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>vn.locdt.jats</groupId>
+            <artifactId>entity.modeling</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>vn.locdt.jats</groupId>
+            <artifactId>entity.modeling</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>vn.locdt.jats</groupId>
+            <artifactId>entity.generator</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 </project>

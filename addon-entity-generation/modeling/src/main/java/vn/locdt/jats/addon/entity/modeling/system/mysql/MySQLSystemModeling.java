@@ -31,28 +31,29 @@ public class MySQLSystemModeling extends SystemModeling {
     }
 
     @Override
-    public List<Catalog> model() {
-        List<Catalog> catalogs = new ArrayList<>();
+    public Catalog model() {
         return SQL.wrap(() -> {
+            Catalog result = null;
             ResultSet rs = wrapper.getMetaData().getCatalogs();
             while (rs.next()) {
-                String catalog = rs.getString("TABLE_CAT");
-
-                if (this.catalog != null) {
-                    if (catalog.equals(this.catalog)) {
-                        catalogs.add(modelCatalog(rs));
-                        break;
-                    }
-                }
-                else if (!sysCatalogs.contains(catalog)) {
-                    catalogs.add(modelCatalog(rs));
-                }
-                else {
+                String catalogDbName = rs.getString("TABLE_CAT");
+                if (sysCatalogs.contains(catalog)) {
                     System.out.println("Could not model a system catalog.");
+                    return null;
+                }
+
+                if (catalogDbName.equals(catalog)) {
+                    result = modelCatalog(rs);
                 }
             }
-            return catalogs;
-        }, new ArrayList<>());
+            return result;
+        }, null);
+    }
+
+    @Override
+    public Catalog model(String catalogName) {
+        this.catalog = catalogName;
+        return model();
     }
 
     @Override
