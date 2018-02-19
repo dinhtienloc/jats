@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component;
 import vn.locdt.jats.module.shell.command.QuestionCommand;
 import vn.locdt.jats.module.shell.question.annotation.QuestionCliOption;
 import vn.locdt.jats.module.shell.question.annotation.QuestionImports;
-import vn.locdt.jats.module.shell.question.init.RootPackageQuestion;
+import vn.locdt.jats.common.addon.question.RootPackageQuestion;
+import vn.locdt.jats.module.shell.setting.ProjectSetting;
 import vn.locdt.jats.module.shell.setting.SettingData;
 import vn.locdt.jats.util.FileUtils;
 import vn.locdt.jats.util.LogUtils;
@@ -31,17 +32,11 @@ public class InitQuestionCommand extends QuestionCommand implements CommandMarke
 
         LogUtils.printDebugLog("Root package: " + rootPackage);
         if (rootPackage != null) {
-            Path rootPkgPath = FileUtils.findFileWithPackageName(rootPackage);
-            if (rootPkgPath == null) {
-                LogUtils.printErrorLog("Package '" + rootPackage + "' does not exist.");
-            }
-            else {
-                SettingData.getProjectSetting().setRootPackage(rootPackage);
-                SettingData.getProjectSetting().setRootPackagePath(rootPkgPath);
-            }
+            ProjectSetting projectSetting = SettingData.getProjectSetting();
+            projectSetting.setRootPackage(rootPackage);
+            projectSetting.findRootPackagePath(rootPackage);
         }
-
-        startQuestions();
+        else startQuestions();
         return null;
     }
 }

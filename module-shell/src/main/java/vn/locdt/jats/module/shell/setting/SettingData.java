@@ -32,6 +32,11 @@ public class SettingData {
         return dbSetting;
     }
 
+    public static void clearSetting() {
+        projectSetting = new ProjectSetting();
+        dbSetting = new DatabaseSetting();
+    }
+
     public static void loadConfiguration() {
         Properties properties = getConfigProperties();
         LogUtils.printDebugLog(properties);

@@ -21,14 +21,7 @@ public class ProjectSetting extends Setting {
     public ProjectSetting(Properties prop) {
         this.entityFolder = prop.getProperty(PropertiesConstants.ENTITYFOLDER);
         this.rootPackage = prop.getProperty(PropertiesConstants.ROOTPACKAGE);
-
-        Path pkgPath = FileUtils.findFileWithPackageName(rootPackage);
-        if (pkgPath == null)
-            LogUtils.printErrorLog("Package '" + rootPackage + "' does not exist.");
-        else
-            LogUtils.printLog("Package '" + rootPackage + "' found.");
-
-        this.rootPackagePath = pkgPath;
+        findRootPackagePath(rootPackage);
     }
 
     public String getRootPackage() {
@@ -53,5 +46,15 @@ public class ProjectSetting extends Setting {
 
     public void setRootPackagePath(Path rootPackagePath) {
         this.rootPackagePath = rootPackagePath;
+    }
+
+    public void findRootPackagePath(String rootPackage) {
+        Path pkgPath = FileUtils.findFileWithPackageName(rootPackage);
+        if (pkgPath == null)
+            LogUtils.printErrorLog("Package '" + rootPackage + "' does not exist.");
+        else
+            LogUtils.printLog("Package '" + rootPackage + "' found.");
+
+        this.rootPackagePath = pkgPath;
     }
 }

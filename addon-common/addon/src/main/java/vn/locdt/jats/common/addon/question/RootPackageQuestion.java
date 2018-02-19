@@ -1,8 +1,9 @@
-package vn.locdt.jats.module.shell.question.init;
+package vn.locdt.jats.common.addon.question;
 
 import vn.locdt.jats.bundle.question.JQuestion;
 import vn.locdt.jats.module.shell.question.QuestionCLI;
 import vn.locdt.jats.module.shell.question.QuestionStatus;
+import vn.locdt.jats.module.shell.setting.ProjectSetting;
 import vn.locdt.jats.module.shell.setting.SettingData;
 
 /**
@@ -24,6 +25,9 @@ public class RootPackageQuestion extends QuestionCLI {
 
     private void askForRootPackage() {
         String rootPackage = JQuestion.input("Your root package:", "rootPackage").getValue();
-        SettingData.getProjectSetting().setRootPackage(rootPackage);
+        ProjectSetting projectSetting = SettingData.getProjectSetting();
+
+        projectSetting.setRootPackage(rootPackage);
+        projectSetting.findRootPackagePath(rootPackage);
     }
 }
