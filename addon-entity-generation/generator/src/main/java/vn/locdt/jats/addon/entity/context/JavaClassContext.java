@@ -1,7 +1,7 @@
 package vn.locdt.jats.addon.entity.context;
 
 import vn.locdt.jats.addon.entity.FileType;
-import vn.locdt.jats.addon.entity.modeling.util.StringUtils;
+import vn.locdt.jats.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,10 +20,10 @@ public abstract class JavaClassContext extends GenerationContext implements Java
     protected Map<String, String> importsMapping;
     protected String packageName;
 
-    public JavaClassContext(String outputDir, String outputName) {
+    public JavaClassContext(String outputDir, String outputName, String packageName) {
         super(outputDir, outputName, FileType.JAVA);
         this.importsMapping = new HashMap<>();
-        this.packageName = StringUtils.getCanonicalNameFromPath(outputDir);
+        this.packageName = packageName;
     }
 
     public JavaClassContext() {
@@ -91,6 +91,9 @@ public abstract class JavaClassContext extends GenerationContext implements Java
     @Override
     public void setOutputDir(String outputDir) {
         super.setOutputDir(outputDir);
-        this.packageName = StringUtils.getCanonicalNameFromPath(outputDir);
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
     }
 }

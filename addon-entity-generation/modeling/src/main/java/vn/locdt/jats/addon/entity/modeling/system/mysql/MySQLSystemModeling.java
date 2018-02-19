@@ -66,7 +66,7 @@ public class MySQLSystemModeling extends SystemModeling {
                 row -> modelForeignKey(catalog, row)
             )
         );
-        System.out.println(">>>>>>>>>>>> Modeling catalog: " + catalog);
+//        System.out.println(">>>>>>>>>>>> Modeling catalog: " + catalog);
         return catalog;
     }
 
@@ -85,7 +85,7 @@ public class MySQLSystemModeling extends SystemModeling {
 
         catalog.addTable(table);
         table.setCatalog(catalog);
-        System.out.println(">>>> Modeling Table: " + table);
+//        System.out.println(">>>> Modeling Table: " + table);
         return table;
     }
 
@@ -94,7 +94,7 @@ public class MySQLSystemModeling extends SystemModeling {
         Column col = extractor.column(rs);
         col.setTable(table);
         table.addColumn(col);
-        System.out.println("> Modeling Column: " + col);
+//        System.out.println("> Modeling Column: " + col);
         return col;
     }
 

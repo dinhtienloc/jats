@@ -171,7 +171,7 @@ public class SingleChoiceQuestion extends Question<SingleChoice> implements NonB
 
     @Override
     public String toString() {
-        String str = item.getTitle() + "\n";
+        String str = ConsoleUtils.createTitle(item.getTitle() + "\n");
         List<Selector> selectors = item.getSelectors();
         if (selectors.size() == 0)
             return str;

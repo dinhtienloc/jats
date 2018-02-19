@@ -28,25 +28,31 @@ import static org.fusesource.jansi.Ansi.ansi;
         EntityGeneratorQuestion.class
 })
 public class EntityGenerationCommand extends QuestionCommand implements CommandMarker {
-    @CliCommand(value = { "entity:gen"})
+    @CliCommand(value = { "entity:gen"}, help = "Generate entity class")
     public String runCommand(
             @CliOption(key = {"db"}) String dbType,
             @CliOption(key = {"url"}) String dbUrl,
             @CliOption(key = {"u, user"}) String dbUser,
             @CliOption(key = {"p, pass"}) String dbPass,
             @CliOption(key = {"f, folder"}) @QuestionCliOption(EntityPackageNameQuestion.class) String entityFolder) {
-        resolveOptionValues();
-
         if (SettingData.getProjectSetting().getRootPackage() == null)
             return LogUtils.createWarningLog("Please use 'init' command to setup jats with your project first!");
 
-        DatabaseSetting dbSetting = SettingData.getDatabaseSetting();
-        dbSetting.setDbType(dbType);
-        dbSetting.setDbUrl(dbUrl);
-        dbSetting.setDbUser(dbUser);
-        dbSetting.setDbPass(dbPass);
+        resolveOptionValues(dbType, dbUrl, dbUser, dbPass, entityFolder);
+        int count = countNotNullValues(dbType, dbUrl, dbUser, dbPass, entityFolder);
 
-        SettingData.getProjectSetting().setEntityFolder(entityFolder);
+        if (count == -1) {
+            return LogUtils.createWarningLog("Required arguments can not be null");
+        }
+        else if (count == 1) {
+            DatabaseSetting dbSetting = SettingData.getDatabaseSetting();
+            dbSetting.setDbType(dbType);
+            dbSetting.setDbUrl(dbUrl);
+            dbSetting.setDbUser(dbUser);
+            dbSetting.setDbPass(dbPass);
+
+            SettingData.getProjectSetting().setEntityFolder(entityFolder);
+        }
 
         LogUtils.printLog("Generating entity...");
 

@@ -65,6 +65,7 @@ public class SettingData {
         try {
             // Project properties
             setProperty(PropertiesConstants.ROOTPACKAGE, projectSetting.getRootPackage());
+            setProperty(PropertiesConstants.ENTITYFOLDER, projectSetting.getEntityFolder());
 
             // Database properties
             setProperty(PropertiesConstants.DBTYPE, dbSetting.getDbType());
@@ -73,6 +74,7 @@ public class SettingData {
             setProperty(PropertiesConstants.DBPASS, dbSetting.getDbPass());
 
             properties.store(new FileOutputStream(FileUtils.getConfigurationPath()), null);
+            LogUtils.printWarningLog("Setting saved!");
         } catch (IOException e) {
             LogUtils.printErrorLog("Error when saving configuration setting.");
         }
@@ -104,5 +106,9 @@ public class SettingData {
 
     public static Connection getConnection()  {
         return getDatabaseSetting().getConnection();
+    }
+
+    public static boolean createConnection() {
+        return getDatabaseSetting().createConnection();
     }
 }

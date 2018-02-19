@@ -13,12 +13,15 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class ConsoleUtils {
     private final static String OS_NAME = System.getProperty("os.name");
 
+    public static String createTitle(String title) {
+        return ansi().fg(Ansi.Color.DEFAULT).bold().a(title).boldOff().toString();
+    }
     public static void renderChoiceQuestion(SingleChoiceQuestion singleChoiceQuestion) {
         AnsiConsole.out.print(ansi().cursorUp(singleChoiceQuestion.getRenderHeight()).a("\r").eraseScreen(Ansi.Erase.FORWARD).fg(Ansi.Color.DEFAULT).a(singleChoiceQuestion.toString()).eraseScreen(Ansi.Erase.FORWARD).reset());
     }
 
     public static void renderQuestion(Question q) {
-        AnsiConsole.out.print(ansi().fg(Ansi.Color.DEFAULT).a(q));
+        AnsiConsole.out.print(ansi().fg(Ansi.Color.DEFAULT).bold().a(q).boldOff());
     }
 
     public static String printSelector(Selector selector) {
@@ -30,8 +33,8 @@ public class ConsoleUtils {
     public static void printResult(Question inputQuestion) {
         Item item = inputQuestion.getItem();
         AnsiConsole.out.println(ansi().cursorUp(item.getRenderHeight()).a("\r").eraseScreen(Ansi.Erase.FORWARD)
-                                .fg(Ansi.Color.DEFAULT).a(item.getTitle())
-                                .fg(Ansi.Color.GREEN).a(" ("+inputQuestion.getAnswerValue()+")")
+                                .a(createTitle(item.getTitle()))
+                                .fg(Ansi.Color.GREEN).bold().a(" ("+inputQuestion.getAnswerValue()+")").boldOff()
                                 .eraseScreen(Ansi.Erase.FORWARD).reset());
     }
 

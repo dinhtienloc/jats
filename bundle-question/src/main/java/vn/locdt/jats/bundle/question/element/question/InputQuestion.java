@@ -37,7 +37,8 @@ public class InputQuestion extends Question implements InputListener {
     @Override
     public Answer prompt() throws IOException, ConsoleNotInitializeException {
         ConsoleReader console = JQuestion.getConsole();
-        String result = console.readLine(item.getTitle() + " ");
+        String title = ConsoleUtils.createTitle(item.getTitle());
+        String result = console.readLine(title + " ");
         return onInput(new InputEvent(result));
     }
 

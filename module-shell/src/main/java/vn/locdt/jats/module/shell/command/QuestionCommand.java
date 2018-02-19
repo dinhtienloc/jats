@@ -57,9 +57,6 @@ public abstract class QuestionCommand {
             status = QuestionStatus.STOP;
         }
 
-        if (QuestionStatus.FINISHED.equals(status))
-            SettingData.save();
-
         return status;
     }
 
@@ -102,9 +99,10 @@ public abstract class QuestionCommand {
             for (int i = 0; i < parameters.length; i++) {
                 Parameter p = parameters[i];
                 Class clazz = getQuestionOfParameter(p);
-                if (clazz == null)
-                    throw new CliOptionQuestionNotMapping("Could not found any question mapped to " + p.getName());
-
+                if (clazz == null) {
+                    LogUtils.printDebugLog(p.getName() + " does not map to any question. Skip");
+                    continue;
+                }
                 String key = clazz.getSimpleName();
                 String[] options = getCliOptionOfParameter(p);
 
@@ -142,6 +140,24 @@ public abstract class QuestionCommand {
         }
         return null;
     }
+
+	/**
+	 * Given an array of objects and count number of not null object.
+	 * @param objects Object's array
+	 * @return 	0  - All objects are null
+	 * 			-1 - Null objects are smaller than the length of array
+	 * 			1  - None of objects are null
+	 */
+	protected int countNotNullValues(Object... objects) {
+    	int count = 0;
+    	for (Object o : objects) {
+    		if (o != null) count++;
+		}
+
+		if (count == 0) return 0;
+    	if (count < objects.length) return -1;
+    	else return 1;
+	}
 
     public class CliOptionValue {
         private String[] keys;

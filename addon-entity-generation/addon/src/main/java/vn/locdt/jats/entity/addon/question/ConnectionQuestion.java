@@ -13,12 +13,21 @@ import vn.locdt.jats.util.LogUtils;
 public class ConnectionQuestion extends QuestionCLI {
 
     @Override
+    protected void postQuestion() {
+        if (QuestionStatus.CONTINUE.equals(status))
+            SettingData.save();
+        super.postQuestion();
+    }
+
+    @Override
     protected void run() {
         if (!SettingData.isConnectionEstablished()) {
             askForDatabaseType();
             askForDatabaseUrl();
             askForDatabaseUsername();
             askForDatabasePassword();
+
+            SettingData.createConnection();
         }
         else if (SettingData.getDatabaseSetting().getConnection() != null)
             status = QuestionStatus.CONTINUE;

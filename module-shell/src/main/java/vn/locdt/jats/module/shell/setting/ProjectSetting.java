@@ -19,12 +19,16 @@ public class ProjectSetting extends Setting {
     public ProjectSetting() {super();}
 
     public ProjectSetting(Properties prop) {
+        this.entityFolder = prop.getProperty(PropertiesConstants.ENTITYFOLDER);
         this.rootPackage = prop.getProperty(PropertiesConstants.ROOTPACKAGE);
+
         Path pkgPath = FileUtils.findFileWithPackageName(rootPackage);
         if (pkgPath == null)
             LogUtils.printErrorLog("Package '" + rootPackage + "' does not exist.");
         else
-            this.rootPackagePath = pkgPath;
+            LogUtils.printLog("Package '" + rootPackage + "' found.");
+
+        this.rootPackagePath = pkgPath;
     }
 
     public String getRootPackage() {

@@ -11,8 +11,8 @@ import vn.locdt.jats.addon.entity.modeling.model.Table;
 public class EntityContext extends JavaClassContext {
     private Table contextModel;
 
-    public EntityContext(Table contextModel, String outputDir, String outputName) {
-        super(outputDir, outputName);
+    public EntityContext(Table contextModel, String outputDir, String outputName, String packageName) {
+        super(outputDir, outputName, packageName);
         this.contextModel = contextModel;
     }
 

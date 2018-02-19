@@ -23,6 +23,7 @@
 
         <!-- Addon Modules-->
         <module>addon-entity-generation</module>
+        <module>addon-common</module>
     </modules>
 
     <dependencies>
@@ -32,22 +33,22 @@
             <version>5.1.45</version>
         </dependency>
 
-        <dependency>
-            <groupId>jline</groupId>
-            <artifactId>jline</artifactId>
-            <version>2.14.5</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>jline</groupId>-->
+            <!--<artifactId>jline</artifactId>-->
+            <!--<version>2.14.5</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.springframework.shell</groupId>
             <artifactId>spring-shell</artifactId>
             <version>1.2.0.RELEASE</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>jline</groupId>
-                    <artifactId>jline</artifactId>
-                </exclusion>
-            </exclusions>
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<groupId>jline</groupId>-->
+                    <!--<artifactId>jline</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
         </dependency>
 
         <dependency>

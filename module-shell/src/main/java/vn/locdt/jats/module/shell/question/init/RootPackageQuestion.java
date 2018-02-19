@@ -9,6 +9,13 @@ import vn.locdt.jats.module.shell.setting.SettingData;
  * Created by locdt on 1/26/2018.
  */
 public class RootPackageQuestion extends QuestionCLI {
+
+    @Override
+    protected void postQuestion() {
+        if (QuestionStatus.CONTINUE.equals(status))
+            SettingData.save();
+        super.postQuestion();
+    }
     @Override
     protected void run() {
         askForRootPackage();

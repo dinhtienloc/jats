@@ -13,7 +13,9 @@ import vn.locdt.jats.module.shell.question.QuestionCLI;
 import vn.locdt.jats.module.shell.question.QuestionStatus;
 import vn.locdt.jats.module.shell.setting.SettingData;
 import vn.locdt.jats.util.LogUtils;
+import vn.locdt.jats.util.StringUtils;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.sql.Connection;
 import java.util.List;
@@ -34,14 +36,15 @@ public class EntityGeneratorQuestion extends QuestionCLI {
             SystemModeling reader = DatabaseReaderFactory.createSystemReader("MySQL", wrapper);
             TemplateProducer producer = TemplateProducer.createProducer("templates/entity");
             Path rootPackagePath = SettingData.getProjectSetting().getRootPackagePath();
+            String entityFolder = SettingData.getProjectSetting().getEntityFolder();
 
             if (rootPackagePath == null) {
                 LogUtils.createErrorLog("Root package is null");
             }
 
             String chosenCatalog = askForCatalogName();
-            if (chosenCatalog == null) {
-                LogUtils.createErrorLog("Could not handle this answer: " + chosenCatalog);
+            if (!StringUtils.isStringValid(chosenCatalog)) {
+                LogUtils.printErrorLog("'" + chosenCatalog + "' is not a valid answer");
                 status = QuestionStatus.STOP;
                 return;
             }
@@ -51,17 +54,21 @@ public class EntityGeneratorQuestion extends QuestionCLI {
             Catalog catalog = reader.model();
 
             String chosenTable = askForTableName(chosenCatalog);
-            if (chosenTable == null) {
-                LogUtils.createErrorLog("Could not handle this answer: " + chosenTable);
+            if (!StringUtils.isStringValid(chosenTable)) {
+                LogUtils.createErrorLog("'" + chosenCatalog + "' is not a valid answer");
                 status = QuestionStatus.STOP;
                 return;
             }
 
+            String outputPath = rootPackagePath.toAbsolutePath().toString() + File.separator + entityFolder;
+
             Table table = catalog.findTableByName(chosenTable);
             EntityGenerator gen = new EntityGenerator(table);
             gen.setTemplateName("Entity.ftl");
-            gen.setOutputDir(rootPackagePath.toAbsolutePath().toString());
+            gen.setPackageName(SettingData.getProjectSetting().getRootPackage());
+            gen.setOutputDir(outputPath);
             gen.setOutputName(table.getJavaName());
+
             boolean result = gen.generate(producer);
             if (result)
                 status = QuestionStatus.CONTINUE;

@@ -1,4 +1,4 @@
-package vn.locdt.jats.entity.addon.command;
+package vn.locdt.jats.common.addon.command;
 
 import org.springframework.shell.core.CommandMarker;
 import org.springframework.shell.core.annotation.CliCommand;
@@ -17,11 +17,11 @@ import java.nio.file.Path;
 /**
  * Created by locdt on 1/27/2018.
  */
-@QuestionImports({RootPackageQuestion.class})
 @Component
+@QuestionImports({RootPackageQuestion.class})
 public class InitQuestionCommand extends QuestionCommand implements CommandMarker {
 
-    @CliCommand(value = { "init"})
+    @CliCommand(value = { "init"}, help = "Setup project with Jats. Need to run first with new project")
     public String runCommand(
         @CliOption(key = "rootPkg")
         @QuestionCliOption(RootPackageQuestion.class) String rootPackage

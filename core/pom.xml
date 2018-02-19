@@ -42,6 +42,12 @@
             <version>1.0.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>vn.locdt.jats</groupId>
+            <artifactId>common.addon</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
