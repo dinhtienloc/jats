@@ -1,6 +1,0 @@
-<configuration>
-	<!-- Disable most stdout logging by default -->
-	<logger name="org.hibernate">
-		<level value="none"/>
-	</logger>
-</configuration>
