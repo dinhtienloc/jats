@@ -50,7 +50,7 @@ public class AppBannerProvider extends DefaultBannerProvider {
 //        buf.append("           | |_| / ___ \\ ___)| | |").append(OsUtils.LINE_SEPARATOR);
 //        buf.append("            \\___/_/   \\_|____/ |_|").append(OsUtils.LINE_SEPARATOR);
         buf.append(OsUtils.LINE_SEPARATOR);
-        buf.append("    (For assistance type \"hint\" then hit ENTER)").append(OsUtils.LINE_SEPARATOR);
+        buf.append("    (For assistance type \"help\" then hit ENTER)").append(OsUtils.LINE_SEPARATOR);
         return buf.toString();
 
     }
