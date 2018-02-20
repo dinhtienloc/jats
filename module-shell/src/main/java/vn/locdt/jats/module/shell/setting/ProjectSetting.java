@@ -48,13 +48,17 @@ public class ProjectSetting extends Setting {
         this.rootPackagePath = rootPackagePath;
     }
 
-    public void findRootPackagePath(String rootPackage) {
+    public boolean findRootPackagePath(String rootPackage) {
+        boolean found = false;
         Path pkgPath = FileUtils.findFileWithPackageName(rootPackage);
-        if (pkgPath == null)
+        if (pkgPath == null) {
             LogUtils.printErrorLog("Package '" + rootPackage + "' does not exist.");
-        else
+        } else {
             LogUtils.printLog("Package '" + rootPackage + "' found.");
+            found = true;
+        }
 
         this.rootPackagePath = pkgPath;
+        return found;
     }
 }

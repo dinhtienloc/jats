@@ -64,15 +64,15 @@ public class TemplateProducer {
             String content = processTemplate(context, templateName);
 
             if (content.length() == 0) {
-                LogUtils.printWarningLog("Empty file " + destination.toAbsolutePath() + ". Skip creating file!");
+                LogUtils.printWarningLog("Creating " + destination.toAbsolutePath() + " unsuccessfully!");
                 return result;
             }
 
-            LogUtils.printSuccessLog("Writing " + destination.toAbsolutePath() + " successfully!");
+            LogUtils.printSuccessLog("Creating " + destination.toAbsolutePath() + " successfully!");
             fw.write(content);
             return result;
         } catch (Exception e) {
-            throw new TemplateException("Error while writing entity file", e);
+            throw new TemplateException("Error while creating entity file", e);
         }
     }
 

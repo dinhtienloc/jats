@@ -19,15 +19,17 @@ public class RootPackageQuestion extends QuestionCLI {
     }
     @Override
     protected void run() {
-        askForRootPackage();
-        status = QuestionStatus.CONTINUE;
+        if (askForRootPackage())
+            status = QuestionStatus.CONTINUE;
+        else
+            status = QuestionStatus.STOP;
     }
 
-    private void askForRootPackage() {
+    private boolean askForRootPackage() {
         String rootPackage = JQuestion.input("Your root package:", "rootPackage").getValue();
         ProjectSetting projectSetting = SettingData.getProjectSetting();
 
         projectSetting.setRootPackage(rootPackage);
-        projectSetting.findRootPackagePath(rootPackage);
+        return projectSetting.findRootPackagePath(rootPackage);
     }
 }
