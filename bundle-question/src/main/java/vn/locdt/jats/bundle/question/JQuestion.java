@@ -2,6 +2,7 @@ package vn.locdt.jats.bundle.question;
 
 import jline.console.ConsoleReader;
 import vn.locdt.jats.bundle.question.answer.Answer;
+import vn.locdt.jats.bundle.question.element.question.PasswordQuestion;
 import vn.locdt.jats.bundle.question.element.question.Question;
 import vn.locdt.jats.bundle.question.element.question.SingleChoiceQuestion;
 import vn.locdt.jats.bundle.question.exception.ConsoleNotInitializeException;
@@ -30,6 +31,17 @@ public class JQuestion {
     public static Answer input(String title, String name) {
         try {
             return new InputQuestion(title, name).prompt();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ConsoleNotInitializeException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Answer maskInput(String title, String name, Character mask) {
+        try {
+            return new PasswordQuestion(title, name, mask).prompt();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ConsoleNotInitializeException e) {

@@ -1,5 +1,6 @@
 package vn.locdt.jats.bundle.question.util;
 
+import vn.locdt.jats.bundle.question.element.question.PasswordQuestion;
 import vn.locdt.jats.bundle.question.element.question.SingleChoiceQuestion;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
@@ -31,10 +32,15 @@ public class ConsoleUtils {
     }
 
     public static void printResult(Question inputQuestion) {
+        String answer = inputQuestion.getAnswerValue();
+
+        if (inputQuestion instanceof PasswordQuestion)
+            answer = answer.replaceAll(".", "*");
+
         Item item = inputQuestion.getItem();
         AnsiConsole.out.println(ansi().cursorUp(item.getRenderHeight()).a("\r").eraseScreen(Ansi.Erase.FORWARD)
                                 .a(createTitle(item.getTitle()))
-                                .fg(Ansi.Color.GREEN).bold().a(" ("+inputQuestion.getAnswerValue()+")").boldOff()
+                                .fg(Ansi.Color.GREEN).bold().a(" " + answer).boldOff()
                                 .eraseScreen(Ansi.Erase.FORWARD).reset());
     }
 
