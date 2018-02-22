@@ -32,7 +32,7 @@ public class TemplateProducer {
 //                File f = new File("");
 //                LogUtils.printDebugLog(getClass().getResourceAsStream(""));
 //                configuration.setDirectoryForTemplateLoading(f);
-                configuration.setClassForTemplateLoading(this.getClass(), "template");
+                configuration.setClassForTemplateLoading(this.getClass(), templateFolder);
                 configuration.setDefaultEncoding("UTF-8");
                 configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
                 configuration.setLogTemplateExceptions(false);

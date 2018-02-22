@@ -11,6 +11,7 @@ import vn.locdt.jats.bundle.question.JQuestion;
 import vn.locdt.jats.entity.addon.internal.DatabaseReader;
 import vn.locdt.jats.module.shell.question.QuestionCLI;
 import vn.locdt.jats.module.shell.question.QuestionStatus;
+import vn.locdt.jats.module.shell.setting.ProjectSetting;
 import vn.locdt.jats.module.shell.setting.SettingData;
 import vn.locdt.jats.util.LogUtils;
 import vn.locdt.jats.util.StringUtils;
@@ -34,9 +35,10 @@ public class EntityGeneratorQuestion extends QuestionCLI {
         try {
             DatabaseMetadataWrapper wrapper = new DatabaseMetadataWrapper(connection.getMetaData());
             SystemModeling reader = DatabaseReaderFactory.createSystemReader("MySQL", wrapper);
-            TemplateProducer producer = TemplateProducer.createProducer("templates/entity");
-            Path rootPackagePath = SettingData.getProjectSetting().getRootPackagePath();
-            String entityFolder = SettingData.getProjectSetting().getEntityFolder();
+            TemplateProducer producer = TemplateProducer.createProducer("template");
+            ProjectSetting setting = SettingData.getProjectSetting();
+            Path rootPackagePath = setting.getRootPackagePath();
+            String entityFolder = setting.getEntityFolder();
 
             if (rootPackagePath == null) {
                 LogUtils.createErrorLog("Root package is null");
@@ -65,7 +67,7 @@ public class EntityGeneratorQuestion extends QuestionCLI {
             Table table = catalog.findTableByName(chosenTable);
             EntityGenerator gen = new EntityGenerator(table);
             gen.setTemplateName("Entity.ftl");
-            gen.setPackageName(SettingData.getProjectSetting().getRootPackage());
+            gen.setPackageName(setting.getRootPackage() + "." + setting.getEntityFolder());
             gen.setOutputDir(outputPath);
             gen.setOutputName(table.getJavaName());
 

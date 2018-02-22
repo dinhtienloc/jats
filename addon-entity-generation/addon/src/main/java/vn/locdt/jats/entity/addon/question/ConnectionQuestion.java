@@ -53,7 +53,7 @@ public class ConnectionQuestion extends QuestionCLI {
     }
 
     private void askForDatabasePassword() {
-        String dbPass = JQuestion.input("Database password:", "dbPass").getValue();
+        String dbPass = JQuestion.maskInput("Database password:", "dbPass", '*').getValue();
         SettingData.getDatabaseSetting().setDbPass(dbPass);
     }
 }
