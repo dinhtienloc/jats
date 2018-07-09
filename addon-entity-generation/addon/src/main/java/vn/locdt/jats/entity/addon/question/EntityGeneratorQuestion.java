@@ -1,14 +1,14 @@
 package vn.locdt.jats.entity.addon.question;
 
-import vn.locdt.jats.addon.entity.generator.EntityGenerator;
-import vn.locdt.jats.addon.entity.TemplateProducer;
-import vn.locdt.jats.addon.entity.modeling.DatabaseMetadataWrapper;
-import vn.locdt.jats.addon.entity.modeling.DatabaseReaderFactory;
-import vn.locdt.jats.addon.entity.modeling.model.Catalog;
-import vn.locdt.jats.addon.entity.modeling.model.Table;
-import vn.locdt.jats.addon.entity.modeling.system.SystemModeling;
 import vn.locdt.jats.bundle.question.JQuestion;
 import vn.locdt.jats.entity.addon.internal.DatabaseReader;
+import vn.locdt.jats.entity.generator.generator.EntityGenerator;
+import vn.locdt.jats.entity.generator.modeling.DatabaseMetadataWrapper;
+import vn.locdt.jats.entity.generator.modeling.DatabaseReaderFactory;
+import vn.locdt.jats.entity.generator.modeling.model.Catalog;
+import vn.locdt.jats.entity.generator.modeling.model.Table;
+import vn.locdt.jats.entity.generator.modeling.system.SystemModeling;
+import vn.locdt.jats.module.generator.TemplateProducer;
 import vn.locdt.jats.module.shell.question.QuestionCLI;
 import vn.locdt.jats.module.shell.question.QuestionStatus;
 import vn.locdt.jats.module.shell.setting.ProjectSetting;
@@ -68,8 +68,7 @@ public class EntityGeneratorQuestion extends QuestionCLI {
             EntityGenerator gen = new EntityGenerator(table);
             gen.setTemplateName("Entity.ftl");
             gen.setPackageName(setting.getRootPackage() + "." + setting.getEntityFolder());
-            gen.setOutputDir(outputPath);
-            gen.setOutputName(table.getJavaName());
+
 
             boolean result = gen.generate(producer);
             if (result)

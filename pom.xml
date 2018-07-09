@@ -24,6 +24,8 @@
         <!-- Addon Modules-->
         <module>addon-entity-generation</module>
         <module>addon-common</module>
+        <module>addon-dao-generation</module>
+        <module>module-generator</module>
     </modules>
 
     <dependencies>
