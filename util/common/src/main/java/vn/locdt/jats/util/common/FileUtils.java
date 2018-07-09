@@ -1,13 +1,12 @@
-package vn.locdt.jats.util;
+package vn.locdt.jats.util.common;
 
 import org.apache.commons.lang.SystemUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.*;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FileUtils {
     public static String getUserDir() {

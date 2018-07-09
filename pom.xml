@@ -7,13 +7,12 @@
     <groupId>vn.locdt.jats</groupId>
     <artifactId>jats</artifactId>
     <name>JATS (Java Assistant Tools)</name>
-    <version>1.0.0</version>
+    <version>2.0.1</version>
     <packaging>pom</packaging>
 
     <modules>
         <!-- Core Modules-->
         <module>core</module>
-        <module>util</module>
 
         <!-- Bundle Modules-->
         <module>bundle-question</module>
@@ -26,6 +25,9 @@
         <module>addon-common</module>
         <module>addon-dao-generation</module>
         <module>module-generator</module>
+
+        <!-- Utilities Modules -->
+        <module>util</module>
     </modules>
 
     <dependencies>
@@ -100,7 +102,7 @@
 
     </dependencies>
     <properties>
-        <app.version>1.0.0</app.version>
+        <jats.version>2.0.0</jats.version>
         <jdk.version>1.8</jdk.version>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>

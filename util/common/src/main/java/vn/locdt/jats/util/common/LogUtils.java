@@ -1,4 +1,4 @@
-package vn.locdt.jats.util;
+package vn.locdt.jats.util.common;
 
 import org.fusesource.jansi.Ansi;
 import org.springframework.shell.support.logging.HandlerUtils;

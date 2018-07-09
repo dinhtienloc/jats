@@ -3,7 +3,7 @@ package vn.locdt.jats.entity.generator.context;
 import vn.locdt.jats.entity.generator.modeling.model.Table;
 import vn.locdt.jats.module.generator.FileType;
 import vn.locdt.jats.module.generator.context.GenerationContext;
-import vn.locdt.jats.util.StringUtils;
+import vn.locdt.jats.util.common.StringUtils;
 
 import java.util.HashMap;
 import java.util.List;

@@ -5,19 +5,16 @@
     <parent>
         <artifactId>jats</artifactId>
         <groupId>vn.locdt.jats</groupId>
-        <version>1.0.0</version>
+        <version>2.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <name>JATS-Utility: IntellJ</name>
-    <artifactId>util.intellj</artifactId>
-    <packaging>jar</packaging>
+    <name>JATS-Utilities: Main</name>
+    <artifactId>util</artifactId>
+    <packaging>pom</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>vn.locdt.jats</groupId>
-            <artifactId>module.shell</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>common</module>
+        <module>intellij</module>
+    </modules>
 
 </project>
