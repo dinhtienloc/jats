@@ -13,8 +13,8 @@ import vn.locdt.jats.module.shell.question.QuestionCLI;
 import vn.locdt.jats.module.shell.question.QuestionStatus;
 import vn.locdt.jats.module.shell.setting.ProjectSetting;
 import vn.locdt.jats.module.shell.setting.SettingData;
-import vn.locdt.jats.util.LogUtils;
-import vn.locdt.jats.util.StringUtils;
+import vn.locdt.jats.util.common.LogUtils;
+import vn.locdt.jats.util.common.StringUtils;
 
 import java.io.File;
 import java.nio.file.Path;

@@ -3,7 +3,7 @@ package vn.locdt.jats.addon.entity.modeling.util;
 import vn.locdt.jats.addon.entity.modeling.model.Catalog;
 import vn.locdt.jats.addon.entity.modeling.model.Column;
 import vn.locdt.jats.addon.entity.modeling.model.Table;
-import vn.locdt.jats.util.StringUtils;
+import vn.locdt.jats.util.common.StringUtils;
 
 /**
  * Created by locdt on 2/2/2018.

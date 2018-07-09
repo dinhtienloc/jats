@@ -1,6 +1,6 @@
 package vn.locdt.jats.addon.entity.modeling.model;
 
-import vn.locdt.jats.util.StringUtils;
+import vn.locdt.jats.util.common.StringUtils;
 
 /**
  * Created by locdt on 2/1/2018.

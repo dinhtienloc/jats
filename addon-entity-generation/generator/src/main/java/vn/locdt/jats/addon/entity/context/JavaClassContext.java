@@ -1,10 +1,9 @@
 package vn.locdt.jats.addon.entity.context;
 
 import vn.locdt.jats.addon.entity.FileType;
-import vn.locdt.jats.util.StringUtils;
+import vn.locdt.jats.util.common.StringUtils;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 

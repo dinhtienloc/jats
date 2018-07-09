@@ -10,10 +10,7 @@ import vn.locdt.jats.module.shell.question.annotation.QuestionImports;
 import vn.locdt.jats.common.addon.question.RootPackageQuestion;
 import vn.locdt.jats.module.shell.setting.ProjectSetting;
 import vn.locdt.jats.module.shell.setting.SettingData;
-import vn.locdt.jats.util.FileUtils;
-import vn.locdt.jats.util.LogUtils;
-
-import java.nio.file.Path;
+import vn.locdt.jats.util.common.LogUtils;
 
 /**
  * Created by locdt on 1/27/2018.

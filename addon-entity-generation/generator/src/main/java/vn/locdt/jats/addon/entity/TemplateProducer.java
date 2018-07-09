@@ -4,12 +4,11 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
 import vn.locdt.jats.addon.entity.generator.exception.TemplateException;
-import vn.locdt.jats.util.LogUtils;
+import vn.locdt.jats.util.common.LogUtils;
 
 import java.io.*;
 import java.nio.file.Path;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**

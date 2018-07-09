@@ -2,8 +2,6 @@ package vn.locdt.jats.addon.entity.generator;
 
 import vn.locdt.jats.addon.entity.TemplateProducer;
 import vn.locdt.jats.addon.entity.context.GenerationContext;
-import vn.locdt.jats.addon.entity.generator.exception.GeneratorException;
-import vn.locdt.jats.util.StringUtils;
 
 import java.io.File;
 import java.io.IOException;

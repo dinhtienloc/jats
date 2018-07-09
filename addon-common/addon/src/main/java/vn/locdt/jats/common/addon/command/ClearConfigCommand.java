@@ -6,12 +6,11 @@ import org.springframework.stereotype.Component;
 import vn.locdt.jats.module.shell.command.QuestionCommand;
 import vn.locdt.jats.module.shell.question.annotation.QuestionImports;
 import vn.locdt.jats.module.shell.setting.SettingData;
-import vn.locdt.jats.util.FileUtils;
-import vn.locdt.jats.util.LogUtils;
+import vn.locdt.jats.util.common.FileUtils;
+import vn.locdt.jats.util.common.LogUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Component
