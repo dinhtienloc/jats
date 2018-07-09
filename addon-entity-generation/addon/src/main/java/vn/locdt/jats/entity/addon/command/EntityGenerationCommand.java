@@ -13,7 +13,7 @@ import vn.locdt.jats.module.shell.setting.SettingData;
 import vn.locdt.jats.entity.addon.question.ConnectionQuestion;
 import vn.locdt.jats.entity.addon.question.EntityPackageNameQuestion;
 import vn.locdt.jats.entity.addon.question.EntityGeneratorQuestion;
-import vn.locdt.jats.util.LogUtils;
+import vn.locdt.jats.util.common.LogUtils;
 
 import static org.fusesource.jansi.Ansi.ansi;
 

@@ -5,7 +5,7 @@ import vn.locdt.jats.module.shell.constants.Constants;
 import vn.locdt.jats.module.shell.question.QuestionCLI;
 import vn.locdt.jats.module.shell.question.QuestionStatus;
 import vn.locdt.jats.module.shell.setting.SettingData;
-import vn.locdt.jats.util.LogUtils;
+import vn.locdt.jats.util.common.LogUtils;
 
 /**
  * Created by locdt on 1/21/2018.

@@ -8,8 +8,16 @@
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <name>JATS Utils</name>
-    <artifactId>util</artifactId>
+    <name>JATS-Utility: IntellJ</name>
+    <artifactId>util.intellj</artifactId>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>vn.locdt.jats</groupId>
+            <artifactId>module.shell</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
 
 </project>

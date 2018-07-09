@@ -1,8 +1,8 @@
 package vn.locdt.jats.module.shell.setting;
 
 import vn.locdt.jats.module.shell.constants.PropertiesConstants;
-import vn.locdt.jats.util.FileUtils;
-import vn.locdt.jats.util.LogUtils;
+import vn.locdt.jats.util.common.FileUtils;
+import vn.locdt.jats.util.common.LogUtils;
 
 import java.io.*;
 import java.sql.Connection;

@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>vn.locdt.jats</groupId>
-            <artifactId>util</artifactId>
+            <artifactId>util.common</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>

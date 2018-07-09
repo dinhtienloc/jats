@@ -8,11 +8,8 @@ import vn.locdt.jats.module.shell.question.annotation.QuestionImports;
 import vn.locdt.jats.module.shell.question.QuestionStatus;
 import vn.locdt.jats.module.shell.question.QuestionCLI;
 import vn.locdt.jats.module.shell.question.annotation.QuestionCliOption;
-import vn.locdt.jats.module.shell.setting.SettingData;
-import vn.locdt.jats.util.LogUtils;
+import vn.locdt.jats.util.common.LogUtils;
 
-import javax.rmi.CORBA.Util;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
