@@ -9,7 +9,7 @@
         <version>2.0.1</version>
     </parent>
     <artifactId>entity</artifactId>
-    <name>JATS-Addon: Entity Generation</name>
+    <name>JATS: Entity Generation</name>
     <packaging>pom</packaging>
 
     <modules>

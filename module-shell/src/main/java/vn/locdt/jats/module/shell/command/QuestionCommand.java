@@ -1,13 +1,13 @@
 package vn.locdt.jats.module.shell.command;
 
-import org.springframework.shell.core.annotation.CliOption;
+import org.springframework.shell.standard.ShellOption;
 import vn.locdt.jats.module.shell.exception.CliOptionQuestionNotMapping;
 import vn.locdt.jats.module.shell.exception.QuestionDeclareNotConsistent;
 import vn.locdt.jats.module.shell.exception.RunCommandMethodNotFound;
 import vn.locdt.jats.module.shell.question.annotation.QuestionImports;
 import vn.locdt.jats.module.shell.question.QuestionStatus;
 import vn.locdt.jats.module.shell.question.QuestionCLI;
-import vn.locdt.jats.module.shell.question.annotation.QuestionCliOption;
+import vn.locdt.jats.module.shell.question.annotation.QuestionShellOption;
 import vn.locdt.jats.util.common.LogUtils;
 
 import java.lang.reflect.Constructor;
@@ -123,15 +123,15 @@ public abstract class QuestionCommand {
     }
 
     private String[] getCliOptionOfParameter(Parameter p) {
-        CliOption option = p.getAnnotation(CliOption.class);
+        ShellOption option = p.getAnnotation(ShellOption.class);
         if (option != null) {
-            return option.key();
+            return option.value();
         }
         return null;
     }
 
     private Class getQuestionOfParameter(Parameter p) {
-        QuestionCliOption option = p.getAnnotation(QuestionCliOption.class);
+        QuestionShellOption option = p.getAnnotation(QuestionShellOption.class);
         if (option != null) {
             return option.value();
         }

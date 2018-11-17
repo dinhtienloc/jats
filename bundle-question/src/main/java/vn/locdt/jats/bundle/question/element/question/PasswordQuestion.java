@@ -1,6 +1,6 @@
 package vn.locdt.jats.bundle.question.element.question;
 
-import jline.console.ConsoleReader;
+import org.jline.reader.LineReader;
 import vn.locdt.jats.bundle.question.JQuestion;
 import vn.locdt.jats.bundle.question.answer.Answer;
 import vn.locdt.jats.bundle.question.event.InputEvent;
@@ -24,9 +24,9 @@ public class PasswordQuestion extends InputQuestion {
 
 	@Override
 	public Answer prompt() throws IOException, ConsoleNotInitializeException {
-		ConsoleReader console = JQuestion.getConsole();
+		LineReader reader = JQuestion.getLineReader();
 		String title = ConsoleUtils.createTitle(item.getTitle());
-		String result = console.readLine(title + " ", mask);
+		String result = reader.readLine(title + " ", mask);
 		return onInput(new InputEvent(result));
 	}
 

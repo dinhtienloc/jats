@@ -1,5 +1,7 @@
 package vn.locdt.jats.bundle.question.element.question;
 
+import org.jline.terminal.Terminal;
+import org.jline.utils.NonBlockingReader;
 import vn.locdt.jats.bundle.question.answer.Answer;
 import vn.locdt.jats.bundle.question.event.NonBlockInputEvent;
 import vn.locdt.jats.bundle.question.exception.ConsoleNotInitializeException;
@@ -21,12 +23,14 @@ public class ConfirmQuestion extends Question implements NonBlockInputListener {
         // read input
         int input;
         boolean finished;
+
+        NonBlockingReader nonBlockingReader = JQuestion.startCharacterReader();
         while (true) {
-            input = JQuestion.getConsole().readCharacter();
+            input = nonBlockingReader.read();
             finished = onInput(new NonBlockInputEvent(input));
             if (finished) break;
         }
-
+        JQuestion.stopCharacterReader();
         return this.answer;
     }
 

@@ -1,9 +1,9 @@
 package vn.locdt.jats.entity.generator.context;
 
-import org.springframework.shell.support.util.OsUtils;
 import vn.locdt.jats.entity.generator.modeling.model.Column;
 import vn.locdt.jats.entity.generator.modeling.model.Relation;
 import vn.locdt.jats.entity.generator.modeling.model.Table;
+import vn.locdt.jats.util.common.OsUtils;
 
 /**
  * Created by locdt on 2/9/2018.

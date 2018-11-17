@@ -9,7 +9,7 @@
         <version>2.0.1</version>
     </parent>
     <artifactId>entity.generator</artifactId>
-    <name>JATS-Addon: Entity Generation - Generator</name>
+    <name>JATS: Entity Generation - Generator</name>
     <packaging>jar</packaging>
 
     <dependencies>

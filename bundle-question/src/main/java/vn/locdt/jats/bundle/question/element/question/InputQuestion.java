@@ -1,11 +1,12 @@
 package vn.locdt.jats.bundle.question.element.question;
 
+import org.jline.reader.LineReader;
 import vn.locdt.jats.bundle.question.JQuestion;
 import vn.locdt.jats.bundle.question.answer.Answer;
 import vn.locdt.jats.bundle.question.event.InputEvent;
 import vn.locdt.jats.bundle.question.exception.ConsoleNotInitializeException;
 import vn.locdt.jats.bundle.question.exception.UndefinedQuestionException;
-import jline.console.ConsoleReader;
+
 import vn.locdt.jats.bundle.question.listener.InputListener;
 import vn.locdt.jats.bundle.question.element.item.Input;
 import vn.locdt.jats.bundle.question.util.ConsoleUtils;
@@ -36,9 +37,9 @@ public class InputQuestion extends Question implements InputListener {
 
     @Override
     public Answer prompt() throws IOException, ConsoleNotInitializeException {
-        ConsoleReader console = JQuestion.getConsole();
+        LineReader reader = JQuestion.getLineReader();
         String title = ConsoleUtils.createTitle(item.getTitle());
-        String result = console.readLine(title + " ");
+        String result = reader.readLine(title + " ");
         return onInput(new InputEvent(result));
     }
 

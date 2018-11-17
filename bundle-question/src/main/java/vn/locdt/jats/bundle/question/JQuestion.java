@@ -1,6 +1,10 @@
 package vn.locdt.jats.bundle.question;
 
-import jline.console.ConsoleReader;
+import org.jline.reader.LineReader;
+import org.jline.reader.LineReaderBuilder;
+import org.jline.terminal.Terminal;
+import org.jline.terminal.TerminalBuilder;
+import org.jline.utils.NonBlockingReader;
 import vn.locdt.jats.bundle.question.answer.Answer;
 import vn.locdt.jats.bundle.question.element.question.PasswordQuestion;
 import vn.locdt.jats.bundle.question.element.question.Question;
@@ -12,13 +16,21 @@ import java.io.IOException;
 import java.util.*;
 
 public class JQuestion {
-    private static ConsoleReader console;
+    private static Terminal terminal;
+    private static LineReader lineReader;
+    private static NonBlockingReader nonBlockingReader;
     private static QuestionGroup questionGroup;
 
     static {
         try {
-            console = new ConsoleReader();
-        } catch (IOException e) {
+            terminal = TerminalBuilder.builder()
+                    .jna(true).system(true)
+                    .build();
+            lineReader = LineReaderBuilder.builder()
+                    .terminal(terminal)
+                    .build();
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -31,9 +43,7 @@ public class JQuestion {
     public static Answer input(String title, String name) {
         try {
             return new InputQuestion(title, name).prompt();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ConsoleNotInitializeException e) {
+        } catch (IOException | ConsoleNotInitializeException e) {
             e.printStackTrace();
         }
         return null;
@@ -42,9 +52,7 @@ public class JQuestion {
     public static Answer maskInput(String title, String name, Character mask) {
         try {
             return new PasswordQuestion(title, name, mask).prompt();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ConsoleNotInitializeException e) {
+        } catch (IOException | ConsoleNotInitializeException e) {
             e.printStackTrace();
         }
         return null;
@@ -53,9 +61,7 @@ public class JQuestion {
     public static Answer select(String title, String name, String[] selection) {
         try {
             return new SingleChoiceQuestion(title, name, selection).prompt();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ConsoleNotInitializeException e) {
+        } catch (IOException | ConsoleNotInitializeException e) {
             e.printStackTrace();
         }
         return null;
@@ -64,17 +70,35 @@ public class JQuestion {
     public static Answer select(String title, String name, List<String> selection) {
         try {
             return new SingleChoiceQuestion(title, name, selection).prompt();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ConsoleNotInitializeException e) {
+        } catch (IOException | ConsoleNotInitializeException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static ConsoleReader getConsole() throws ConsoleNotInitializeException {
-        if (console == null) throw new ConsoleNotInitializeException("Console is not initialized.");
-        return console;
+    public static Terminal getTerminal() throws ConsoleNotInitializeException {
+        if (terminal == null) throw new ConsoleNotInitializeException("Console is not initialized.");
+        return terminal;
+    }
+    public static LineReader getLineReader() throws ConsoleNotInitializeException {
+        if (lineReader == null) throw new ConsoleNotInitializeException("Console is not initialized.");
+        return lineReader;
+    }
+
+    public static NonBlockingReader startCharacterReader() {
+        terminal.enterRawMode();
+        nonBlockingReader = terminal.reader();
+        return nonBlockingReader;
+    }
+
+    public static void stopCharacterReader() {
+        try {
+            nonBlockingReader.close();
+            nonBlockingReader = null;
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static class QuestionGroup {

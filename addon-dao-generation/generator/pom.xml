@@ -11,7 +11,7 @@
 
     <artifactId>dao.generator</artifactId>
 
-    <name>JATS-Addon: DAO Generation - Generator</name>
+    <name>JATS: DAO Generation - Generator</name>
     <packaging>jar</packaging>
 
 </project>

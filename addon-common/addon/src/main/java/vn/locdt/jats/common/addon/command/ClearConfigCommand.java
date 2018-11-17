@@ -1,8 +1,7 @@
 package vn.locdt.jats.common.addon.command;
 
-import org.springframework.shell.core.CommandMarker;
-import org.springframework.shell.core.annotation.CliCommand;
-import org.springframework.stereotype.Component;
+import org.springframework.shell.standard.ShellComponent;
+import org.springframework.shell.standard.ShellMethod;
 import vn.locdt.jats.module.shell.command.QuestionCommand;
 import vn.locdt.jats.module.shell.question.annotation.QuestionImports;
 import vn.locdt.jats.module.shell.setting.SettingData;
@@ -13,11 +12,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-@Component
+@ShellComponent
 @QuestionImports({})
-public class ClearConfigCommand extends QuestionCommand implements CommandMarker {
+public class ClearConfigCommand extends QuestionCommand {
 
-	@CliCommand(value = { "config:clear"}, help = "Clear all saved setting in current project")
+	@ShellMethod(key = { "config:clear"}, value = "Clear all saved setting in current project")
 	public void runCommand() {
 		try {
 			SettingData.clearSetting();

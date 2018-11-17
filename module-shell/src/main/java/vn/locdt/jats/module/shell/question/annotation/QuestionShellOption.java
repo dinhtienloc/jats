@@ -1,6 +1,6 @@
 package vn.locdt.jats.module.shell.question.annotation;
 
-import org.springframework.shell.core.annotation.CliOption;
+import org.springframework.shell.standard.ShellOption;
 
 import java.lang.annotation.*;
 
@@ -8,6 +8,6 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.PARAMETER})
-public @interface QuestionCliOption {
+public @interface QuestionShellOption {
     Class value();
 }

@@ -9,7 +9,7 @@
         <version>2.0.1</version>
     </parent>
     <artifactId>common</artifactId>
-    <name>JATS-Addon: Common Setting</name>
+    <name>JATS: Common Setting</name>
     <packaging>pom</packaging>
 
     <modules>

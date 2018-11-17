@@ -1,12 +1,11 @@
 package vn.locdt.jats.entity.addon.command;
 
-import org.springframework.shell.core.CommandMarker;
-import org.springframework.shell.core.annotation.CliCommand;
-import org.springframework.shell.core.annotation.CliOption;
-import org.springframework.stereotype.Component;
+import org.springframework.shell.standard.ShellComponent;
+import org.springframework.shell.standard.ShellMethod;
+import org.springframework.shell.standard.ShellOption;
 import vn.locdt.jats.module.shell.question.QuestionStatus;
 import vn.locdt.jats.module.shell.command.QuestionCommand;
-import vn.locdt.jats.module.shell.question.annotation.QuestionCliOption;
+import vn.locdt.jats.module.shell.question.annotation.QuestionShellOption;
 import vn.locdt.jats.module.shell.question.annotation.QuestionImports;
 import vn.locdt.jats.module.shell.setting.DatabaseSetting;
 import vn.locdt.jats.module.shell.setting.SettingData;
@@ -15,26 +14,24 @@ import vn.locdt.jats.entity.addon.question.EntityPackageNameQuestion;
 import vn.locdt.jats.entity.addon.question.EntityGeneratorQuestion;
 import vn.locdt.jats.util.common.LogUtils;
 
-import static org.fusesource.jansi.Ansi.ansi;
-
 /**
  * Created by locdt on 1/22/2018.
  */
 
-@Component
+@ShellComponent
 @QuestionImports({
         ConnectionQuestion.class,
         EntityPackageNameQuestion.class,
         EntityGeneratorQuestion.class
 })
-public class EntityGenerationCommand extends QuestionCommand implements CommandMarker {
-    @CliCommand(value = { "entity:gen"}, help = "Generate entity class")
+public class EntityGenerationCommand extends QuestionCommand {
+    @ShellMethod(key = { "entity:gen"}, value = "Generate entity class")
     public String runCommand(
-            @CliOption(key = {"db"}) String dbType,
-            @CliOption(key = {"url"}) String dbUrl,
-            @CliOption(key = {"u, user"}) String dbUser,
-            @CliOption(key = {"p, pass"}) String dbPass,
-            @CliOption(key = {"f, folder"}) @QuestionCliOption(EntityPackageNameQuestion.class) String entityFolder) {
+            @ShellOption(value = {"db"}) String dbType,
+            @ShellOption(value = {"url"}) String dbUrl,
+            @ShellOption(value = {"u, user"}) String dbUser,
+            @ShellOption(value = {"p, pass"}) String dbPass,
+            @ShellOption(value = {"f, folder"}) @QuestionShellOption(EntityPackageNameQuestion.class) String entityFolder) {
         if (SettingData.getProjectSetting().getRootPackage() == null)
             return LogUtils.createWarningLog("Please use 'init' command to setup jats with your project first!");
 

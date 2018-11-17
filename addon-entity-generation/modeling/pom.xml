@@ -10,7 +10,7 @@
         <relativePath>../../addon-entity-generation</relativePath>
     </parent>
     <artifactId>entity.modeling</artifactId>
-    <name>JATS-Addon: Entity Generation - Modeling</name>
+    <name>JATS: Entity Generation - Modeling</name>
     <packaging>jar</packaging>
 
     <dependencies>

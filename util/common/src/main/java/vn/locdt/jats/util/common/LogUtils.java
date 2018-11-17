@@ -1,15 +1,14 @@
 package vn.locdt.jats.util.common;
 
 import org.fusesource.jansi.Ansi;
-import org.springframework.shell.support.logging.HandlerUtils;
+import org.springframework.shell.Utils;
 
 import java.util.logging.Logger;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class LogUtils {
-    private static final Logger logger = HandlerUtils.getLogger(LogUtils.class);
-    public final static boolean DEBUG_MODE = false;
+    public static boolean DEBUG_MODE = false;
 
     public static String createLog(Object message) {
         return ansi().fg(Ansi.Color.CYAN).a(message)
@@ -42,26 +41,26 @@ public class LogUtils {
     }
 
     public static void printLog(Object message) {
-        logger.info(createLog(message));
+        System.out.println(createLog(message));
     }
 
     public static void printSuccessLog(Object message) {
-        logger.info(createSuccessLog(message));
+        System.out.println(createSuccessLog(message));
     }
 
     public static void printErrorLog(Object result, Object cause) {
-        logger.info(createErrorLog(result, cause));
+        System.out.println(createErrorLog(result, cause));
     }
 
     public static void printErrorLog(Object message) {
-        logger.info(createErrorLog(message));
+        System.out.println(createErrorLog(message));
     }
 
     public static void printWarningLog(Object message) {
-        logger.info(createWarningLog(message));
+        System.out.println(createWarningLog(message));
     }
     public static void printDebugLog(Object message) {
         if (!DEBUG_MODE) return;
-        logger.warning(createDebugLog(message));
+        System.out.println(createDebugLog(message));
     }
 }
