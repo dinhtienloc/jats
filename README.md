@@ -1,5 +1,5 @@
 # JATS
-JATS (Java Assistant Tools) using Spring Shell 1 to provide many various command-line utilities to rapidly develop Java Web Application
+JATS (Java Assistant Tools) using Spring Shell 2 to provide many various command-line utilities to rapidly develop Java Web Application
 
 ## Requirement
 * JDK 8
