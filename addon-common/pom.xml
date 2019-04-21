@@ -10,7 +10,7 @@
     </parent>
     <artifactId>common</artifactId>
     <name>JATS: Common Setting</name>
-    <packaging>pom</packaging>
+    <!--<packaging>pom</packaging>-->
 
     <modules>
         <module>addon</module>

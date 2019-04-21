@@ -1,6 +1,6 @@
 package vn.locdt.jats.bundle.question.event;
 
-import vn.locdt.jats.bundle.question.element.item.Selector;
+import vn.locdt.jats.bundle.question.element.item.choice.Selector;
 
 public class ChooseSelectorEvent {
     private Selector selector;

@@ -16,6 +16,6 @@
         <module>addon</module>
         <module>generator</module>
     </modules>
-    <packaging>pom</packaging>
+    <!--<packaging>pom</packaging>-->
 
 </project>

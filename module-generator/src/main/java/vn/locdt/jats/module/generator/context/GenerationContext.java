@@ -1,16 +1,16 @@
 package vn.locdt.jats.module.generator.context;
 
 import vn.locdt.jats.module.generator.FileType;
+import vn.locdt.jats.util.common.FileUtils;
 
 /**
  * Created by locdt on 2/9/2018.
  */
 public abstract class GenerationContext<CM> {
     protected CM contextModel;
-    protected String rootPackage;
-    protected String projectPath;
     protected String outputName;
     protected FileType fileType;
+    protected String outputDirectory;
 
     public GenerationContext() {}
 
@@ -18,45 +18,28 @@ public abstract class GenerationContext<CM> {
         this.fileType = fileType;
     }
 
-    public GenerationContext(String rootPackage, String projectPath, String outputName, FileType fileType) {
-        this.rootPackage = rootPackage;
-        this.projectPath = projectPath;
+    public GenerationContext(String outputDirectory, String outputName, FileType fileType) {
+        this.outputDirectory = outputDirectory;
         this.outputName = outputName;
         this.fileType = fileType;
     }
 
-    public GenerationContext(CM contextModel, String rootPackage, String projectPath,
+    public GenerationContext(CM contextModel, String outputDirectory,
 							 String outputName, FileType fileType) {
-        this(rootPackage, projectPath ,outputName, fileType);
+        this(outputDirectory ,outputName, fileType);
         this.contextModel = contextModel;
     }
 
     public CM getContextModel() {
-        return contextModel;
+        return this.contextModel;
     }
 
     public void setContextModel(CM contextModel) {
         this.contextModel = contextModel;
     }
 
-    public String getRootPackage() {
-        return rootPackage;
-    }
-
-    public void setRootPackage(String rootPackage) {
-        this.rootPackage = rootPackage;
-    }
-
-    public String getProjectPath() {
-        return projectPath;
-    }
-
-    public void setProjectPath(String projectPath) {
-        this.projectPath = projectPath;
-    }
-
     public String getOutputName() {
-        return outputName;
+        return this.outputName;
     }
 
     public void setOutputName(String outputName) {
@@ -64,10 +47,22 @@ public abstract class GenerationContext<CM> {
     }
 
     public FileType getFileType() {
-        return fileType;
+        return this.fileType;
     }
 
     public void setFileType(FileType fileType) {
         this.fileType = fileType;
     }
+
+	public String getOutputDirectory() {
+		return this.outputDirectory;
+	}
+
+	public void setOutputDirectory(String outputDirectory) {
+		this.outputDirectory = outputDirectory;
+	}
+
+	public String getOutputPath() {
+		return FileUtils.path(this.outputDirectory, this.outputName + this.fileType.getExt());
+	}
 }

@@ -1,10 +1,13 @@
 package vn.locdt.jats.module.shell.question;
 
+import org.jline.reader.LineReader;
+
 /**
  * Created by locdt on 1/21/2018.
  */
 public abstract class QuestionCLI {
     protected QuestionStatus status;
+    protected LineReader lineReader;
 
     public QuestionCLI() {}
 
@@ -27,5 +30,13 @@ public abstract class QuestionCLI {
                 postQuestion();
         }
         return status;
+    }
+
+    public LineReader getLineReader() {
+        return lineReader;
+    }
+
+    public void setLineReader(LineReader lineReader) {
+        this.lineReader = lineReader;
     }
 }

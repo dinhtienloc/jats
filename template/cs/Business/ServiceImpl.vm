@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using System.Data.Common;
+using ${packages.get('DataAccess').value};
+using ${packages.get('Model').value};
+using MyGobyLib.AdoNet;
+
+#foreach( $classReference in $entity.classReferenceList )
+using $classReference;
+#end
+
+namespace ${currentPackage}
+{
+	public class ${currentTemplate.generatedName} : ServiceSupport#if(${currentTemplate.templateInterface}), ${currentTemplate.templateInterface.generatedName}
+#end
+	{
+		public ${entity.name}Dao ${entity.name}Dao { private get; set; }
+	
+		#region Insert ${entity.name}
+		public void Insert${entity.name}(${entity.name} ${entity.lcName})
+		{
+			// Open a scoped connection
+            using (var conn = new DbConnectionScope(DbObjectFactory))
+            {
+            	// Insert ${entity.name}
+                ${entity.name}Dao.Insert${entity.name}(${entity.lcName});
+            }	
+		}
+		#endregion
+		
+		#region Update ${entity.name}
+		public int Update${entity.name}(${entity.name} ${entity.lcName})
+		{
+			// Open a scoped connection
+            using (var conn = new DbConnectionScope(DbObjectFactory))
+            {
+            	// Update ${entity.name}
+                int ret = ${entity.name}Dao.Update${entity.name}(${entity.lcName});
+                return ret;
+            }
+		}
+		#endregion
+		
+		#region Delete ${entity.name}
+		public int Delete${entity.name}(${tags.methodArgs($keyList)})
+		{
+			// Open a scoped connection
+			using (var conn = new DbConnectionScope(DbObjectFactory))
+            {
+            	// Delete ${entity.name}
+                int ret = ${entity.name}Dao.Delete${entity.name}(${tags.methodCallArgs($keyList)});
+                return ret;
+            }
+		}
+		#endregion
+		
+		#region Get ${entity.name}
+		public $entity.name Get${entity.name}(${tags.methodArgs($keyList)})
+		{
+			// Open a scoped connection
+			using (var conn = new DbConnectionScope(DbObjectFactory))
+            {
+            	// Get ${entity.name}
+                $entity.name obj = ${entity.name}Dao.Get${entity.name}(${tags.methodCallArgs($keyList)});
+                return obj;
+            }
+		}
+		#endregion
+		
+		#region Get ${entity.name} List
+		public IList<${entity.name}> Get${entity.name}List()
+		{
+			// Open a scoped connection
+			using (var conn = new DbConnectionScope(DbObjectFactory))
+            {
+            	// Get ${entity.name} List
+                IList<${entity.name}> list = ${entity.name}Dao.Get${entity.name}List();
+                return list;
+            }
+		}
+		#endregion
+	}
+}

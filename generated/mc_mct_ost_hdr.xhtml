@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:syn="http://synergixtech.com/synfaces">
+    <h:form>
+        <syn:dataTable value="#{bean.list}"
+                       var="var">
+
+            <syn:column labelKey="maint_contract_no"
+                        styleClass="syn-table-column-code"
+                        sortAndFilterBy="#{var.maint_contract_no}">
+                <syn:outputLabel value="#{var.maint_contract_no}"/>
+            </syn:column>
+
+            <syn:column labelKey="renewal_no"
+                        styleClass="syn-table-column-number"
+                        sortAndFilterBy="#{var.renewal_no}">
+                <syn:outputLabel value="#{var.renewal_no}"/>
+            </syn:column>
+
+            <syn:column labelKey="revision_no"
+                        styleClass="syn-table-column-number"
+                        sortAndFilterBy="#{var.revision_no}">
+                <syn:outputLabel value="#{var.revision_no}"/>
+            </syn:column>
+
+            <syn:column labelKey="master_contract_no"
+                        styleClass="syn-table-column-code"
+                        sortAndFilterBy="#{var.master_contract_no}">
+                <syn:outputLabel value="#{var.master_contract_no}"/>
+            </syn:column>
+        </syn:dataTable>
+    </h:form>
+</ui:composition>

@@ -10,5 +10,13 @@
     </parent>
     <artifactId>bundle.question</artifactId>
     <name>JATS-Bundle: Console Question</name>
-    <packaging>jar</packaging>
+    <!--<packaging>jar</packaging>-->
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.shell</groupId>
+            <artifactId>spring-shell-starter</artifactId>
+            <version>3.0.0.BUILD-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

@@ -24,9 +24,8 @@ public class PasswordQuestion extends InputQuestion {
 
 	@Override
 	public Answer prompt() throws IOException, ConsoleNotInitializeException {
-		LineReader reader = JQuestion.getLineReader();
 		String title = ConsoleUtils.createTitle(item.getTitle());
-		String result = reader.readLine(title + " ", mask);
+		String result = this.lineReader.readLine(title + " ", mask);
 		return onInput(new InputEvent(result));
 	}
 

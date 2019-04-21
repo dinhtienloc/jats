@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>vn.locdt.jats</groupId>
+        <artifactId>synergix</artifactId>
+        <version>2.0.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>synergix.addon</artifactId>
+    <name>JATS: Synergix Assistent - Addon</name>
+    <!--<packaging>jar</packaging>-->
+
+    <dependencies>
+        <dependency>
+            <groupId>vn.locdt.jats</groupId>
+            <artifactId>module.shell</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>vn.locdt.jats</groupId>
+            <artifactId>bundle.question</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>vn.locdt.jats</groupId>
+            <artifactId>util.common</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>vn.locdt.jats</groupId>
+            <artifactId>synergix.generator</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>vn.locdt.jats</groupId>
+            <artifactId>module.modeling</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgres</artifactId>
+            <scope>system</scope>
+            <version>9.4.1209</version>
+            <systemPath>${basedir}/../../libs/postgres/postgresql-9.4.1209.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ibm.db2</groupId>
+            <artifactId>db2jcc4</artifactId>
+            <scope>system</scope>
+            <version>1.0.0</version>
+            <systemPath>${basedir}/../../libs/db2/db2jcc4-1.0.0.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ibm.db2</groupId>
+            <artifactId>db2jcc4_license_cu</artifactId>
+            <scope>system</scope>
+            <version>1.0.0</version>
+            <systemPath>${basedir}/../../libs/db2/db2jcc4_license_cu-1.0.0.jar</systemPath>
+        </dependency>
+
+    </dependencies>
+</project>

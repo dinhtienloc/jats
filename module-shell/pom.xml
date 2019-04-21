@@ -11,7 +11,7 @@
 
     <artifactId>module.shell</artifactId>
     <name>JATS-Module: Shell</name>
-    <packaging>jar</packaging>
+    <!--<packaging>jar</packaging>-->
 
     <dependencies>
         <dependency>
@@ -24,5 +24,7 @@
             <artifactId>bundle.question</artifactId>
             <version>2.0.1</version>
         </dependency>
+
+
     </dependencies>
 </project>

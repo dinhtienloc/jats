@@ -34,7 +34,7 @@ public class InitQuestionCommand extends QuestionCommand {
             projectSetting.setRootPackage(rootPackage);
             projectSetting.findRootPackagePath(rootPackage);
         }
-        else startQuestions();
+        else startQuestions(null);
         return null;
     }
 }

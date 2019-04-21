@@ -4,7 +4,8 @@ import vn.locdt.jats.entity.generator.context.JavaClassContext;
 import vn.locdt.jats.module.generator.Generator;
 
 public class IBaseDAOGenerator extends Generator<JavaClassContext> {
-	public IBaseDAOGenerator() {
+	public IBaseDAOGenerator(JavaClassContext context) {
+		super(context);
 		this.templateName = "IBaseDAO.ftl";
 	}
 

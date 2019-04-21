@@ -1,6 +1,6 @@
 package vn.locdt.jats.bundle.question.element.question;
 
-import vn.locdt.jats.bundle.question.element.item.Choice;
+import vn.locdt.jats.bundle.question.element.item.choice.Choice;
 
 import java.util.ArrayList;
 import java.util.List;

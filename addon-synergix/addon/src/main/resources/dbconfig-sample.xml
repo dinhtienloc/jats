@@ -1,0 +1,54 @@
+<databases>
+<!-- Vietnam dev DB -->
+    <group name="HAPPY">
+        <database category="ctrl" alias="HAPPY" type="db2" url="jdbc:db2://172.18.0.22:50000/happy" user="db2admin" password="x" schema="db2admin" />
+        <database category="main" alias="HARMONY" type="db2" url="jdbc:db2://172.18.0.22:50000/harmony" user="db2admin" password="x" schema="db2admin" />
+        <database category="main" alias="FUNNY" type="db2" url="jdbc:db2://172.18.0.22:50000/funny" user="db2admin" password="x" schema="db2admin" />
+    </group>
+
+    <group name="semctrl">
+        <database category="ctrl" alias="semctrl" type="db2" url="jdbc:db2://172.18.0.10:50000/semctrl" user="db2admin" password="Taskhub1" schema="db2admin" />
+        <database category="main" alias="summit" type="db2" url="jdbc:db2://172.18.0.10:50000/summit" user="db2admin" password="Taskhub1" schema="db2admin" />
+        <database category="main" alias="sembas" type="db2" url="jdbc:db2://172.18.0.10:50000/SEMBAS" user="db2admin" password="Taskhub1" schema="db2admin" />
+        <database category="main" alias="uenrgy" type="db2" url="jdbc:db2://172.18.0.10:50000/UENRGY" user="db2admin" password="Taskhub1" schema="db2admin" />
+        <database category="main" alias="gasmrt" type="db2" url="jdbc:db2://172.18.0.10:50000/GASMRT" user="db2admin" password="Taskhub1" schema="db2admin" />
+    </group>
+
+    <group name="TRGCTRL">
+        <database category="ctrl" alias="TRGCTRL" type="db2" url="jdbc:db2://172.18.0.245:50000/TRGCTRL" user="db2admin" password="Taskhub1" schema="db2admin" />
+        <database category="main" alias="TRGMAIN" type="db2" url="jdbc:db2://172.18.0.245:50000/TRGMain" user="db2admin" password="Taskhub1" schema="db2admin" />
+    </group>
+
+    <group name="INFCTRL">
+        <database category="ctrl" alias="INFCTRL" type="db2" url="jdbc:db2://172.18.0.168:50000/INFCTRL" user="db2admin" password="Taskhub1" schema="db2admin" />
+        <database category="main" alias="INFMAIN" type="db2" url="jdbc:db2://172.18.0.168:50000/INFMAIN" user="db2admin" password="Taskhub1" schema="db2admin" />
+    </group>
+
+    <group name="UNICTRL">
+        <database category="ctrl" alias="UNICTRL" type="db2" url="jdbc:db2://mytom-pc:50000/UNICTRL" user="db2admin" password="Taskhub1" schema="db2admin" />
+        <database category="main" alias="UNIMAIN" type="db2" url="jdbc:db2://mytom-pc:50000/UNIMAIN" user="db2admin" password="Taskhub1" schema="db2admin" />
+    </group>
+
+<!-- PostgreSQL config -->
+    <group name="PRJCTRL">
+        <database db="ctrl" alias="PRJCTRL" type="postgresql" url="jdbc:postgresql://172.18.0.22:5432/PRJCTRL" user="postgres" password="x" schema="public" category="ctrl"/>
+        <database db="ctrl" alias="PRJMAIN1" type="postgresql" url="jdbc:postgresql://172.18.0.22:5432/PRJMAIN1" user="postgres" password="x" schema="public" category="MAIN"/>
+        <database db="ctrl" alias="PRJMAIN2" type="postgresql" url="jdbc:postgresql://172.18.0.22:5432/PRJMAIN2" user="postgres" password="x" schema="public" category="MAIN"/>
+    </group>
+
+    <group name="semctrl2">
+        <database category="ctrl" alias="semctrl2" type="db2" url="jdbc:db2://172.18.0.21:50000/semctrl" user="db2admin" password="Taskhub1" schema="db2admin" />
+        <database category="main" alias="summit2" type="db2" url="jdbc:db2://172.18.0.21:50000/summit" user="db2admin" password="Taskhub1" schema="db2admin" />
+        <database category="main" alias="sembas2" type="db2" url="jdbc:db2://172.18.0.21:50000/SEMBAS" user="db2admin" password="Taskhub1" schema="db2admin" />
+        <database category="main" alias="uenrgy2" type="db2" url="jdbc:db2://172.18.0.21:50000/UENRGY" user="db2admin" password="Taskhub1" schema="db2admin" />
+        <database category="main" alias="gasmrt2" type="db2" url="jdbc:db2://172.18.0.21:50000/GASMRT" user="db2admin" password="Taskhub1" schema="db2admin" />
+    </group>
+	
+	<!-- PostgreSQL config -->
+	<group name="pjpg">
+		<database db="ctrl" alias="pjpgctrl" type="postgresql" url="jdbc:postgresql://172.18.0.25:5432/pjpgctrl" user="postgres" password="Taskhub1" schema="public" category="ctrl"/>
+		<database db="ctrl" alias="pjpgmain1" type="postgresql" url="jdbc:postgresql://172.18.0.25:5432/pjpgmain1" user="postgres" password="Taskhub1" schema="public" category="MAIN"/>
+		<database db="ctrl" alias="pjpgmain2" type="postgresql" url="jdbc:postgresql://172.18.0.25:5432/pjpgmain2" user="postgres" password="Taskhub1" schema="public" category="MAIN"/>
+		<database db="ctrl" alias="pjpgmain3" type="postgresql" url="jdbc:postgresql://172.18.0.25:5432/pjpgmain3" user="postgres" password="Taskhub1" schema="public" category="MAIN"/>
+	</group>
+</databases>

@@ -54,8 +54,8 @@ public class SettingData {
 
     private static Properties getConfigProperties() {
         Properties properties = new Properties();
-        LogUtils.printDebugLog(FileUtils.getConfigurationPath());
-        File propertiesFile = new File(FileUtils.getConfigurationPath());
+        LogUtils.printDebugLog(FileUtils.CONFIG_FILE_NAME);
+        File propertiesFile = new File(FileUtils.CONFIG_FILE_NAME);
         LogUtils.printDebugLog(propertiesFile.getAbsolutePath());
         try (InputStream input = new FileInputStream(propertiesFile)) {
             // load a properties file
@@ -78,7 +78,7 @@ public class SettingData {
             setProperty(PropertiesConstants.DBUSER, dbSetting.getDbUser());
             setProperty(PropertiesConstants.DBPASS, dbSetting.getDbPass());
 
-            properties.store(new FileOutputStream(FileUtils.getConfigurationPath()), null);
+            properties.store(new FileOutputStream(FileUtils.CONFIG_FILE_NAME), null);
             LogUtils.printWarningLog("Setting saved!");
         } catch (IOException e) {
             LogUtils.printErrorLog("Error when saving configuration setting.");

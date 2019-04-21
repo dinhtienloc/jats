@@ -10,11 +10,16 @@ public class StringUtils {
 	public static boolean isNullString(String str) {
 		return str == null;
 	}
-	public static boolean isStringValid(String str) {
+	public static boolean isNotEmpty(String str) {
 		return !isNullString(str) && str.length() > 0;
 	}
+
+	public static boolean isEmpty(String str) {
+		return !isNotEmpty(str);
+	}
+
 	public static String getCanonicalNameFromPath(String path) {
-		if (StringUtils.isStringValid(path))
+		if (StringUtils.isNotEmpty(path))
 			return path.replace('/', '.').replace('\\', '.');
 		return "";
 	}
@@ -39,7 +44,7 @@ public class StringUtils {
 	public static String[] getSimpleName(String canonicalName) {
 		String[] result = new String[2];
 
-		if (!isStringValid(canonicalName))
+		if (!isNotEmpty(canonicalName))
 			return result;
 
 		if (!canonicalName.contains("."))
@@ -50,7 +55,7 @@ public class StringUtils {
 
 		String simpleName = canonicalName.substring(canonicalName.lastIndexOf(".") + 1, canonicalName.length());
 
-		if (isStringValid(simpleName)) {
+		if (isNotEmpty(simpleName)) {
 			result[0] = simpleName;
 			if (canonicalName.contains("java.lang"))
 				result[1] = simpleName;

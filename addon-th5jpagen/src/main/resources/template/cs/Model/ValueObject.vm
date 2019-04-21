@@ -1,0 +1,16 @@
+using System;
+
+#foreach( $classReference in $entity.classReferenceList )
+using $classReference;
+#end
+
+namespace ${currentPackage}
+{
+	[Serializable]
+	public class ${currentTemplate.generatedName} : ValueBase
+	{
+#foreach( $prop in $propertyList )
+		public ${prop.dataType} ${prop.name} { get; set; }
+#end
+	}
+}

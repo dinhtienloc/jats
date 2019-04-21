@@ -10,11 +10,11 @@
     </parent>
     <artifactId>entity</artifactId>
     <name>JATS: Entity Generation</name>
-    <packaging>pom</packaging>
+    <!--<packaging>pom</packaging>-->
 
     <modules>
         <module>generator</module>
-        <module>modeling</module>
         <module>addon</module>
     </modules>
+
 </project>

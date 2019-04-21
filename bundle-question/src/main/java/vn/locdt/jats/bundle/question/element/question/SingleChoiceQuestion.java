@@ -1,6 +1,5 @@
 package vn.locdt.jats.bundle.question.element.question;
 
-import org.jline.terminal.Terminal;
 import org.jline.utils.NonBlockingReader;
 import vn.locdt.jats.bundle.question.answer.Answer;
 import vn.locdt.jats.bundle.question.constant.VKConstants;
@@ -11,11 +10,11 @@ import vn.locdt.jats.bundle.question.exception.ConsoleNotInitializeException;
 import vn.locdt.jats.bundle.question.exception.UndefinedQuestionException;
 import vn.locdt.jats.bundle.question.listener.ChoiceListener;
 import vn.locdt.jats.bundle.question.listener.NonBlockInputListener;
-import vn.locdt.jats.bundle.question.element.item.SingleChoice;
+import vn.locdt.jats.bundle.question.element.item.choice.SingleChoice;
 import vn.locdt.jats.bundle.question.util.DetectArrowKey;
 import vn.locdt.jats.bundle.question.JQuestion;
 import vn.locdt.jats.bundle.question.util.ConsoleUtils;
-import vn.locdt.jats.bundle.question.element.item.Selector;
+import vn.locdt.jats.bundle.question.element.item.choice.Selector;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,17 +23,11 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 public class SingleChoiceQuestion extends Question<SingleChoice> implements NonBlockInputListener, ChoiceListener {
 
-    public SingleChoiceQuestion(String title, String name) {
-        super();
-        this.item = new SingleChoice(title, name);
-        try {
-            this.answer = new Answer(item);
-        } catch (UndefinedQuestionException e) {
-            e.printStackTrace();
-        }
+    private SingleChoiceQuestion(String title, String name) {
+        super(new SingleChoice(title, name));
     }
 
-    public SingleChoiceQuestion(String title, String name, boolean isPrintedResult) {
+    SingleChoiceQuestion(String title, String name, boolean isPrintedResult) {
         this(title, name);
         this.isPrintedResult = isPrintedResult;
         updateRenderHeight();
@@ -100,7 +93,7 @@ public class SingleChoiceQuestion extends Question<SingleChoice> implements NonB
         // read input
         int input;
         boolean finished;
-        NonBlockingReader nonBlockingReader = JQuestion.startCharacterReader();
+        NonBlockingReader nonBlockingReader = JQuestion.startCharacterReader(this.lineReader);
         while (true) {
             input = nonBlockingReader.read();
             finished = onInput(new NonBlockInputEvent(input));
@@ -132,7 +125,7 @@ public class SingleChoiceQuestion extends Question<SingleChoice> implements NonB
         }
     }
 
-    private boolean handleInput(int charCode, NonBlockInputEvent e) {
+    protected boolean handleInput(int charCode, NonBlockInputEvent e) {
         if (charCode == VKConstants.VK_ENTER) {
             onChosen(new ChooseSelectorEvent(item.getActivedSelector()));
             e.stop();
@@ -195,7 +188,7 @@ public class SingleChoiceQuestion extends Question<SingleChoice> implements NonB
     @Override
     public boolean onInput(NonBlockInputEvent e) {
         int charCode = e.getAddedChar();
-//            System.out.println(charCode);
+        System.out.println(charCode);
         return handleInput(charCode, e);
     }
 

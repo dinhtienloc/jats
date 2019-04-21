@@ -5,7 +5,7 @@ import vn.locdt.jats.bundle.question.constant.VKConstants;
 public class DetectArrowKey {
     public static boolean detecting = false; //1: Up, 2: Down, 3: Left, 4: Right
     private static int step = -1;
-    private static int[] arrowProcess = new int[]{27, 91};
+    private static int[] arrowProcess = new int[]{27, 79};
 
     public static void detect() {
         DetectArrowKey.detecting = true;

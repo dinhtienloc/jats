@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templateXml desc="">
+
+	<configs>
+		<config name="targetDir" value="E:/NWorkspace/CoursesNet" />
+	</configs>
+
+	<packages>
+		<package id="CoursesNet" value="CoursesNet" />
+		<package id="CoursesNet.Web" value="CoursesNet.Web" />
+		<package id="Model" value="Model" parent="CoursesNet" />
+		<package id="DataAccess" value="DataAccess" parent="CoursesNet" />
+
+		<!--
+			<package id="Business" value="Business" parent="CoursesNet" />
+			<package id="Business.Impl" value="Business.Impl" parent="CoursesNet"
+			/>
+		-->
+
+		<package id="Controllers" value="Controllers" parent="CoursesNet.Web" />
+	</packages>
+
+	<templateGroup location="/template/cs">
+		<template id="ValueObject" location="/Model/ValueObject.vm"
+			ext="cs" package="Model" appended="false" saveTo="/CoursesNet/Model" />
+		<template id="Dao" location="/DataAccess/Dao.vm" ext="cs"
+			package="DataAccess" appended="true" saveTo="/CoursesNet/DataAccess" />
+			
+		<!--
+			<template id="Service" location="/Business/Service.vm" ext="cs"
+			package="Business" appended="true" saveTo="/CoursesNet/Business" />
+			<template id="ServiceImpl" interface="Service"
+			location="/Business/ServiceImpl.vm" ext="cs" package="Business.Impl"
+			appended="true" saveTo="/CoursesNet/Business/Impl" />
+		-->
+	</templateGroup>
+
+</templateXml>

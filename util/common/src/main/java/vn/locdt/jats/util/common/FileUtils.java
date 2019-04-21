@@ -1,14 +1,23 @@
 package vn.locdt.jats.util.common;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.SystemUtils;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class FileUtils {
+	public static final String CONFIG_FILE_NAME = "syn.properties";
+	public static final String CONFIG_FOLDER_PATH = FileUtils.path(FileUtils.getUserDir());
+
     public static String getUserDir() {
         String currentLocation = null;
         if (SystemUtils.IS_OS_LINUX) {
@@ -23,11 +32,36 @@ public class FileUtils {
         return currentLocation;
     }
 
-    public static String getConfigurationPath() {
-        return "jats.properties";
+    public static String path(String... folders) {
+    	return new FilePath().add(folders).build();
     }
 
-    public static Path findFileWithPath(String path) {
+    public static void createFile(Path path) throws IOException {
+	    if (!Files.exists(path)) {
+		    if (path.getParent() != null)
+			    Files.createDirectories(path.getParent());
+		    Files.createFile(path);
+	    }
+    }
+
+    public static File createFile(String path) throws IOException {
+	    Path des = Paths.get(path);
+	    createFile(des);
+
+	    return new File(path);
+    }
+
+    public static File createFileFromResource(ClassLoader cl, String fileName, String savedPath) throws IOException {
+	    InputStream is = cl.getResourceAsStream(fileName);
+	    File newFile = createFile(savedPath);
+	    FileOutputStream out = new FileOutputStream(newFile);
+	    IOUtils.copy(is, out);
+	    out.close();
+	    is.close();
+	    return newFile;
+    }
+
+    private static Path findFileWithPath(String path) {
         Path start = Paths.get("");
         Path result = null;
         try {
@@ -44,5 +78,21 @@ public class FileUtils {
     public static Path findFileWithPackageName(String packageName) {
         String path = packageName.replace(".", File.separator);
         return findFileWithPath(path);
+    }
+
+    public static class FilePath {
+    	List<String> folders;
+    	private FilePath() {
+    		this.folders = new ArrayList<>();
+	    }
+
+	    private FilePath add(String... folders) {
+    		this.folders.addAll(Arrays.asList(folders));
+    		return this;
+	    }
+
+	    private String build() {
+    		return this.folders.isEmpty() ? "" : String.join(File.separator, this.folders);
+	    }
     }
 }

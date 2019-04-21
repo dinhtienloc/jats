@@ -1,0 +1,11 @@
+#foreach( $prop in $keyList )
+#if(${entity.singleKey})
+	${entity.lcName}.set${prop.name}(?);
+#else
+	${entity.lcName}.getPk().set${prop.name}(?);
+#end
+#end
+
+#foreach( $prop in $nonKeyList )
+${entity.lcName}.set${prop.name}(?);
+#end

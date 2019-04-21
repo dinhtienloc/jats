@@ -23,33 +23,37 @@ public class TemplateProducer {
     private String templateFolder;
     private Configuration configuration;
 
-    private TemplateProducer(String templateFolder) {
+    private TemplateProducer(Class clazz, String templateFolder) {
         try {
             if (producer != null) {
                 throw new RuntimeException("TemplateProducer can be initialize only one time. Use getInstance() to get the single instance of this class.");
             } else {
                 this.templateFolder = templateFolder;
-                configuration = new Configuration(Configuration.VERSION_2_3_23);
+                this.configuration = new Configuration(Configuration.VERSION_2_3_23);
 //                File f = new File("");
 //                LogUtils.printDebugLog(getClass().getResourceAsStream(""));
 //                configuration.setDirectoryForTemplateLoading(f);
-                configuration.setClassForTemplateLoading(this.getClass(), templateFolder);
-                configuration.setDefaultEncoding("UTF-8");
-                configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-                configuration.setLogTemplateExceptions(false);
+	            this.configuration.setClassForTemplateLoading(clazz, templateFolder);
+	            this.configuration.setDefaultEncoding("UTF-8");
+	            this.configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+	            this.configuration.setLogTemplateExceptions(false);
             }
         } catch (Exception e) {
             throw new RuntimeException("Error while initializing TemplateProducer", e);
         }
     }
 
-    public static TemplateProducer createProducer(String templateFolder) {
+    public static TemplateProducer createProducer(Class clazz, String templateFolder) {
         if (producer == null) {
             synchronized (TemplateProducer.class) {
-                if (producer == null) producer = new TemplateProducer(templateFolder);
+                if (producer == null) producer = new TemplateProducer(clazz, templateFolder);
             }
         }
         return producer;
+    }
+
+    public static TemplateProducer createProducer(String templateFolder) {
+        return createProducer(TemplateProducer.class, templateFolder);
     }
 
     public static TemplateProducer getProducer() {
@@ -62,7 +66,7 @@ public class TemplateProducer {
     public boolean produce(Map<String, Object> context, String templateName, Path destination) {
         boolean result = false;
         try (FileWriter fw = new FileWriter(destination.toFile())) {
-            String content = processTemplate(context, templateName);
+            String content = this.processTemplate(context, templateName);
 
             if (content.length() == 0) {
                 LogUtils.printWarningLog("Creating " + destination.toAbsolutePath() + " unsuccessfully!");
@@ -73,7 +77,7 @@ public class TemplateProducer {
             fw.write(content);
             return result;
         } catch (Exception e) {
-            throw new TemplateException("Error while creating entity file", e);
+            throw new TemplateException("Error while creating entity file: " + e.getMessage(), e);
         }
     }
 
@@ -81,7 +85,7 @@ public class TemplateProducer {
         StringWriter sw = new StringWriter();
         BufferedWriter bw = new BufferedWriter(sw);
 
-        Template template = configuration.getTemplate(templateName);
+        Template template = this.configuration.getTemplate(templateName);
         template.process(context, bw);
 
         return sw.toString();

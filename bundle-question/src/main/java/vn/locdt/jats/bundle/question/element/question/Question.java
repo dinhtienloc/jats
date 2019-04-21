@@ -1,9 +1,13 @@
 package vn.locdt.jats.bundle.question.element.question;
 
+import org.jline.reader.LineReader;
+import org.jline.utils.NonBlockingReader;
+import vn.locdt.jats.bundle.question.JQuestion;
 import vn.locdt.jats.bundle.question.answer.Answer;
 import vn.locdt.jats.bundle.question.element.RenderElement;
 import vn.locdt.jats.bundle.question.exception.ConsoleNotInitializeException;
 import vn.locdt.jats.bundle.question.element.item.Item;
+import vn.locdt.jats.bundle.question.spring.context.ShellApplicationContext;
 
 import java.io.IOException;
 
@@ -11,10 +15,15 @@ public abstract class Question<T extends Item> extends RenderElement {
     protected T item;
     protected boolean isPrintedResult = true;
     protected Answer answer;
+    protected LineReader lineReader;
 
-    public Question() {}
+    public Question(T item) {
+        this.item = item;
+        this.answer = new Answer(item);
+    }
 
-    public Question(boolean isPrintedResult) {
+    public Question(T item, boolean isPrintedResult) {
+        this(item);
         this.isPrintedResult = isPrintedResult;
     }
 
@@ -48,6 +57,22 @@ public abstract class Question<T extends Item> extends RenderElement {
         this.answer.setValue(value);
     }
 
+    public LineReader getLineReader() {
+        return lineReader;
+    }
+
+    public Question lineReader(LineReader lineReader) {
+        this.lineReader = lineReader;
+        return this;
+    }
+
+    public NonBlockingReader enableCharacterReader() {
+        return JQuestion.startCharacterReader(this.lineReader);
+    }
+
+    public void disableCharacterReader() {
+        JQuestion.stopCharacterReader();
+    }
     @Override
     public void updateRenderHeight() {
         setRenderHeight(getItem().getRenderHeight());

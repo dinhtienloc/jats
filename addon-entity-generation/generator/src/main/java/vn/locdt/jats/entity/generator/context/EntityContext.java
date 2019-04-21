@@ -1,8 +1,8 @@
 package vn.locdt.jats.entity.generator.context;
 
-import vn.locdt.jats.entity.generator.modeling.model.Column;
-import vn.locdt.jats.entity.generator.modeling.model.Relation;
-import vn.locdt.jats.entity.generator.modeling.model.Table;
+import vn.locdt.jats.module.modeling.model.Column;
+import vn.locdt.jats.module.modeling.model.Relation;
+import vn.locdt.jats.module.modeling.model.Table;
 import vn.locdt.jats.util.common.OsUtils;
 
 /**

@@ -1,5 +1,9 @@
 package vn.locdt.jats.bundle.question;
 
+import org.jline.reader.LineReader;
+import org.jline.reader.LineReaderBuilder;
+import org.jline.terminal.Terminal;
+import org.jline.terminal.TerminalBuilder;
 import vn.locdt.jats.bundle.question.exception.ConsoleNotInitializeException;
 
 import java.io.IOException;
@@ -28,7 +32,12 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            String value = JQuestion.select("What do you want?", "want", getDatabaseTypes()).getValue();
+            Terminal terminal = TerminalBuilder.builder().system(true).jansi(true).build();
+            LineReader lineReader = LineReaderBuilder.builder().terminal(terminal).build();
+
+//            JQuestion.input("test:").getValue();
+//            String value = JQuestion.select("What do you want?", "want", getDatabaseTypes()).getValue();
+            System.out.println(JQuestion.autocompleteInput(lineReader, "test").getValue());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -6,8 +6,8 @@ import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 import vn.locdt.jats.bundle.question.element.question.Question;
 import vn.locdt.jats.bundle.question.element.item.Item;
-import vn.locdt.jats.bundle.question.element.item.Choice;
-import vn.locdt.jats.bundle.question.element.item.Selector;
+import vn.locdt.jats.bundle.question.element.item.choice.Choice;
+import vn.locdt.jats.bundle.question.element.item.choice.Selector;
 
 import static org.fusesource.jansi.Ansi.ansi;
 

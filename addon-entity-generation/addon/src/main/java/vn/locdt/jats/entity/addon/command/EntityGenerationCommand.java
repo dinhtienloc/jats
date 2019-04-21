@@ -31,7 +31,7 @@ public class EntityGenerationCommand extends QuestionCommand {
             @ShellOption(value = {"url"}) String dbUrl,
             @ShellOption(value = {"u, user"}) String dbUser,
             @ShellOption(value = {"p, pass"}) String dbPass,
-            @ShellOption(value = {"f, folder"}) @QuestionShellOption(EntityPackageNameQuestion.class) String entityFolder) {
+            @ShellOption(value = {"f, folder"}) @QuestionShellOption(value = EntityPackageNameQuestion.class) String entityFolder) {
         if (SettingData.getProjectSetting().getRootPackage() == null)
             return LogUtils.createWarningLog("Please use 'init' command to setup jats with your project first!");
 
@@ -53,7 +53,7 @@ public class EntityGenerationCommand extends QuestionCommand {
 
         LogUtils.printLog("Generating entity...");
 
-        QuestionStatus status = startQuestions();
+        QuestionStatus status = startQuestions(null);
         if (status.equals(QuestionStatus.STOP)) return null;
         SettingData.closeConnection();
 

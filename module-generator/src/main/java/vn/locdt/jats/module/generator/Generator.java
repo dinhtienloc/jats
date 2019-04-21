@@ -1,6 +1,7 @@
 package vn.locdt.jats.module.generator;
 
 import vn.locdt.jats.module.generator.context.GenerationContext;
+import vn.locdt.jats.util.common.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,12 +22,14 @@ public abstract class Generator<C extends GenerationContext> {
     protected Map<String, Object> dataMapping;
     protected C context;
 
-    public Generator() {
+    public Generator(C context) {
+        this.context = context;
         this.dataMapping = new HashMap<>();
+	    this.dataMapping.put("context", context);
     }
 
     protected void prepareContext() {
-        dataMapping.put("context", context);
+        return;
     }
 
     public void setTemplateName(String templateName) {
@@ -34,7 +37,7 @@ public abstract class Generator<C extends GenerationContext> {
     }
 
     public C getContext() {
-        return context;
+        return this.context;
     }
 
     public void setContext(C context) {
@@ -42,30 +45,15 @@ public abstract class Generator<C extends GenerationContext> {
     }
 
     public boolean generate(TemplateProducer producer) {
-        String outputDir = context.getRootPackage() + context.getProjectPath();
-
-        String outputName = context.getOutputName();
-        String ext = context.getFileType().getExt();
-
         try {
-            String outputPath = "";
-            if (outputDir != null && outputDir.length() > 0)
-                outputPath += outputDir + File.separator;
+            Path des = Paths.get(this.context.getOutputPath());
+	        FileUtils.createFile(des);
 
-            outputPath += outputName + ext;
-            Path des = Paths.get(outputPath);
+            this.prepareContext();
 
-            if (!Files.exists(des)) {
-                if (des.getParent() != null)
-                    Files.createDirectories(des.getParent());
-                Files.createFile(des);
-            }
-
-            prepareContext();
-
-            return producer.produce(dataMapping, templateName, des);
+            return producer.produce(this.dataMapping, this.templateName, des);
         } catch (IOException e) {
-            log.log(Level.INFO, "Error create entity file " + outputDir + File.separator + outputName);
+            log.log(Level.INFO, "Error create file " + this.context.getOutputPath());
         }
         return false;
     }

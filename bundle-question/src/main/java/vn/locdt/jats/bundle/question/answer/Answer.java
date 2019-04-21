@@ -5,29 +5,23 @@ import vn.locdt.jats.bundle.question.element.item.Item;
 
 public class Answer {
     private Item sourceItem;
-    private String value;
+    private String value = "";
 
-    public Answer(Item sourceItem) throws UndefinedQuestionException {
-        if (sourceItem == null)
-            throw new UndefinedQuestionException("Can't determine answer for undefined question.");
+    public Answer(Item sourceItem) {
         this.sourceItem = sourceItem;
-        this.value = "";
     }
 
-    public Answer(Item sourceItem, String value) throws UndefinedQuestionException {
-        if (sourceItem == null)
-            throw new UndefinedQuestionException("Can't determine answer for undefined question.");
-
+    public Answer(Item sourceItem, String value) {
         this.sourceItem = sourceItem;
         this.value = value;
     }
 
     public String getName() {
-        return sourceItem.getName();
+        return this.sourceItem.getName();
     }
 
     public String getValue() {
-        return value;
+        return this.value;
     }
 
     public void setValue(String value) {
@@ -36,6 +30,6 @@ public class Answer {
 
     @Override
     public String toString() {
-        return "{\""+ sourceItem.getName() + ":" + "\"" + value + "\"}";
+        return "{\""+ this.sourceItem.getName() + ":" + "\"" + this.value + "\"}";
     }
 }

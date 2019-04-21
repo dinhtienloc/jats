@@ -11,7 +11,7 @@
 
     <artifactId>common.addon</artifactId>
     <name>JATS: Commmon Setting - Addon</name>
-    <packaging>jar</packaging>
+    <!--<packaging>jar</packaging>-->
 
     <dependencies>
         <dependency>

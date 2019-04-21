@@ -1,7 +1,7 @@
 package vn.locdt.jats.entity.generator.context;
 
 import vn.locdt.jats.entity.generator.APIType;
-import vn.locdt.jats.entity.generator.modeling.model.Table;
+import vn.locdt.jats.module.modeling.model.Table;
 
 public class DAOContext extends JavaClassContext {
 	private APIType apiType;

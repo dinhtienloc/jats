@@ -13,40 +13,31 @@ import vn.locdt.jats.bundle.question.util.ConsoleUtils;
 
 import java.io.IOException;
 
-public class InputQuestion extends Question implements InputListener {
+public class InputQuestion extends Question<Input> implements InputListener {
 
-    public InputQuestion(String title, String name, boolean isPrintedResult) throws IOException {
-        super(isPrintedResult);
-        this.item = new Input(title, name);
-        try {
-            this.answer = new Answer(item);
-        } catch (UndefinedQuestionException e) {
-            e.printStackTrace();
-        }
+    public InputQuestion(String title, String name, boolean isPrintedResult) {
+        super(new Input(title, name), isPrintedResult);
     }
 
     public InputQuestion(String title, String name) {
-        super();
-        this.item = new Input(title, name);
-        try {
-            this.answer = new Answer(item);
-        } catch (UndefinedQuestionException e) {
-            e.printStackTrace();
-        }
+        this(title, name, false);
+    }
+
+    public InputQuestion(String title) {
+        this(title, null);
     }
 
     @Override
     public Answer prompt() throws IOException, ConsoleNotInitializeException {
-        LineReader reader = JQuestion.getLineReader();
-        String title = ConsoleUtils.createTitle(item.getTitle());
-        String result = reader.readLine(title + " ");
-        return onInput(new InputEvent(result));
+        String title = ConsoleUtils.createTitle(this.item.getTitle());
+        String result = this.lineReader.readLine(title + " ");
+        return this.onInput(new InputEvent(result));
     }
 
     @Override
     public Answer onInput(InputEvent e) {
-        setAnswer(e.getInputValue());
+	    this.setAnswer(e.getInputValue());
         if (this.isPrintedResult) ConsoleUtils.printResult(this);
-        return getAnswer();
+        return this.getAnswer();
     }
 }

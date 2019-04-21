@@ -10,9 +10,10 @@
     </parent>
     <artifactId>core</artifactId>
     <name>JATS-Core: Core</name>
-    <packaging>jar</packaging>
+    <!--<packaging>jar</packaging>-->
 
     <properties>
+        <spring-boot.version>1.5.15.RELEASE</spring-boot.version>
         <app.version>2.0.0</app.version>
         <jdk.version>1.8</jdk.version>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -21,6 +22,29 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -53,63 +77,54 @@
             <version>2.0.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>vn.locdt.jats</groupId>
+            <artifactId>moduleconfig.addon</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>vn.locdt.jats</groupId>
+            <artifactId>th5jpagen</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
-        <finalName>jats</finalName>
         <plugins>
-            <!-- download source code in Eclipse, best practice -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.9</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
                 <configuration>
-                    <downloadSources>true</downloadSources>
-                    <downloadJavadocs>false</downloadJavadocs>
+                    <includeSystemScope>true</includeSystemScope>
                 </configuration>
-            </plugin>
-
-            <!-- Set a compiler level -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-                </configuration>
-            </plugin>
-
-            <!-- Maven Shade Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>2.3</version>
                 <executions>
-                    <!-- Run shade goal on package phase -->
                     <execution>
-                        <phase>package</phase>
+                        <id>repackage</id>
                         <goals>
-                            <goal>shade</goal>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.googlecode.addjars-maven-plugin</groupId>
+                <artifactId>addjars-maven-plugin</artifactId>
+                <version>1.0.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>add-jars</goal>
                         </goals>
                         <configuration>
-                            <finalName>jats-${project.version}</finalName>
-                            <outputDirectory>../build</outputDirectory>
-                            <transformers>
-                                <!--<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">-->
-                                    <!--<resource>META-INF/spring.handlers</resource>-->
-                                <!--</transformer>-->
-                                <!--<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">-->
-                                    <!--<resource>META-INF/spring.schemas</resource>-->
-                                <!--</transformer>-->
-                                <!-- add Main-Class to manifest file -->
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <manifestEntries>
-                                        <Implementation-Version>${app.version}</Implementation-Version>
-                                        <Main-Class>vn.locdt.jats.core.NewMain</Main-Class>
-                                    </manifestEntries>
-                                </transformer>
-                            </transformers>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/../libs</directory>
+                                </resource>
+                            </resources>
                         </configuration>
                     </execution>
                 </executions>

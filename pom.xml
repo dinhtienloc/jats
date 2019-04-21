@@ -3,19 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>vn.locdt.jats</groupId>
     <artifactId>jats</artifactId>
     <name>JATS (Java Assistant Tools)</name>
     <version>2.0.1</version>
     <packaging>pom</packaging>
-
-    <repositories>
-        <repository>
-            <id>Local repository</id>
-            <url>file://${basedir}/libs</url>
-        </repository>
-    </repositories>
 
     <modules>
         <!-- Utilities Modules -->
@@ -26,15 +18,22 @@
 
         <!-- Main Modules-->
         <module>module-shell</module>
+        <module>module-modeling</module>
         <module>module-generator</module>
 
         <!-- Addon Modules-->
         <!--<module>addon-entity-generation</module>-->
+
         <!--<module>addon-common</module>-->
         <!--<module>addon-dao-generation</module>-->
+        <module>addon-synergix</module>
+        <module>addon-moduleconfig</module>
 
         <!-- Core Modules-->
         <module>core</module>
+        <module>addon-th5jpagen</module>
+        <!--<module>module-modeling</module>-->
+
     </modules>
 
     <dependencies>
@@ -54,7 +53,7 @@
         <dependency>
             <groupId>org.springframework.shell</groupId>
             <artifactId>spring-shell-starter</artifactId>
-            <version>2.0.0.RELEASE</version>
+            <version>3.0.0.BUILD-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -84,12 +83,6 @@
         </dependency>
 
         <dependency>
-            <groupId>net.java.dev.jna</groupId>
-            <artifactId>jna</artifactId>
-            <version>4.5.0</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.2</version>
@@ -100,31 +93,6 @@
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
             <version>2.3.23</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
-        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>0.9.11</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.ibm.db2</groupId>
-            <artifactId>db2jcc4</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.ibm.db2</groupId>
-            <artifactId>db2jcc4_license_cu</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>9.4.1209</version>
         </dependency>
 
     </dependencies>
