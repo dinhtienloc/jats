@@ -5,6 +5,7 @@ import vn.locdt.jats.util.common.StringUtils;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -18,20 +19,16 @@ public abstract class JavaClassContext<CM> extends GenerationContext<CM> impleme
     protected static final String IMPLEMENT_STATEMENT = " implements %s";
 
     protected Map<String, String> importsMapping;
-	protected String rootPackage;
-	protected String projectPath;
     protected String packageName;
 
-    public JavaClassContext(String rootPackage, String projectPath, String outputName, String packageName) {
-        super((rootPackage + File.separator + projectPath).replace(".", File.separator), outputName, FileType.JAVA);
-        this.rootPackage = rootPackage;
-        this.projectPath = projectPath;
-        this.importsMapping = new HashMap<>();
+    public JavaClassContext(String outputPath, String outputName, String packageName) {
+        super(outputPath, outputName, FileType.JAVA);
+        this.importsMapping = new LinkedHashMap<>();
         this.packageName = packageName;
     }
 
-    public JavaClassContext(CM contextModel, String rootPackage, String projectPath, String outputName, String packageName) {
-        this(rootPackage, projectPath, outputName, packageName);
+    public JavaClassContext(CM contextModel, String outputPath, String outputName, String packageName) {
+        this(outputPath, outputName, packageName);
         this.contextModel = contextModel;
     }
 
@@ -44,22 +41,6 @@ public abstract class JavaClassContext<CM> extends GenerationContext<CM> impleme
         super(FileType.JAVA);
         this.importsMapping = new HashMap<>();
     }
-
-	public String getRootPackage() {
-		return this.rootPackage;
-	}
-
-	public void setRootPackage(String rootPackage) {
-		this.rootPackage = rootPackage;
-	}
-
-	public String getProjectPath() {
-		return this.projectPath;
-	}
-
-	public void setProjectPath(String projectPath) {
-		this.projectPath = projectPath;
-	}
 
     @Override
     public String getPackageStatement() {
@@ -84,6 +65,16 @@ public abstract class JavaClassContext<CM> extends GenerationContext<CM> impleme
             return this.parsingIterableClass(canonicalName);
         else
             return this.put(StringUtils.getSimpleName(canonicalName));
+    }
+
+    public String canoncialImportClass(String canonicalName) {
+        this.importClass(canonicalName);
+        return canonicalName;
+    }
+    public void silentImport(String... canonicalNames) {
+        for (String canonicalName : canonicalNames) {
+            this.importClass(canonicalName);
+        }
     }
 
     private String parsingIterableClass(String name) {
@@ -116,6 +107,10 @@ public abstract class JavaClassContext<CM> extends GenerationContext<CM> impleme
 	        this.importsMapping.put(simpleName, canonicalName);
         }
         return simpleName;
+    }
+
+    public String getPackageName() {
+        return this.packageName;
     }
 
     public void setPackageName(String packageName) {

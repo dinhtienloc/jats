@@ -36,8 +36,9 @@ public class Main {
             LineReader lineReader = LineReaderBuilder.builder().terminal(terminal).build();
 
 //            JQuestion.input("test:").getValue();
+            JQuestion.select(lineReader, "What do you want?", "want", Arrays.asList(getDatabaseTypes())).getValue();
 //            String value = JQuestion.select("What do you want?", "want", getDatabaseTypes()).getValue();
-            System.out.println(JQuestion.autocompleteInput(lineReader, "test").getValue());
+//            System.out.println(JQuestion.autocompleteInput(lineReader, "test").getValue());
         } catch (Exception e) {
             e.printStackTrace();
         }

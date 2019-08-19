@@ -3,13 +3,18 @@ package vn.locdt.jats.util.common;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 import org.springframework.shell.Utils;
+import vn.locdt.jats.util.exception.ErrorLogWaitException;
 
+import java.util.concurrent.Callable;
+import java.util.function.Supplier;
 import java.util.logging.Logger;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class LogUtils {
     private static boolean DEBUG_MODE = false;
+	public static String SUCCESS = "SUCCESS";
+	public static String ERROR = "ERROR";
 
     public static void enableDebug() {
     	DEBUG_MODE = true;
@@ -21,9 +26,23 @@ public class LogUtils {
 	    printLog("Disabled debug log");
     }
 
-    private static String createLog(Object message, Object... params) {
-        return ansi().fg(Ansi.Color.CYAN).a(createMessage(message, params))
-                .fg(Ansi.Color.DEFAULT).toString();
+    public static String bold(Object message) {
+    	return ansi().bold().a(message.toString()).boldOff().toString();
+	}
+
+    public static String createLog(Object message, LogType type, Object... params) {
+    	switch (type) {
+			case SUCCESS: return createSuccessLog(message, params);
+			case DEBUG: return createErrorLog(message, params);
+			case ERROR: return createDebugLog(message, params);
+			case NORMAL: return createLog(message, params);
+			case WARNING: return createWarningLog(message, params);
+		}
+		return "";
+	}
+
+    public static String createLog(Object message, Object... params) {
+        return ansi().fg(Ansi.Color.DEFAULT).a(bold("[LOG] " + createMessage(message, params))).toString();
     }
 
 	public static String createSuccessLog(Object message, Object... params) {
@@ -52,6 +71,15 @@ public class LogUtils {
                 .fg(Ansi.Color.DEFAULT).toString();
     }
 
+    public static String createLogWait(Object message, LogType type, Supplier<String> supplier, Object... params) throws ErrorLogWaitException {
+		System.out.print(createLog(message, type, params));
+    	String mes = supplier.get();
+    	if (isError(mes)) {
+    		throw new ErrorLogWaitException();
+		}
+		return mes;
+	}
+
     public static void printLog(Object message, Object... params) {
         System.out.println(createLog(message, params));
     }
@@ -68,6 +96,10 @@ public class LogUtils {
         System.out.println(createErrorLog(message, params));
     }
 
+    public static void printLogWait(Object message, LogType type, Supplier<String> supplier, Object... params) throws ErrorLogWaitException {
+    	System.out.println(createLogWait(message, type, supplier, params));
+	}
+
     public static void printWarningLog(Object message, Object... params) {
         System.out.println(createWarningLog(message, params));
     }
@@ -80,4 +112,8 @@ public class LogUtils {
     private static String createMessage(Object message, Object... params) {
     	return String.format(message.toString(), params);
     }
+
+    public static boolean isError(String str) {
+    	return ERROR.equals(str);
+	}
 }

@@ -1,21 +1,24 @@
 package vn.locdt.jats.synergix.generator.context;
 
+import org.apache.commons.lang.StringUtils;
 import vn.locdt.jats.module.generator.context.JavaClassContext;
+import vn.locdt.jats.synergix.generator.context.model.DashpaneModel;
 import vn.locdt.jats.synergix.generator.context.model.FormModel;
+import vn.locdt.jats.synergix.generator.context.model.SynergixFormModel;
 
-public class TH6BeanContext extends JavaClassContext<FormModel> {
-    public TH6BeanContext(FormModel contextModel, String rootPackage, String projectPath, String outputName, String packageName) {
-        super(contextModel, rootPackage, projectPath, outputName, packageName);
+public class TH6BeanContext<M extends SynergixFormModel> extends JavaClassContext<M> {
+    public TH6BeanContext(M contextModel, String outputPath, String outputName, String packageName) {
+        super(contextModel, outputPath, outputName, packageName);
     }
 
-    public TH6BeanContext(FormModel contextModel) {
+    public TH6BeanContext(M contextModel) {
         super();
         this.contextModel = contextModel;
     }
 
     @Override
     public String getClassName() {
-        return this.getContextModel().getContextName() + "Bean";
+        return this.getContextModel().getContextNameAsClassName() + "Bean";
     }
 
     @Override
@@ -26,5 +29,15 @@ public class TH6BeanContext extends JavaClassContext<FormModel> {
     @Override
     public String getImplementClassName() {
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "TH6BeanContext{" +
+                "contextModel=" + contextModel +
+                ", outputName='" + outputName + '\'' +
+                ", fileType=" + fileType +
+                ", outputDirectory='" + outputDirectory + '\'' +
+                '}';
     }
 }

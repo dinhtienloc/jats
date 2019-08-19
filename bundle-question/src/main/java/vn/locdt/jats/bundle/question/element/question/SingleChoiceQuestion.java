@@ -188,7 +188,8 @@ public class SingleChoiceQuestion extends Question<SingleChoice> implements NonB
     @Override
     public boolean onInput(NonBlockInputEvent e) {
         int charCode = e.getAddedChar();
-        System.out.println(charCode);
+//        System.out.println(charCode);
+//        return false;
         return handleInput(charCode, e);
     }
 

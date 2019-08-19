@@ -7,5 +7,6 @@ public class TH6BeanGenerator extends Generator<TH6BeanContext> {
 
     public TH6BeanGenerator(TH6BeanContext context) {
         super(context);
+        this.templateName = "Bean.ftl";
     }
 }

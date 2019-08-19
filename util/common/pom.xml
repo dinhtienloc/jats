@@ -18,6 +18,14 @@
             <artifactId>reflections</artifactId>
             <version>0.9.10</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.tmatesoft.svnkit/svnkit -->
+        <dependency>
+            <groupId>org.tmatesoft.svnkit</groupId>
+            <artifactId>svnkit</artifactId>
+            <version>1.9.3</version>
+        </dependency>
+
     </dependencies>
 
 </project>

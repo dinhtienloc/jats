@@ -17,10 +17,6 @@ public interface JavaClassContextHandler {
 
     String importClass(String canonicalName);
 
-    default void importClassQuietly(String canonicalName) {
-        importClass(canonicalName);
-    }
-
     String getExtendClassName();
 
     String getImplementClassName();

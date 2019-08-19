@@ -1,40 +1,25 @@
 ${context.packageStatement}
-
+${context.silentImport(
+	context.packageName?replace("uibean", "service") + "." + context.contextModel.contextNameAsClassName + "Service",
+	"synergix.th6.business.action.uibean.abstractbean." + context.extendClassName,
+	"javax.inject.Inject",
+	"javax.inject.Named"
+)}
 <#assign classStatement>
-
+@Named
 public class ${context.className}${context.extendStatement}${context.implementStatement} {
-<#--<#include "EntityAttribute.ftl" />-->
-<#--${fields}-->
-<#--${getset}-->
+
+	@Inject
+	private ${context.contextModel.contextNameAsClassName}Service ${context.contextModel.contextName}Service;
+
+	@Override
+	public String getFormCode() {
+		return "${context.contextModel.code}";
+	}
 }
 </#assign>
 ${context.getImports()}
-
 ${classStatement}
 
-<#--<#assign classbody>-->
-<#--<#include "PojoTypeDeclaration.ftl"/> {-->
 
-<#--<#if !entity.isInterface()>-->
-<#--<#include "PojoFields.ftl"/>-->
-
-<#--<#include "PojoConstructors.ftl"/>-->
-<#---->
-<#--<#include "PojoPropertyAccessors.ftl"/>-->
-
-<#--<#include "PojoToString.ftl"/>-->
-
-<#--<#include "PojoEqualsHashcode.ftl"/>-->
-
-<#--<#else>-->
-<#--<#include "PojoInterfacePropertyAccessors.ftl"/>-->
-
-<#--</#if>-->
-<#--<#include "PojoExtraClassCode.ftl"/>-->
-
-<#--}-->
-<#--</#assign>-->
-
-<#--${pojo.generateImports()}-->
-<#--${classbody}-->
 

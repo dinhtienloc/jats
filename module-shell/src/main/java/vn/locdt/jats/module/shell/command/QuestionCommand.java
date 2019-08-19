@@ -2,14 +2,13 @@ package vn.locdt.jats.module.shell.command;
 
 import org.jline.reader.LineReader;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.shell.standard.ShellOption;
 import org.springframework.stereotype.Component;
 import vn.locdt.jats.module.shell.exception.CliOptionQuestionNotMapping;
 import vn.locdt.jats.module.shell.exception.QuestionDeclareNotConsistent;
 import vn.locdt.jats.module.shell.exception.RunCommandMethodNotFound;
-import vn.locdt.jats.module.shell.question.ChainingQuestionCLI;
+import vn.locdt.jats.module.shell.question.ParameterizedQuestionCLI;
 import vn.locdt.jats.module.shell.question.QuestionCLI;
 import vn.locdt.jats.module.shell.question.QuestionStatus;
 import vn.locdt.jats.module.shell.question.annotation.QuestionImports;
@@ -56,8 +55,8 @@ public abstract class QuestionCommand {
 				} else {
 					if (parameter != null) {
 						Object questionParam = parameter.get(q.getClass());
-						if (questionParam != null && q instanceof ChainingQuestionCLI) {
-							((ChainingQuestionCLI) q).setParameter(questionParam);
+						if (questionParam != null && q instanceof ParameterizedQuestionCLI) {
+							((ParameterizedQuestionCLI) q).setParameter(questionParam);
 						}
 					}
 
@@ -118,16 +117,24 @@ public abstract class QuestionCommand {
 			for (int i = 0; i < parameters.length; i++) {
 				Parameter p = parameters[i];
 				CliQuestionOption cliQuestionOption = this.getQuestionOfParameter(p);
-				if (cliQuestionOption == null) continue;
-
-				Class clazz = cliQuestionOption.getQuestionClass();
-				if (clazz == null) {
-					LogUtils.printDebugLog(p.getName() + " does not map to any value. Skip");
+				if (cliQuestionOption == null) {
+					LogUtils.printDebugLog("["+p.getName()+"]" + " didn't map with any question. Skip");
 					continue;
 				}
 
+				Class clazz = cliQuestionOption.getQuestionClass();
+				if (clazz == null) {
+					LogUtils.printDebugLog("["+p.getName()+"]" + " is mapping with null question. Skip");
+					continue;
+				}
+				else {
+					LogUtils.printDebugLog("["+p.getName()+"]" + " is mapping with " + clazz.getSimpleName());
+				}
+
 				if (!cliQuestionOption.getActivedValue().contains(values[i])) {
-					LogUtils.printDebugLog(p.getName() + " has valid value that is not active the question. Skip");
+					LogUtils.printDebugLog("["+p.getName()+"]" + " " + clazz.getSimpleName()
+							+ " can be actived by passing " + cliQuestionOption.getActivedValue()
+							+ ". But the real value is " + values[i] + ". Skip");
 					continue;
 				}
 

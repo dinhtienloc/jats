@@ -73,6 +73,7 @@ public abstract class Question<T extends Item> extends RenderElement {
     public void disableCharacterReader() {
         JQuestion.stopCharacterReader();
     }
+
     @Override
     public void updateRenderHeight() {
         setRenderHeight(getItem().getRenderHeight());

@@ -32,8 +32,18 @@ public class DatabaseGroup {
     }
 
     public void addDatabaseInfo(DatabaseInfo info) {
-        if(info != null) this.dbInfos.add(info);
+        if(info != null)  {
+        	info.setGroup(this);
+        	this.dbInfos.add(info);
+		}
     }
+
+    public DatabaseInfo getCtrlDb() {
+    	return this.dbInfos.stream()
+				.filter(dbInfo -> "ctrl".equalsIgnoreCase(dbInfo.category))
+				.findFirst()
+				.orElse(null);
+	}
 
 	@Override
 	public String toString() {

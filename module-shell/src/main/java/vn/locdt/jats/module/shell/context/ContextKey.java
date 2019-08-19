@@ -11,7 +11,8 @@ public enum ContextKey {
 	TEMPLATE_PATH("templatePath"),
     PLUGIN_PATH("pluginPath"),
 	VELOCITY_PATH("velocityPath"),
-	TH6_PATH("th6Path");
+	TH6_PATH("th6Path"),
+	SUPERMODEL_PATH("supermodelPath");
 
 
     private String propKey;

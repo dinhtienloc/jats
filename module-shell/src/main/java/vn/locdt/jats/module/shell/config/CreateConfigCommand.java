@@ -19,6 +19,6 @@ public class CreateConfigCommand {
 		if (key != null) {
 			ShellRuntimeContext.addContext(key, propertyValue);
 		}
-		return LogUtils.createSuccessLog("Save config successfully!");
+		return LogUtils.createSuccessLog("[SUCCESS] Config " + LogUtils.bold(propertyName) + " is updated with new value: " + LogUtils.bold(propertyValue));
 	}
 }

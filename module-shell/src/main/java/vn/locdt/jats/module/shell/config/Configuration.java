@@ -64,9 +64,10 @@ public abstract class Configuration {
 	}
 
 	private boolean loadConfigFromFile() {
+//		System.out.println(this.configPath);
 		File propertiesFile = new File(this.configPath);
 		if (!propertiesFile.exists()) {
-			LogUtils.printWarningLog("There is no current config!");
+//			LogUtils.printWarningLog("There is no current config!");
 			return false;
 		} else {
 			try (InputStream input = new FileInputStream(propertiesFile)) {

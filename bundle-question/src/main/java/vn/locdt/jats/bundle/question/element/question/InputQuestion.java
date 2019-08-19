@@ -20,7 +20,7 @@ public class InputQuestion extends Question<Input> implements InputListener {
     }
 
     public InputQuestion(String title, String name) {
-        this(title, name, false);
+        this(title, name, true);
     }
 
     public InputQuestion(String title) {

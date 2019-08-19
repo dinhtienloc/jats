@@ -8,9 +8,4 @@ public class DatatableContext extends XHTMLContext<DatatableModel> {
 	public DatatableContext(DatatableModel contextModel, String outputDirectory, String outputName) {
 		super(contextModel, outputDirectory, outputName);
 	}
-
-	public DatatableContext(DatatableModel contextModel) {
-		super();
-		this.contextModel = contextModel;
-	}
 }

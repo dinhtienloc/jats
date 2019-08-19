@@ -18,11 +18,13 @@ public class SynegixConfiguration extends Configuration {
 	public void saveShellContextToConfig() {
 		this.saveConfigFromShellContext(ContextKey.DATABASE_INFO);
 		this.saveConfigFromShellContext(ContextKey.TH6_PATH);
+		this.saveConfigFromShellContext(ContextKey.SUPERMODEL_PATH);
 	}
 
 	@Override
 	public void loadConfigToShellContext() {
 		this.loadConfigToShellContext(ContextKey.TH6_PATH);
+		this.loadConfigToShellContext(ContextKey.SUPERMODEL_PATH);
 
 		String dbAlias = this.properties.getProperty(ContextKey.DATABASE_INFO.getPropKey());
 		DatabaseInfo info = DatabaseLoader.getInfo(dbAlias);
@@ -30,6 +32,7 @@ public class SynegixConfiguration extends Configuration {
 			info.getConnection();
 			this.loadConfigToShellContext(ContextKey.DATABASE_INFO, info);
 			LogUtils.printSuccessLog("Connect successfully!");
+			info.closeConnection();
 		}
 	}
 }

@@ -30,6 +30,7 @@ public class DatabaseInfo {
 	public final boolean canConvertDatatype;
 	public final String driver;
 	private Connection conn;
+	private DatabaseGroup group;
 	
 	public DatabaseInfo(String alias, String type, String version, String url, String user, String password, String schema, String category) {
 		this.alias = alias;
@@ -46,16 +47,25 @@ public class DatabaseInfo {
 		// capability
 		this.canConvertDatatype = this.type.equals(DB2) && this.version.equals("9.7");
 	}
-	
-	public Connection getConnection() {
-		if (this.conn != null)
-			return this.conn;
 
-		Properties connectionProps = new Properties();
-	    connectionProps.put("user", this.user);
-	    connectionProps.put("password", this.password);
+	public DatabaseGroup getGroup() {
+		return this.group;
+	}
+
+	public void setGroup(DatabaseGroup group) {
+		this.group = group;
+	}
+
+	public Connection getConnection() {
+		try {
+			if (this.conn != null && !this.conn.isClosed())
+				return this.conn;
+
+			Properties connectionProps = new Properties();
+			connectionProps.put("user", this.user);
+			connectionProps.put("password", this.password);
 	    
-	    try {
+
 	    	this.conn = DriverManager.getConnection(this.url, connectionProps);
 		    if (this.conn  == null) throw new IllegalStateException("invalid database configuration");
 		    return this.conn;

@@ -63,19 +63,16 @@ public class TemplateProducer {
         return producer;
     }
 
-    public boolean produce(Map<String, Object> context, String templateName, Path destination) {
-        boolean result = false;
+    void produce(Map<String, Object> context, String templateName, Path destination) throws TemplateException {
         try (FileWriter fw = new FileWriter(destination.toFile())) {
             String content = this.processTemplate(context, templateName);
 
             if (content.length() == 0) {
                 LogUtils.printWarningLog("Creating " + destination.toAbsolutePath() + " unsuccessfully!");
-                return result;
             }
 
             LogUtils.printSuccessLog("Creating " + destination.toAbsolutePath() + " successfully!");
             fw.write(content);
-            return result;
         } catch (Exception e) {
             throw new TemplateException("Error while creating entity file: " + e.getMessage(), e);
         }

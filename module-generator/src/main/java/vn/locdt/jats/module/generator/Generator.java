@@ -1,6 +1,7 @@
 package vn.locdt.jats.module.generator;
 
 import vn.locdt.jats.module.generator.context.GenerationContext;
+import vn.locdt.jats.module.generator.exception.TemplateException;
 import vn.locdt.jats.util.common.FileUtils;
 
 import java.io.File;
@@ -44,17 +45,11 @@ public abstract class Generator<C extends GenerationContext> {
         this.context = context;
     }
 
-    public boolean generate(TemplateProducer producer) {
-        try {
-            Path des = Paths.get(this.context.getOutputPath());
-	        FileUtils.createFile(des);
+    public void generate(TemplateProducer producer) throws IOException, TemplateException {
+        Path des = Paths.get(this.context.getOutputPath());
+        FileUtils.createFile(des);
 
-            this.prepareContext();
-
-            return producer.produce(this.dataMapping, this.templateName, des);
-        } catch (IOException e) {
-            log.log(Level.INFO, "Error create file " + this.context.getOutputPath());
-        }
-        return false;
+        this.prepareContext();
+        producer.produce(this.dataMapping, this.templateName, des);
     }
 }
