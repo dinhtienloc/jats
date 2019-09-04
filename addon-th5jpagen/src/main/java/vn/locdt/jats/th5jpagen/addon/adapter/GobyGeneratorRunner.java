@@ -99,7 +99,7 @@ public class GobyGeneratorRunner {
 
 			while (true) {
 				while (true) {
-					String tables = JQuestion.input(this.lineReader, "Enter Tables: ").getValue();
+					String tables = JQuestion.input(this.lineReader, "Enter Tables: ").prompt();
 					if (tables.toUpperCase().equalsIgnoreCase("R")) {
 						templateXml.Reset();
 						tplParser.doParse(templateXml.getFileLocation(), templateXml);

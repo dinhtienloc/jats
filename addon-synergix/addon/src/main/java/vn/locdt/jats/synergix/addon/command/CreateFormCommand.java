@@ -1,5 +1,7 @@
 package vn.locdt.jats.synergix.addon.command;
 
+import java.sql.Connection;
+
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
@@ -8,51 +10,53 @@ import vn.locdt.jats.module.shell.command.QuestionCommand;
 import vn.locdt.jats.module.shell.context.ContextKey;
 import vn.locdt.jats.module.shell.context.ShellRuntimeContext;
 import vn.locdt.jats.module.shell.question.QuestionStatus;
-import vn.locdt.jats.module.shell.question.annotation.QuestionImports;
+import vn.locdt.jats.module.shell.question.annotation.Confirmation;
+import vn.locdt.jats.module.shell.question.annotation.Question;
 import vn.locdt.jats.synergix.addon.db.DatabaseInfo;
-import vn.locdt.jats.synergix.addon.db.queryaction.QueryAction;
 import vn.locdt.jats.synergix.addon.question.CreateFormQuestion;
 import vn.locdt.jats.synergix.addon.util.CommonUtils;
 import vn.locdt.jats.synergix.generator.context.model.FormModel;
-import vn.locdt.jats.util.common.*;
+import vn.locdt.jats.util.common.LogType;
+import vn.locdt.jats.util.common.LogUtils;
+import vn.locdt.jats.util.common.SVNUtil;
 import vn.locdt.jats.util.exception.ErrorLogWaitException;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import static org.fusesource.jansi.Ansi.ansi;
 import static org.springframework.shell.standard.ShellOption.NULL;
 
 @ShellComponent
-@QuestionImports(CreateFormQuestion.class)
 public class CreateFormCommand extends QuestionCommand {
 
 	@ShellMethod(key = "create:form", value = "Create new form code")
 	public String runCommand(
 			@ShellOption(value = {"-m", "--module"}, defaultValue = NULL)
+			@Question(title = "Module code:")
 					String module,
 
 			@ShellOption(value = {"-t", "--transaction"}, defaultValue = NULL)
+			@Question(title = "Transaction type code:")
 					String transactionTypeCode,
 
-			@ShellOption(value = {"-r", "--role"})
+			@ShellOption(value = {"-r", "--role"}, defaultValue = NULL)
+			@Question(title = "Role:")
 					String role,
 
-			@ShellOption(value = {"-c", "--code"})
+			@ShellOption(value = {"-c", "--code"}, defaultValue = NULL)
+			@Question(title = "Form code:")
 					String formCode,
 
 			@ShellOption(value = {"-d", "--desc"}, defaultValue = NULL)
+			@Question(title = "Description:")
 					String description,
 
-			@ShellOption(value = {"-u", "--user"})
+			@ShellOption(value = {"-u", "--user"}, defaultValue = NULL)
+			@Question(title = "Created by:")
 					String createdBy,
 
-			@ShellOption(value = "--codegen")
-					boolean codeGen
+			@ShellOption(value = "--codegen", defaultValue = NULL)
+			@Question(title = "Do you want to boilerplate code for Bean, Service and XHTML (Y/N)?")
+			@Confirmation
+					Boolean codeGen
 	) {
-		this.resolveOptionValues(module, transactionTypeCode, formCode, description, Boolean.toString(codeGen));
 
 		try {
 			final SVNClientManager svnClientManager = SVNUtil.createSVNClientManager();
@@ -62,7 +66,7 @@ public class CreateFormCommand extends QuestionCommand {
 
 			// append form query to 01_form_master.sql
 			final String formQuery = "INSERT INTO FORM_MASTER (FORM_CODE,FORM_NAME,URL,MODULE_CODE,TRANSACTION_TYPE_CODE,CREATED_BY,VERSION_NO,IMPLEMENTED_STATUS,OBJECT_VERSION) " +
-					"VALUES ('"+formCode+"','"+description+"','','"+(module != null ? module.toUpperCase() : null)+"','"+(transactionTypeCode != null ? transactionTypeCode.toUpperCase() : null)+"','"+createdBy+"', 6, 'I', 0)";
+					"VALUES ('" + formCode + "','" + description + "','','" + (module != null ? module.toUpperCase() : null) + "','" + (transactionTypeCode != null ? transactionTypeCode.toUpperCase() : null) + "','" + createdBy + "', 6, 'I', 0)";
 			CommonUtils.append01_form_master(formCode, createdBy, formQuery);
 
 			// insert to db
@@ -78,8 +82,7 @@ public class CreateFormCommand extends QuestionCommand {
 			if (role != null) {
 				CommonUtils.assignRoleCodePermission(formCode, role, mainDbInfo);
 			}
-		}
-		catch (ErrorLogWaitException e) {
+		} catch (ErrorLogWaitException e) {
 			return "";
 		}
 

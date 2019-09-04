@@ -1,5 +1,9 @@
 package vn.locdt.jats.synergix.addon.question;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.util.StringUtils;
 import vn.locdt.jats.bundle.question.JQuestion;
 import vn.locdt.jats.module.generator.TemplateProducer;
@@ -16,10 +20,6 @@ import vn.locdt.jats.synergix.generator.context.TH6ServiceContext;
 import vn.locdt.jats.synergix.generator.context.model.SynergixFormModel;
 import vn.locdt.jats.util.common.FileUtils;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
 public abstract class SynergixCreateFormQuesion<M extends SynergixFormModel> extends ParameterizedQuestionCLI<M> {
 	protected static final String JAVA_PATH = "TH6\\src\\main\\java";
 	protected static final String WEBAPP_PATH = "TH6\\src\\main\\webapp";
@@ -32,7 +32,7 @@ public abstract class SynergixCreateFormQuesion<M extends SynergixFormModel> ext
 	}
 
 	@Override
-	protected  boolean validateParameters() {
+	protected boolean validateParameters() {
 		return ParamAssert.notNull(this.getParameter().getCode(), "Form Code") &&
 				ParamAssert.notNull(this.getParameter().getModule(), "Module Code");
 	}
@@ -41,8 +41,8 @@ public abstract class SynergixCreateFormQuesion<M extends SynergixFormModel> ext
 	protected void run() {
 		TemplateProducer producer = TemplateProducer.createProducer("template");
 
-		String formContextName = JQuestion.input(this.lineReader, "Your form context name:").getValue();
-		String parentBeanName = JQuestion.select(this.lineReader,"Choose parent Bean:", "parentBean", this.getParentBeans()).getValue();
+		String formContextName = JQuestion.input(this.lineReader, "Your form context name:").prompt();
+		String parentBeanName = JQuestion.select(this.lineReader, "Choose parent Bean:", this.getParentBeans()).prompt();
 
 		this.parameter.setContextName(formContextName);
 		this.parameter.setParentBeanName(parentBeanName);
@@ -52,8 +52,7 @@ public abstract class SynergixCreateFormQuesion<M extends SynergixFormModel> ext
 			this.generateService(producer, th6Path);
 			this.generateFormPage(producer, th6Path);
 			this.status = QuestionStatus.CONTINUE;
-		}
-		catch (IOException | TemplateException e) {
+		} catch (IOException | TemplateException e) {
 			e.printStackTrace();
 			this.status = QuestionStatus.STOP;
 		}

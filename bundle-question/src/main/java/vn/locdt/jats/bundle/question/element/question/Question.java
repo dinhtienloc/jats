@@ -1,81 +1,50 @@
 package vn.locdt.jats.bundle.question.element.question;
 
 import org.jline.reader.LineReader;
-import org.jline.utils.NonBlockingReader;
-import vn.locdt.jats.bundle.question.JQuestion;
 import vn.locdt.jats.bundle.question.answer.Answer;
 import vn.locdt.jats.bundle.question.element.RenderElement;
-import vn.locdt.jats.bundle.question.exception.ConsoleNotInitializeException;
 import vn.locdt.jats.bundle.question.element.item.Item;
-import vn.locdt.jats.bundle.question.spring.context.ShellApplicationContext;
 
-import java.io.IOException;
+public abstract class Question<T extends Item, V> extends RenderElement {
+	protected T item;
+	boolean isPrintedResult = true;
+	protected V value;
+	protected LineReader lineReader;
 
-public abstract class Question<T extends Item> extends RenderElement {
-    protected T item;
-    protected boolean isPrintedResult = true;
-    protected Answer answer;
-    protected LineReader lineReader;
+	public Question(LineReader reader, T item) {
+		this.lineReader = reader;
+		this.item = item;
+	}
 
-    public Question(T item) {
-        this.item = item;
-        this.answer = new Answer(item);
-    }
+	public Question(LineReader reader, T item, boolean isPrintedResult) {
+		this(reader, item);
+		this.isPrintedResult = isPrintedResult;
+	}
 
-    public Question(T item, boolean isPrintedResult) {
-        this(item);
-        this.isPrintedResult = isPrintedResult;
-    }
+	public T getItem() {
+		return this.item;
+	}
 
-    public T getItem() {
-        return item;
-    }
+	boolean isPrintedResult() {
+		return this.isPrintedResult;
+	}
 
-    public boolean isPrintedResult() {
-        return isPrintedResult;
-    }
+	public abstract V prompt();
 
-    public abstract Answer prompt() throws IOException, ConsoleNotInitializeException;
+	public V getValue() {
+		return this.value;
+	}
 
-    public Answer getAnswer() {
-        return this.answer;
-    }
+	public void setValue(V value) {
+		this.value = value;
+	}
 
-    public String getAnswerAsJson() {
-        return answer.getName() + ":" + answer.getValue();
-    }
+	public LineReader getLineReader() {
+		return this.lineReader;
+	}
 
-    public String getAnswerValue() {
-        return answer.getValue();
-    }
-
-    public void setAnswer(Answer answer) {
-        this.answer = answer;
-    }
-
-    public void setAnswer(String value) {
-        this.answer.setValue(value);
-    }
-
-    public LineReader getLineReader() {
-        return lineReader;
-    }
-
-    public Question lineReader(LineReader lineReader) {
-        this.lineReader = lineReader;
-        return this;
-    }
-
-    public NonBlockingReader enableCharacterReader() {
-        return JQuestion.startCharacterReader(this.lineReader);
-    }
-
-    public void disableCharacterReader() {
-        JQuestion.stopCharacterReader();
-    }
-
-    @Override
-    public void updateRenderHeight() {
-        setRenderHeight(getItem().getRenderHeight());
-    }
+	@Override
+	public void updateRenderHeight() {
+		this.setRenderHeight(this.getItem().getRenderHeight());
+	}
 }

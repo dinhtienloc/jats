@@ -28,10 +28,13 @@
         <!--<module>addon-dao-generation</module>-->
         <module>addon-synergix</module>
         <module>addon-moduleconfig</module>
+        <module>addon-th5jpagen</module>
+
+        <!-- Utility Modules-->
+        <module>aspectj</module>
 
         <!-- Core Modules-->
         <module>core</module>
-        <module>addon-th5jpagen</module>
         <!--<module>module-modeling</module>-->
 
     </modules>

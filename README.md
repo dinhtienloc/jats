@@ -4,19 +4,14 @@ JATS (Java Assistant Tools) using Spring Shell 2 to provide many various command
 ## Requirement
 * JDK 8
 * Maven 2.3.2
+* Spring Shell 2.0.1
 
-## Building
+## Build
 ```
-mvn package
-```
-
-## Running
-* Create a bat file named as `jats.bat`:
-```
-@echo off
-java -jar (path_to_jats_project)\target\jats.jar
+mvnw clean package
 ```
 
-* Add the directory of folder contains `jats.bat` to the PATH environment variable.
-* Open `cmd`, type `jats`
-![JATS's welcome banner](https://i.imgur.com/nEJJMcm.png)
+## Run
+```
+java -jar (path_to_jats_project)\target\core-2.0.1.jar
+```

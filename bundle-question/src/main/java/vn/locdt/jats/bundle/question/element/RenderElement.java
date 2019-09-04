@@ -7,7 +7,7 @@ public abstract class RenderElement {
     protected int renderHeight;
 
     public int getRenderHeight() {
-        return renderHeight;
+        return this.renderHeight;
     }
 
     public void setRenderHeight(int renderHeight) {

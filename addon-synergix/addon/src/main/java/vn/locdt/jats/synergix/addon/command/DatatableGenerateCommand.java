@@ -104,9 +104,9 @@ public class DatatableGenerateCommand extends QuestionCommand {
 	}
 
 	private DatatableModel createDatatableModel(List<DatatableColumnModel> cols) {
-		String dtValue = JQuestion.input(this.getLineReader(), "Datatable List Value: ").getValue();
-		String dtVar = JQuestion.input(this.getLineReader(), "Datatable Var Value: ").getValue();
-		String dtStyleClass = JQuestion.input(this.getLineReader(), "Datatable Style Class: ").getValue();
+		String dtValue = JQuestion.input(this.getLineReader(), "Datatable List Value: ").prompt();
+		String dtVar = JQuestion.input(this.getLineReader(), "Datatable Var Value: ").prompt();
+		String dtStyleClass = JQuestion.input(this.getLineReader(), "Datatable Style Class: ").prompt();
 
 		DatatableModel dbModel = new DatatableModel(dtValue, dtVar, dtStyleClass);
 		dbModel.getColumns().addAll(cols);

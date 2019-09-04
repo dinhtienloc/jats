@@ -35,7 +35,7 @@ public class EntityGenerationCommand extends QuestionCommand {
         if (SettingData.getProjectSetting().getRootPackage() == null)
             return LogUtils.createWarningLog("Please use 'init' command to setup jats with your project first!");
 
-        resolveOptionValues(dbType, dbUrl, dbUser, dbPass, entityFolder);
+//        resolveOptionValues(dbType, dbUrl, dbUser, dbPass, entityFolder);
         int count = countNotNullValues(dbType, dbUrl, dbUser, dbPass, entityFolder);
 
         if (count == -1) {

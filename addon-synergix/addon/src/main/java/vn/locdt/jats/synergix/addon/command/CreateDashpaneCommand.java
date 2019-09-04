@@ -46,7 +46,7 @@ public class CreateDashpaneCommand extends QuestionCommand {
 			@ShellOption(value = "--codegen")
 					boolean codeGen
 	) {
-		this.resolveOptionValues(moduleCode, role, formCode, description, title, createdBy, Boolean.toString(codeGen));
+//		this.resolveOptionValues(moduleCode, role, formCode, description, title, createdBy, Boolean.toString(codeGen));
 
 		try {
 			final SVNClientManager svnClientManager = SVNUtil.createSVNClientManager();

@@ -26,7 +26,7 @@ public class InitQuestionCommand extends QuestionCommand {
         @QuestionShellOption(RootPackageQuestion.class) String rootPackage
     ) {
         LogUtils.printDebugLog("Option: " + rootPackage);
-        resolveOptionValues(rootPackage);
+//        resolveOptionValues(rootPackage);
 
         LogUtils.printDebugLog("Root package: " + rootPackage);
         if (rootPackage != null) {
