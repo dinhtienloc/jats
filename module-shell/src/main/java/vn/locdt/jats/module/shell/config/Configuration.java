@@ -13,10 +13,10 @@ import java.util.*;
 
 public abstract class Configuration {
 	protected Properties properties;
-	private String configPath;
+	protected String configPath;
 
-	public Configuration(String configPath) {
-		this.configPath = configPath;
+	public Configuration(String configFileName) {
+		this.configPath = FileUtils.path(FileUtils.getJarFileLocation(), configFileName);
 		this.properties = new Properties();
 		boolean loaded = this.loadConfigFromFile();
 		if (loaded) {

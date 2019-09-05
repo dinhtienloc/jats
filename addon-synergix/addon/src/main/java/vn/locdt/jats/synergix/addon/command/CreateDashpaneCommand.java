@@ -7,6 +7,7 @@ import org.tmatesoft.svn.core.wc.SVNClientManager;
 import vn.locdt.jats.module.shell.command.QuestionCommand;
 import vn.locdt.jats.module.shell.context.ContextKey;
 import vn.locdt.jats.module.shell.context.ShellRuntimeContext;
+import vn.locdt.jats.module.shell.exception.ContextNotFoundException;
 import vn.locdt.jats.module.shell.question.QuestionStatus;
 import vn.locdt.jats.synergix.addon.db.DatabaseInfo;
 import vn.locdt.jats.synergix.addon.question.CreateDashpaneQuestion;
@@ -74,6 +75,8 @@ public class CreateDashpaneCommand extends QuestionCommand {
 			}
 		} catch (ErrorLogWaitException e) {
 			return "";
+		} catch (ContextNotFoundException e) {
+			LogUtils.printErrorLog(e.getMessage());
 		}
 
 

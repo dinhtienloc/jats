@@ -95,4 +95,15 @@ public class FileUtils {
     		return this.folders.isEmpty() ? "" : String.join(File.separator, this.folders);
 	    }
     }
+
+    public static String getJarFileLocation() {
+		String jarPath = FileUtils.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+		String rootJarPath = jarPath.substring("jar:file:/".length(), jarPath.indexOf("BOOT-INF") - 2);
+		int lastSeperatorIndex = rootJarPath.lastIndexOf("\\");
+		if (lastSeperatorIndex < 0) {
+			lastSeperatorIndex = rootJarPath.lastIndexOf("/");
+		}
+
+		return lastSeperatorIndex >= 0 ? rootJarPath.substring(0, lastSeperatorIndex) : "";
+	}
 }

@@ -1,6 +1,7 @@
 package vn.locdt.jats.module.shell.context;
 
 import sun.rmi.runtime.Log;
+import vn.locdt.jats.module.shell.exception.ContextNotFoundException;
 import vn.locdt.jats.util.common.LogUtils;
 
 import java.util.HashMap;
@@ -38,16 +39,12 @@ public class ShellRuntimeContext {
 
     public static ContextKey getContextKey(String propKey) {return ContextKey.findByPropKey(propKey);}
 
-    public static <C> C getContext(String propKey, Class<C> type) {
-    	ContextKey contextKey = getContextKey(propKey);
-    	if (contextKey == null) {
-    		return null;
-	    }
-
-	    return getContext(contextKey, type);
-    }
 	public static Map<ContextKey, Object> getContextMap() {return context;}
-    public static <C> C getContext(ContextKey key, Class<C> type) {
+    public static <C> C getContext(ContextKey key, Class<C> type) throws ContextNotFoundException {
+    	Object obj = context.get(key);
+    	if (obj == null || "".equals(obj.toString())) {
+    		throw new ContextNotFoundException("Please setup '" + key.getPropKey() + "' config by using 'config:add' command. The operation will be stopped.");
+		}
         return type.cast(context.get(key));
     }
 

@@ -4,6 +4,7 @@ import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
 import vn.locdt.jats.module.shell.context.ContextKey;
 import vn.locdt.jats.module.shell.context.ShellRuntimeContext;
+import vn.locdt.jats.module.shell.exception.ContextNotFoundException;
 import vn.locdt.jats.synergix.addon.db.DatabaseInfo;
 import vn.locdt.jats.synergix.addon.db.queryaction.QueryAction;
 import vn.locdt.jats.util.common.*;
@@ -22,7 +23,7 @@ public class CommonUtils {
 
 	public static final String SYNERGIX_ID = "U999999999";
 
-	public static void updateSuperModel(SVNClientManager svnClientManager) throws ErrorLogWaitException {
+	public static void updateSuperModel(SVNClientManager svnClientManager) throws ErrorLogWaitException, ContextNotFoundException {
 		final String superModelPath = ShellRuntimeContext.getContext(ContextKey.SUPERMODEL_PATH, String.class);
 		LogUtils.printLogWait("Update SuperModel to latest rev...", LogType.SUCCESS, () -> {
 			try {
@@ -36,7 +37,7 @@ public class CommonUtils {
 		});
 	}
 
-	public static void append01_form_master(String formCode, String createdBy, String formQuery) throws ErrorLogWaitException {
+	public static void append01_form_master(String formCode, String createdBy, String formQuery) throws ErrorLogWaitException, ContextNotFoundException {
 		final String superModelPath = ShellRuntimeContext.getContext(ContextKey.SUPERMODEL_PATH, String.class);
 		LogUtils.printLogWait("Append form code query to " + LogUtils.bold("01_form_master.sql") + " file...", LogType.SUCCESS, () -> {
 			try {

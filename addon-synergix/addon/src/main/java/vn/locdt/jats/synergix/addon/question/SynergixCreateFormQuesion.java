@@ -10,6 +10,7 @@ import vn.locdt.jats.module.generator.TemplateProducer;
 import vn.locdt.jats.module.generator.exception.TemplateException;
 import vn.locdt.jats.module.shell.context.ContextKey;
 import vn.locdt.jats.module.shell.context.ShellRuntimeContext;
+import vn.locdt.jats.module.shell.exception.ContextNotFoundException;
 import vn.locdt.jats.module.shell.question.ParameterizedQuestionCLI;
 import vn.locdt.jats.module.shell.question.QuestionStatus;
 import vn.locdt.jats.module.shell.util.ParamAssert;
@@ -19,6 +20,7 @@ import vn.locdt.jats.synergix.generator.context.TH6BeanContext;
 import vn.locdt.jats.synergix.generator.context.TH6ServiceContext;
 import vn.locdt.jats.synergix.generator.context.model.SynergixFormModel;
 import vn.locdt.jats.util.common.FileUtils;
+import vn.locdt.jats.util.common.LogUtils;
 
 public abstract class SynergixCreateFormQuesion<M extends SynergixFormModel> extends ParameterizedQuestionCLI<M> {
 	protected static final String JAVA_PATH = "TH6\\src\\main\\java";
@@ -55,6 +57,8 @@ public abstract class SynergixCreateFormQuesion<M extends SynergixFormModel> ext
 		} catch (IOException | TemplateException e) {
 			e.printStackTrace();
 			this.status = QuestionStatus.STOP;
+		} catch (ContextNotFoundException e) {
+			LogUtils.printErrorLog(e.getMessage());
 		}
 	}
 

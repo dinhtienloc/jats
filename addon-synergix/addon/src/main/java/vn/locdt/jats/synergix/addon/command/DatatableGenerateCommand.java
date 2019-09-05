@@ -16,6 +16,7 @@ import vn.locdt.jats.module.generator.exception.TemplateException;
 import vn.locdt.jats.module.shell.command.QuestionCommand;
 import vn.locdt.jats.module.shell.context.ContextKey;
 import vn.locdt.jats.module.shell.context.ShellRuntimeContext;
+import vn.locdt.jats.module.shell.exception.ContextNotFoundException;
 import vn.locdt.jats.synergix.addon.config.SynergixDataType;
 import vn.locdt.jats.synergix.addon.param.ColumnExpression;
 import vn.locdt.jats.synergix.addon.param.OrderedColumnExpression;
@@ -41,22 +42,21 @@ public class DatatableGenerateCommand extends QuestionCommand {
 			@ShellOption(value = {"-o", "--order"}) OrderedColumnExpression orderExpression,
 			@ShellOption(value = {"-c", "--ctrl"}) boolean isCtrl) {
 
-		String th6Path = ShellRuntimeContext.getContext(ContextKey.TH6_PATH, String.class);
-		Assert.notNull(th6Path, LogUtils.createErrorLog("Please set up 'th6Path' config first."));
-
-		final String metaPath = "TH6\\src\\main\\resources\\synergix\\th6\\data\\meta\\" + (isCtrl ? "ctrlschema" : "schema");
-		final String tableFileName = StringUtils.capitalize(tableName) + FileType.XML.getExt();
-		final String moduleTablePath = FileUtils.path(module.toLowerCase(), tableFileName);
-		File xmlFile = new File(FileUtils.path(th6Path, metaPath, moduleTablePath));
-		if (!xmlFile.exists()) {
-			return LogUtils.createErrorLog(xmlFile.getAbsolutePath() + " file not found");
-		}
-
-
-		Document doc = XMLUtils.parseFile(xmlFile);
-		NodeList nl = doc.getElementsByTagName("column");
-
 		try {
+			String th6Path = ShellRuntimeContext.getContext(ContextKey.TH6_PATH, String.class);
+
+			final String metaPath = "TH6\\src\\main\\resources\\synergix\\th6\\data\\meta\\" + (isCtrl ? "ctrlschema" : "schema");
+			final String tableFileName = StringUtils.capitalize(tableName) + FileType.XML.getExt();
+			final String moduleTablePath = FileUtils.path(module.toLowerCase(), tableFileName);
+			File xmlFile = new File(FileUtils.path(th6Path, metaPath, moduleTablePath));
+			if (!xmlFile.exists()) {
+				return LogUtils.createErrorLog(xmlFile.getAbsolutePath() + " file not found");
+			}
+
+
+			Document doc = XMLUtils.parseFile(xmlFile);
+			NodeList nl = doc.getElementsByTagName("column");
+
 			List<DatatableColumnModel> cols = new ArrayList<>();
 			for (ColumnExpression exp : orderExpression.getColumnExpressions()) {
 				Element colElm = (Element) nl.item(exp.getIndex() - 1);
@@ -92,15 +92,11 @@ public class DatatableGenerateCommand extends QuestionCommand {
 			LogUtils.printErrorLog("Can't parse column order. Format is wrong", e);
 		} catch (TemplateException | IOException e) {
 			e.printStackTrace();
+		} catch (ContextNotFoundException e) {
+			LogUtils.printErrorLog(e.getMessage());
 		}
 
 		return null;
-	}
-
-	public Availability generateAvailability() {
-		return ShellRuntimeContext.getContext(ContextKey.TH6_PATH, String.class) != null
-				? Availability.available()
-				: Availability.unavailable("you are not connected");
 	}
 
 	private DatatableModel createDatatableModel(List<DatatableColumnModel> cols) {

@@ -40,28 +40,15 @@ public class GobyGeneratorRunner {
 		this.lineReader = lineReader;
 	}
 
-	public void run() throws ThreadStorageException {
+	public void run() {
 		TemplateXml templateXml = new TemplateXml();
 		PluginXml pluginXml = new PluginXml();
-		String jdbcConfigFile;
 
 		try {
-			// load goby config
-			String gobyConfigPath = ShellRuntimeContext.getContext(ContextKey.GOBY_CONFIG_PATH, String.class);
-
-			if (gobyConfigPath == null) {
-				gobyConfigPath = FileUtils.path(FileUtils.CONFIG_FOLDER_PATH);
-				ShellRuntimeContext.addContext(ContextKey.GOBY_CONFIG_PATH, gobyConfigPath);
-
-				ClassLoader cl = GobyGeneratorRunner.class.getClassLoader();
-				FileUtils.createFileFromResource(cl, "template", FileUtils.path(gobyConfigPath, "template"));
-				FileUtils.createFileFromResource(cl, DEFAULT_PLUGIN_XML, FileUtils.path(gobyConfigPath, DEFAULT_PLUGIN_XML));
-				FileUtils.createFileFromResource(cl, VELOCITY_FILE, FileUtils.path(gobyConfigPath, VELOCITY_FILE));
-			}
-
-			templateXml.setFileLocation(FileUtils.path(gobyConfigPath, DEFAULT_TEMPLATE_XML));
-			pluginXml.setFileLocation(FileUtils.path(gobyConfigPath, DEFAULT_PLUGIN_XML));
-			VelocityUtil.initVelocity(FileUtils.path(gobyConfigPath, VELOCITY_FILE));
+			String folderPath = FileUtils.getJarFileLocation();
+			templateXml.setFileLocation(FileUtils.path(folderPath, DEFAULT_TEMPLATE_XML));
+			pluginXml.setFileLocation(FileUtils.path(folderPath, DEFAULT_PLUGIN_XML));
+			VelocityUtil.initVelocity(FileUtils.path(folderPath, VELOCITY_FILE));
 
 			LogUtils.printLog("               Goby Generator is written by Ha Duc Loc <haducloc13@gmail.com>");
 			LogUtils.printLog("/*---------------------------------------------------------------------------*/");
@@ -123,7 +110,7 @@ public class GobyGeneratorRunner {
 								++idx;
 								var10001[0] = idx;
 								var10001[1] = tableName;
-								LogUtils.printLog("[%s] Table %s:", var10001);
+								LogUtils.printLog("Table %s:", tableName);
 
 								try {
 									Entity entity = new Entity();
@@ -151,11 +138,9 @@ public class GobyGeneratorRunner {
 				}
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
 			LogUtils.printErrorLog("Can not find goby config path.", e);
 		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtils.printErrorLog("Exception occurs!", e);
+			LogUtils.printErrorLog(e.getMessage());
 		}
 	}
 }

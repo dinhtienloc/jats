@@ -9,6 +9,7 @@ import org.tmatesoft.svn.core.wc.SVNClientManager;
 import vn.locdt.jats.module.shell.command.QuestionCommand;
 import vn.locdt.jats.module.shell.context.ContextKey;
 import vn.locdt.jats.module.shell.context.ShellRuntimeContext;
+import vn.locdt.jats.module.shell.exception.ContextNotFoundException;
 import vn.locdt.jats.module.shell.question.QuestionStatus;
 import vn.locdt.jats.module.shell.question.annotation.Confirmation;
 import vn.locdt.jats.module.shell.question.annotation.Question;
@@ -82,19 +83,24 @@ public class CreateFormCommand extends QuestionCommand {
 			if (role != null) {
 				CommonUtils.assignRoleCodePermission(formCode, role, mainDbInfo);
 			}
+
+			if (codeGen) {
+				CreateFormQuestion question = new CreateFormQuestion(new FormModel(formCode, module, transactionTypeCode));
+				question.setLineReader(this.getLineReader());
+				QuestionStatus status = question.start();
+				if (status.equals(QuestionStatus.CONTINUE)) {
+					return LogUtils.createSuccessLog("Done");
+				}
+			}
+
+			return LogUtils.createLog("You must add this form code to " + LogUtils.bold("menu.xml") + " yourself. Good luck!");
+
 		} catch (ErrorLogWaitException e) {
 			return "";
+		} catch (ContextNotFoundException e) {
+			LogUtils.printErrorLog(e.getMessage());
 		}
 
-		if (codeGen) {
-			CreateFormQuestion question = new CreateFormQuestion(new FormModel(formCode, module, transactionTypeCode));
-			question.setLineReader(this.getLineReader());
-			QuestionStatus status = question.start();
-			if (status.equals(QuestionStatus.CONTINUE)) {
-				return LogUtils.createSuccessLog("Done");
-			}
-		}
-
-		return LogUtils.createLog("You must add this form code to " + LogUtils.bold("menu.xml") + " yourself. Good luck!");
+		return null;
 	}
 }

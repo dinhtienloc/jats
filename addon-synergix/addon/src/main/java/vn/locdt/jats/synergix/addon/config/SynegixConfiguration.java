@@ -8,10 +8,10 @@ import vn.locdt.jats.util.common.FileUtils;
 import vn.locdt.jats.util.common.LogUtils;
 
 public class SynegixConfiguration extends Configuration {
-	private static final String PATH = FileUtils.path(FileUtils.CONFIG_FOLDER_PATH, FileUtils.CONFIG_FILE_NAME);
+	private static final String CONFIG_FILE_NAME = FileUtils.CONFIG_FILE_NAME;
 
 	public SynegixConfiguration() {
-		super(PATH);
+		super(CONFIG_FILE_NAME);
 	}
 
 	@Override

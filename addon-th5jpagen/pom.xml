@@ -30,7 +30,23 @@
             <artifactId>goby</artifactId>
             <scope>system</scope>
             <version>1.0.0</version>
-            <systemPath>${basedir}/../libs/synergix/goby-1.0.0.jar</systemPath>
+            <systemPath>${basedir}/../addon-th5jpagen/libs/synergix/goby-1.0.0.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <scope>system</scope>
+            <version>1.6.1</version>
+            <systemPath>${basedir}/../addon-th5jpagen/libs/synergix/dom4j-1.6.1.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <scope>system</scope>
+            <version>1.5</version>
+            <systemPath>${basedir}/../addon-th5jpagen/libs/synergix/velocity-1.5.jar</systemPath>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/commons-collections/commons-collections -->
