@@ -112,6 +112,7 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <includeSystemScope>true</includeSystemScope>
+                    <outputDirectory>../../../../Dist</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>

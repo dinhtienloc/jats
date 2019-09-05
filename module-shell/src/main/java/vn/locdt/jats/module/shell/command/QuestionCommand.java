@@ -22,5 +22,4 @@ public abstract class QuestionCommand {
 	public LineReader getLineReader() {
 		return this.lineReader;
 	}
-
 }

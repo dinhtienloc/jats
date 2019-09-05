@@ -35,8 +35,9 @@ public abstract class SynergixCreateFormQuesion<M extends SynergixFormModel> ext
 
 	@Override
 	protected boolean validateParameters() {
-		return ParamAssert.notNull(this.getParameter().getCode(), "Form Code") &&
-				ParamAssert.notNull(this.getParameter().getModule(), "Module Code");
+		ParamAssert.isNull(this.getParameter().getCode(), "Form Code");
+		ParamAssert.isNull(this.getParameter().getModule(), "Module Code");
+		return true;
 	}
 
 	@Override

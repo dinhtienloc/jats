@@ -1,1 +1,0 @@
-java -jar "D:\works\Workspace\SynTool\core\target\core-2.0.1.jar"

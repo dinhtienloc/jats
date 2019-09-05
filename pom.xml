@@ -30,9 +30,6 @@
         <module>addon-moduleconfig</module>
         <module>addon-th5jpagen</module>
 
-        <!-- Utility Modules-->
-        <module>aspectj</module>
-
         <!-- Core Modules-->
         <module>core</module>
         <!--<module>module-modeling</module>-->

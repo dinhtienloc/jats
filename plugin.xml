@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<pluginXml>
-	<plugin class="goby.codegen.plugin.JavaPlugin" order="10" />
-	<plugin class="goby.codegen.plugin.JpaExtPlugin" order="50" />
-	<plugin class="goby.codegen.plugin.TH5ExtPlugin" order="100" />
-</pluginXml>

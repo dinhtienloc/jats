@@ -8,6 +8,7 @@ import goby.codegen.plugin.DbMtPlugin;
 import goby.collection.CollectionUtils;
 import goby.collection.Predicate;
 import goby.jdbc.JdbcUtil;
+import vn.locdt.jats.util.common.StringUtils;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -22,13 +23,14 @@ public class PostgresPlugin extends DbMtPlugin {
 
         try {
             ResultSet rs = conn.getMetaData().getTables(null, null, entity.getTableName().toUpperCase(), null);
-            boolean tableExists = false;
+            boolean tableExists = rs.next();
 
-            if (!rs.next()) {
+            if (!tableExists) {
                 rs = conn.getMetaData().getTables(null, null, entity.getTableName().toLowerCase(), null);
+                tableExists = rs.next();
             }
 
-            if (rs.next()) {
+            if (tableExists) {
                 entity.setTableCat(rs.getString("TABLE_CAT"));
                 entity.setTableScheme(rs.getString("TABLE_SCHEM"));
                 entity.setTableName(rs.getString("TABLE_NAME"));
@@ -39,12 +41,11 @@ public class PostgresPlugin extends DbMtPlugin {
                 entity.setLcName(entity.getName().toLowerCase());
                 entity.setUcName(entity.getName().toUpperCase());
                 entity.setTableAlias(this.getTableAliasBuilder().buildAlias(entity));
-                tableExists = true;
             }
 
             rs.close();
             if (!tableExists) {
-                throw new Exception(String.format("Table %s doesnot exist.", entity.getTableName()));
+                throw new Exception(String.format("Table %s does not exist.", entity.getTableName()));
             }
 
             List<String> primaryKeys = JdbcUtil.loadKeys(conn, entity.getTableName());

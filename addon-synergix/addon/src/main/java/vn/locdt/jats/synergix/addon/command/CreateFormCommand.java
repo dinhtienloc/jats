@@ -5,6 +5,7 @@ import java.sql.Connection;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
+import org.springframework.util.Assert;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
 import vn.locdt.jats.module.shell.command.QuestionCommand;
 import vn.locdt.jats.module.shell.context.ContextKey;
@@ -13,6 +14,7 @@ import vn.locdt.jats.module.shell.exception.ContextNotFoundException;
 import vn.locdt.jats.module.shell.question.QuestionStatus;
 import vn.locdt.jats.module.shell.question.annotation.Confirmation;
 import vn.locdt.jats.module.shell.question.annotation.Question;
+import vn.locdt.jats.module.shell.util.ParamAssert;
 import vn.locdt.jats.synergix.addon.db.DatabaseInfo;
 import vn.locdt.jats.synergix.addon.question.CreateFormQuestion;
 import vn.locdt.jats.synergix.addon.util.CommonUtils;
@@ -20,6 +22,7 @@ import vn.locdt.jats.synergix.generator.context.model.FormModel;
 import vn.locdt.jats.util.common.LogType;
 import vn.locdt.jats.util.common.LogUtils;
 import vn.locdt.jats.util.common.SVNUtil;
+import vn.locdt.jats.util.common.StringUtils;
 import vn.locdt.jats.util.exception.ErrorLogWaitException;
 
 import static org.springframework.shell.standard.ShellOption.NULL;
@@ -60,6 +63,8 @@ public class CreateFormCommand extends QuestionCommand {
 	) {
 
 		try {
+			ParamAssert.isEmpty(formCode, "Form code");
+
 			final SVNClientManager svnClientManager = SVNUtil.createSVNClientManager();
 
 			// update supermodel to latest rev
@@ -80,7 +85,7 @@ public class CreateFormCommand extends QuestionCommand {
 			});
 
 			// assign role to form code
-			if (role != null) {
+			if (StringUtils.isNotEmpty(role)) {
 				CommonUtils.assignRoleCodePermission(formCode, role, mainDbInfo);
 			}
 
