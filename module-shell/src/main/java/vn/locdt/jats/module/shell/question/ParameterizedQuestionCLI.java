@@ -2,6 +2,7 @@ package vn.locdt.jats.module.shell.question;
 
 public abstract class ParameterizedQuestionCLI<P> extends QuestionCLI {
     protected P parameter;
+
     public ParameterizedQuestionCLI(P parameter) {
         this.parameter = parameter;
     }
@@ -10,8 +11,7 @@ public abstract class ParameterizedQuestionCLI<P> extends QuestionCLI {
     protected void preQuestion() {
         if (this.validateParameters()) {
             status = QuestionStatus.CONTINUE;
-        }
-        else {
+        } else {
             status = QuestionStatus.STOP;
         }
     }

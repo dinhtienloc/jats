@@ -1,6 +1,10 @@
 package vn.locdt.jats.module.modeling;
 
-import vn.locdt.jats.module.modeling.model.*;
+import vn.locdt.jats.module.modeling.model.Catalog;
+import vn.locdt.jats.module.modeling.model.Column;
+import vn.locdt.jats.module.modeling.model.Relation;
+import vn.locdt.jats.module.modeling.model.Schema;
+import vn.locdt.jats.module.modeling.model.Table;
 
 import java.sql.ResultSet;
 

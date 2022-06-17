@@ -11,7 +11,8 @@ public abstract class Model {
     protected String javaName;
     protected String javaVarName;
 
-    public Model() {}
+    public Model() {
+    }
 
     public Model(String name) {
         this.name = name;

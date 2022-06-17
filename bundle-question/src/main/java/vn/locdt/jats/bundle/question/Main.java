@@ -1,14 +1,6 @@
 package vn.locdt.jats.bundle.question;
 
-import org.jline.reader.LineReader;
-import org.jline.reader.LineReaderBuilder;
-import org.jline.terminal.Terminal;
-import org.jline.terminal.TerminalBuilder;
-import vn.locdt.jats.bundle.question.exception.ConsoleNotInitializeException;
-
-import java.io.IOException;
 import java.util.Arrays;
-
 
 
 public class Main {

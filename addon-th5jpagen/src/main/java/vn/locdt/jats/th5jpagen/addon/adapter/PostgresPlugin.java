@@ -8,7 +8,6 @@ import goby.codegen.plugin.DbMtPlugin;
 import goby.collection.CollectionUtils;
 import goby.collection.Predicate;
 import goby.jdbc.JdbcUtil;
-import vn.locdt.jats.util.common.StringUtils;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -51,7 +50,7 @@ public class PostgresPlugin extends DbMtPlugin {
             List<String> primaryKeys = JdbcUtil.loadKeys(conn, entity.getTableName());
             rs = conn.getMetaData().getColumns(null, null, entity.getTableName(), null);
 
-            while(rs.next()) {
+            while (rs.next()) {
                 Property property = new Property();
                 property.setColumnName(rs.getString("COLUMN_NAME"));
                 property.setDbTypeName(rs.getString("TYPE_NAME").toUpperCase());
@@ -76,8 +75,8 @@ public class PostgresPlugin extends DbMtPlugin {
             rs.close();
             Iterator i$ = entity.getPropertyList().iterator();
 
-            while(i$.hasNext()) {
-                Property prop = (Property)i$.next();
+            while (i$.hasNext()) {
+                Property prop = (Property) i$.next();
                 if (prop.getIsKey()) {
                     entity.getKeyList().add(prop);
                 } else {
@@ -97,10 +96,10 @@ public class PostgresPlugin extends DbMtPlugin {
             try {
                 final ResultSet fkrs = conn.getMetaData().getImportedKeys(null, null, entity.getTableName());
 
-                while(fkrs.next()) {
+                while (fkrs.next()) {
                     fk = CollectionUtils.find(entity.getImpFkList(), new Predicate() {
                         public boolean evaluateOn(Object obj) {
-                            FK fk = (FK)obj;
+                            FK fk = (FK) obj;
 
                             try {
                                 return fkrs.getString("FK_NAME").equals(fk.getFk_name());
@@ -131,8 +130,8 @@ public class PostgresPlugin extends DbMtPlugin {
                 fkrs.close();
                 i$ = entity.getImpFkList().iterator();
 
-                while(i$.hasNext()) {
-                    fk = (FK)i$.next();
+                while (i$.hasNext()) {
+                    fk = (FK) i$.next();
                     len = fk.getJoinColumnList().size();
                     (fk.getJoinColumnList().get(len - 1)).setIsLast(true);
                 }
@@ -141,12 +140,12 @@ public class PostgresPlugin extends DbMtPlugin {
             }
 
             try {
-                final ResultSet fkrs  = conn.getMetaData().getExportedKeys(null, null, entity.getTableName());
+                final ResultSet fkrs = conn.getMetaData().getExportedKeys(null, null, entity.getTableName());
 
-                while(fkrs.next()) {
+                while (fkrs.next()) {
                     fk = CollectionUtils.find(entity.getExpFkList(), new Predicate() {
                         public boolean evaluateOn(Object obj) {
-                            FK fk = (FK)obj;
+                            FK fk = (FK) obj;
 
                             try {
                                 return fkrs.getString("FK_NAME").equals(fk.getFk_name());
@@ -177,8 +176,8 @@ public class PostgresPlugin extends DbMtPlugin {
                 fkrs.close();
                 i$ = entity.getExpFkList().iterator();
 
-                while(i$.hasNext()) {
-                    fk = (FK)i$.next();
+                while (i$.hasNext()) {
+                    fk = (FK) i$.next();
                     len = fk.getJoinColumnList().size();
                     (fk.getJoinColumnList().get(len - 1)).setIsLast(true);
                 }

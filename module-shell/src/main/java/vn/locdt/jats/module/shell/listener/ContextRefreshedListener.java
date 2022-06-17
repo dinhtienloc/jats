@@ -9,9 +9,9 @@ import vn.locdt.jats.util.common.LogUtils;
 @Component
 public class ContextRefreshedListener implements ApplicationListener<ContextRefreshedEvent> {
 
-	@Override
-	public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-		LogUtils.printLog("Load existing config...");
-		Configuration.loadAllConfigurations();
-	}
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        LogUtils.printLog("Load existing config...");
+        Configuration.loadAllConfigurations();
+    }
 }

@@ -15,8 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FileUtils {
-	public static final String CONFIG_FILE_NAME = "syn.properties";
-	public static final String CONFIG_FOLDER_PATH = FileUtils.path(FileUtils.getUserDir());
+    public static final String CONFIG_FILE_NAME = "syn.properties";
+    public static final String CONFIG_FOLDER_PATH = FileUtils.path(FileUtils.getUserDir());
 
     public static String getUserDir() {
         String currentLocation = null;
@@ -33,32 +33,32 @@ public class FileUtils {
     }
 
     public static String path(String... folders) {
-    	return new FilePath().add(folders).build();
+        return new FilePath().add(folders).build();
     }
 
     public static void createFile(Path path) throws IOException {
-	    if (!Files.exists(path)) {
-		    if (path.getParent() != null)
-			    Files.createDirectories(path.getParent());
-		    Files.createFile(path);
-	    }
+        if (!Files.exists(path)) {
+            if (path.getParent() != null)
+                Files.createDirectories(path.getParent());
+            Files.createFile(path);
+        }
     }
 
     public static File createFile(String path) throws IOException {
-	    Path des = Paths.get(path);
-	    createFile(des);
+        Path des = Paths.get(path);
+        createFile(des);
 
-	    return new File(path);
+        return new File(path);
     }
 
     public static File createFileFromResource(ClassLoader cl, String fileName, String savedPath) throws IOException {
-	    InputStream is = cl.getResourceAsStream(fileName);
-	    File newFile = createFile(savedPath);
-	    FileOutputStream out = new FileOutputStream(newFile);
-	    IOUtils.copy(is, out);
-	    out.close();
-	    is.close();
-	    return newFile;
+        InputStream is = cl.getResourceAsStream(fileName);
+        File newFile = createFile(savedPath);
+        FileOutputStream out = new FileOutputStream(newFile);
+        IOUtils.copy(is, out);
+        out.close();
+        is.close();
+        return newFile;
     }
 
     private static Path findFileWithPath(String path) {
@@ -66,8 +66,8 @@ public class FileUtils {
         Path result = null;
         try {
             result = Files.walk(start)
-                .filter(p -> p.toString().endsWith(path))
-                .findFirst().orElse(null);
+                    .filter(p -> p.toString().endsWith(path))
+                    .findFirst().orElse(null);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,29 +81,34 @@ public class FileUtils {
     }
 
     public static class FilePath {
-    	List<String> folders;
-    	private FilePath() {
-    		this.folders = new ArrayList<>();
-	    }
+        List<String> folders;
 
-	    private FilePath add(String... folders) {
-    		this.folders.addAll(Arrays.asList(folders));
-    		return this;
-	    }
+        private FilePath() {
+            this.folders = new ArrayList<>();
+        }
 
-	    private String build() {
-    		return this.folders.isEmpty() ? "" : String.join(File.separator, this.folders);
-	    }
+        private FilePath add(String... folders) {
+            this.folders.addAll(Arrays.asList(folders));
+            return this;
+        }
+
+        private String build() {
+            return this.folders.isEmpty() ? "" : String.join(File.separator, this.folders);
+        }
     }
 
     public static String getJarFileLocation() {
-		String jarPath = FileUtils.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
-		String rootJarPath = jarPath.substring("jar:file:/".length(), jarPath.indexOf("BOOT-INF") - 2);
-		int lastSeperatorIndex = rootJarPath.lastIndexOf("\\");
-		if (lastSeperatorIndex < 0) {
-			lastSeperatorIndex = rootJarPath.lastIndexOf("/");
-		}
+        String jarPath = FileUtils.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+        if (jarPath.contains("jar")) {
+            String rootJarPath = jarPath.substring("jar:file:".length(), jarPath.indexOf("BOOT-INF") - 2);
+            int lastSeperatorIndex = rootJarPath.lastIndexOf("\\");
+            if (lastSeperatorIndex < 0) {
+                lastSeperatorIndex = rootJarPath.lastIndexOf("/");
+            }
 
-		return lastSeperatorIndex >= 0 ? rootJarPath.substring(0, lastSeperatorIndex) : "";
-	}
+            return lastSeperatorIndex >= 0 ? rootJarPath.substring(0, lastSeperatorIndex) : "";
+        } else {
+            return ".";
+        }
+    }
 }

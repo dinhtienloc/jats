@@ -19,7 +19,7 @@ public class DatabaseReaderFactory {
 
     static {
         systems.put(MySQLSystemModeling.SYSTEM, MySQLSystemModeling::new);
-	    systems.put(PostgreSQLSystemModeling.SYSTEM, PostgreSQLSystemModeling::new);
+        systems.put(PostgreSQLSystemModeling.SYSTEM, PostgreSQLSystemModeling::new);
     }
 
     public static SystemModeling createSystemReader(String databaseType, DatabaseMetadataWrapper wrapper) throws SystemReaderNotFoundException {

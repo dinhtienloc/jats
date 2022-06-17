@@ -25,7 +25,7 @@ import vn.locdt.jats.util.common.LogUtils;
         EntityGeneratorQuestion.class
 })
 public class EntityGenerationCommand extends QuestionCommand {
-    @ShellMethod(key = { "entity:gen"}, value = "Generate entity class")
+    @ShellMethod(key = {"entity:gen"}, value = "Generate entity class")
     public String runCommand(
             @ShellOption(value = {"db"}) String dbType,
             @ShellOption(value = {"url"}) String dbUrl,
@@ -40,8 +40,7 @@ public class EntityGenerationCommand extends QuestionCommand {
 
         if (count == -1) {
             return LogUtils.createWarningLog("Required arguments can not be null");
-        }
-        else if (count == 1) {
+        } else if (count == 1) {
             DatabaseSetting dbSetting = SettingData.getDatabaseSetting();
             dbSetting.setDbType(dbType);
             dbSetting.setDbUrl(dbUrl);

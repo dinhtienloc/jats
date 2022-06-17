@@ -81,7 +81,7 @@ public class EntityGeneratorQuestion extends QuestionCLI {
         }
     }
 
-    private String askForTableName(String catalogName){
+    private String askForTableName(String catalogName) {
         String chosenTable = null;
         List<String> tables = dbReader.getDatabaseTableList(catalogName);
 
@@ -94,7 +94,7 @@ public class EntityGeneratorQuestion extends QuestionCLI {
         return chosenTable;
     }
 
-    private String askForCatalogName(){
+    private String askForCatalogName() {
         String chosenCatalog = null;
         List<String> catalogs = dbReader.getCatalogList();
 

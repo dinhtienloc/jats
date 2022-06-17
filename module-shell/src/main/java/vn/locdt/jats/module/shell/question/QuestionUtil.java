@@ -1,7 +1,5 @@
 package vn.locdt.jats.module.shell.question;
 
-import java.lang.reflect.Constructor;
-
 public class QuestionUtil {
     public static <Q> Q activeQuestion(Class<Q> questionClass) {
         try {

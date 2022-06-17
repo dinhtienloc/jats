@@ -48,15 +48,15 @@ public class Table extends Model {
         this.columns = columns;
     }
 
-	public String getCatalogName() {
-		return this.catalogName;
-	}
+    public String getCatalogName() {
+        return this.catalogName;
+    }
 
-	public void setCatalogName(String catalogName) {
-		this.catalogName = catalogName;
-	}
+    public void setCatalogName(String catalogName) {
+        this.catalogName = catalogName;
+    }
 
-	public List<Column> getPrimaryKeys() {
+    public List<Column> getPrimaryKeys() {
         return getColumns().stream()
                 .filter(col -> col.isPrimaryKey())
                 .collect(Collectors.toList());

@@ -6,10 +6,13 @@ package vn.locdt.jats.module.generator;
 public enum FileType {
     JAVA(".java"),
     XHTML(".xhtml"),
-	XML(".xml");
+    XML(".xml");
 
     private String ext;
-    FileType(String ext) {this.ext = ext;}
+
+    FileType(String ext) {
+        this.ext = ext;
+    }
 
     public String getExt() {
         return this.ext;

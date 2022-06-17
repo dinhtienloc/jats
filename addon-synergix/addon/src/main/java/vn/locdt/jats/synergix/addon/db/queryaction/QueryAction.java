@@ -1,7 +1,5 @@
 package vn.locdt.jats.synergix.addon.db.queryaction;
 
-import vn.locdt.jats.module.modeling.util.SQL;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
@@ -32,9 +30,13 @@ public abstract class QueryAction {
         };
     }
 
-    protected void preAction() {}
+    protected void preAction() {
+    }
+
     protected abstract void createQuery() throws SQLException;
-    protected void postAction() {}
+
+    protected void postAction() {
+    }
 
     public void execute() throws SQLException {
         this.preAction();

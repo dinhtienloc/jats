@@ -33,10 +33,10 @@ public class CreateFormQuestion extends SynergixCreateFormQuesion<FormModel> {
     @Override
     protected List<String> getParentBeans() {
         return Arrays.asList(
-            "SingleViewGlobalMaintenanceUiBean",
-            "SingleViewUIBean",
-            "SummaryDetailGlobalMaintenanceUiBean",
-            "SummaryDetailUIBean"
+                "SingleViewGlobalMaintenanceUiBean",
+                "SingleViewUIBean",
+                "SummaryDetailGlobalMaintenanceUiBean",
+                "SummaryDetailUIBean"
         );
     }
 }

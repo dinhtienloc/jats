@@ -55,7 +55,7 @@ public abstract class JavaClassContext extends GenerationContext<Table> implemen
     public String getImports() {
         return importsMapping.entrySet()
                 .stream()
-                .filter( e -> !e.getKey().equals(e.getValue()) && !e.getValue().contains("<"))
+                .filter(e -> !e.getKey().equals(e.getValue()) && !e.getValue().contains("<"))
                 .map(e -> String.format(IMPORT_STATEMENT, e.getValue()))
                 .collect(Collectors.joining("\n"));
     }
@@ -93,8 +93,7 @@ public abstract class JavaClassContext extends GenerationContext<Table> implemen
                 importsMapping.put(canonicalName, canonicalName);
                 return canonicalName;
             }
-        }
-        else {
+        } else {
             importsMapping.put(simpleName, canonicalName);
         }
         return simpleName;

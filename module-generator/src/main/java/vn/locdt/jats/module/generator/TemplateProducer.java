@@ -33,10 +33,10 @@ public class TemplateProducer {
 //                File f = new File("");
 //                LogUtils.printDebugLog(getClass().getResourceAsStream(""));
 //                configuration.setDirectoryForTemplateLoading(f);
-	            this.configuration.setClassForTemplateLoading(clazz, templateFolder);
-	            this.configuration.setDefaultEncoding("UTF-8");
-	            this.configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-	            this.configuration.setLogTemplateExceptions(false);
+                this.configuration.setClassForTemplateLoading(clazz, templateFolder);
+                this.configuration.setDefaultEncoding("UTF-8");
+                this.configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+                this.configuration.setLogTemplateExceptions(false);
             }
         } catch (Exception e) {
             throw new RuntimeException("Error while initializing TemplateProducer", e);

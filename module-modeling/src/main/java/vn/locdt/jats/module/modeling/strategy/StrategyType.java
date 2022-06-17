@@ -9,6 +9,12 @@ public enum StrategyType {
     ENHANCED_SEQUENCE("enhanced-sequence"),
     TABLE(null);
     private String strategyName;
-    StrategyType(String strategyName) {this.strategyName = strategyName;}
-    public String getStrategyName() {return this.strategyName;}
+
+    StrategyType(String strategyName) {
+        this.strategyName = strategyName;
+    }
+
+    public String getStrategyName() {
+        return this.strategyName;
+    }
 }

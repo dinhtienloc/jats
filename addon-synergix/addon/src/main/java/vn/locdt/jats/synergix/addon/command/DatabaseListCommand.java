@@ -13,17 +13,17 @@ import java.util.Set;
 @ShellComponent
 public class DatabaseListCommand extends QuestionCommand {
 
-	@ShellMethod(key = {"dblist"}, value = "Create connection to database")
-	public String runCommand() {
+    @ShellMethod(key = {"dblist"}, value = "Create connection to database")
+    public String runCommand() {
 
-		Set<DatabaseGroup> groups = DatabaseLoader.getDbGroups();
-		if (CollectionUtils.isEmpty(groups)) {
-			return LogUtils.createSuccessLog("No database not found!");
-		}
+        Set<DatabaseGroup> groups = DatabaseLoader.getDbGroups();
+        if (CollectionUtils.isEmpty(groups)) {
+            return LogUtils.createSuccessLog("No database not found!");
+        }
 
-		for (DatabaseGroup group : groups) {
-			System.out.println(group.toString());
-		}
-		return null;
-	}
+        for (DatabaseGroup group : groups) {
+            System.out.println(group.toString());
+        }
+        return null;
+    }
 }

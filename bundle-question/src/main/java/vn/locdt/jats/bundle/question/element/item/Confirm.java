@@ -19,6 +19,7 @@ public class Confirm extends Item {
     public boolean isConfirmed() {
         return confirmed;
     }
+
     public void yesLabel(String yes) {
         yesLabel = yes;
     }

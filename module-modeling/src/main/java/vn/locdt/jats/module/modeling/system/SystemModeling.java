@@ -4,7 +4,11 @@ import vn.locdt.jats.module.modeling.DatabaseMetadataWrapper;
 import vn.locdt.jats.module.modeling.ResultSetExtractor;
 import vn.locdt.jats.module.modeling.exception.CatalogNotSupportException;
 import vn.locdt.jats.module.modeling.exception.SchemaNotSupportException;
-import vn.locdt.jats.module.modeling.model.*;
+import vn.locdt.jats.module.modeling.model.Catalog;
+import vn.locdt.jats.module.modeling.model.Column;
+import vn.locdt.jats.module.modeling.model.Relation;
+import vn.locdt.jats.module.modeling.model.Schema;
+import vn.locdt.jats.module.modeling.model.Table;
 
 import java.sql.ResultSet;
 
@@ -16,7 +20,8 @@ public abstract class SystemModeling {
     protected ResultSetExtractor extractor;
     protected String catalog;
 
-    public SystemModeling() {}
+    public SystemModeling() {
+    }
 
     public SystemModeling(DatabaseMetadataWrapper wrapper) {
         this.wrapper = wrapper;

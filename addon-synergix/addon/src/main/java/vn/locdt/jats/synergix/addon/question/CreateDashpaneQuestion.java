@@ -13,25 +13,25 @@ import java.util.List;
 
 public class CreateDashpaneQuestion extends SynergixCreateFormQuesion<DashpaneModel> {
 
-	public CreateDashpaneQuestion(DashpaneModel parameter) {
-		super(parameter);
-	}
+    public CreateDashpaneQuestion(DashpaneModel parameter) {
+        super(parameter);
+    }
 
-	@Override
-	protected void generateFormPage(TemplateProducer producer, String th6Path) throws IOException, TemplateException {
-		String outputDirectory = FileUtils.path(th6Path, WEBAPP_PATH, "dashboards", "dashpane");
-		String fileName = this.parameter.getCode().toLowerCase();
+    @Override
+    protected void generateFormPage(TemplateProducer producer, String th6Path) throws IOException, TemplateException {
+        String outputDirectory = FileUtils.path(th6Path, WEBAPP_PATH, "dashboards", "dashpane");
+        String fileName = this.parameter.getCode().toLowerCase();
 
-		TH6WebPageContext context = new TH6WebPageContext<>(this.getParameter(), outputDirectory, fileName);
-		Th6WebPageGenerator generator = new Th6WebPageGenerator(context);
-		generator.generate(producer);
-	}
+        TH6WebPageContext context = new TH6WebPageContext<>(this.getParameter(), outputDirectory, fileName);
+        Th6WebPageGenerator generator = new Th6WebPageGenerator(context);
+        generator.generate(producer);
+    }
 
-	@Override
-	protected List<String> getParentBeans() {
-		return Arrays.asList(
-				"DashpaneBean",
-				"FinancialPeriodDashpaneBean"
-		);
-	}
+    @Override
+    protected List<String> getParentBeans() {
+        return Arrays.asList(
+                "DashpaneBean",
+                "FinancialPeriodDashpaneBean"
+        );
+    }
 }

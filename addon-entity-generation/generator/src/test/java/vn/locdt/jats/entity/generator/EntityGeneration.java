@@ -14,7 +14,7 @@ import java.sql.DriverManager;
  * Created by locdt on 2/9/2018.
  */
 public class EntityGeneration {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
 //        DatabaseMetadataWrapper wrapper = createDatabaseMetadataWrapper();
 //        Catalog catalog = readCatalog("thesis", wrapper);
 

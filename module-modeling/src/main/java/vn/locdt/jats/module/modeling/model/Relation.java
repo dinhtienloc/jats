@@ -104,6 +104,7 @@ public class Relation extends Model {
         IMPOERTED_KEY_SET_DEFAULT(3),
         IMPORTED_KEY_RESTRICT(4);
         private int type;
+
         UpdateRule(int type) {
             this.type = type;
         }
@@ -131,6 +132,7 @@ public class Relation extends Model {
         IMPOERTED_KEY_SET_DEFAULT(3),
         IMPORTED_KEY_RESTRICT(4);
         private int type;
+
         DeleteRule(int type) {
             this.type = type;
         }

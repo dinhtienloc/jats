@@ -12,7 +12,8 @@ public abstract class GenerationContext<CM> {
     protected FileType fileType;
     protected String outputDirectory;
 
-    public GenerationContext() {}
+    public GenerationContext() {
+    }
 
     public GenerationContext(FileType fileType) {
         this.fileType = fileType;
@@ -25,8 +26,8 @@ public abstract class GenerationContext<CM> {
     }
 
     public GenerationContext(CM contextModel, String outputDirectory,
-							 String outputName, FileType fileType) {
-        this(outputDirectory ,outputName, fileType);
+                             String outputName, FileType fileType) {
+        this(outputDirectory, outputName, fileType);
         this.contextModel = contextModel;
     }
 
@@ -54,15 +55,15 @@ public abstract class GenerationContext<CM> {
         this.fileType = fileType;
     }
 
-	public String getOutputDirectory() {
-		return this.outputDirectory;
-	}
+    public String getOutputDirectory() {
+        return this.outputDirectory;
+    }
 
-	public void setOutputDirectory(String outputDirectory) {
-		this.outputDirectory = outputDirectory;
-	}
+    public void setOutputDirectory(String outputDirectory) {
+        this.outputDirectory = outputDirectory;
+    }
 
-	public String getOutputPath() {
-		return FileUtils.path(this.outputDirectory, this.outputName + this.fileType.getExt());
-	}
+    public String getOutputPath() {
+        return FileUtils.path(this.outputDirectory, this.outputName + this.fileType.getExt());
+    }
 }

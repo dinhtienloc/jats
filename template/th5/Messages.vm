@@ -1,0 +1,3 @@
+#foreach( $prop in $propertyList )
+${prop.lcName}=$prop.label
+#end

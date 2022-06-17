@@ -17,6 +17,7 @@ public class RootPackageQuestion extends QuestionCLI {
             SettingData.save();
         super.postQuestion();
     }
+
     @Override
     protected void run() {
         if (askForRootPackage())

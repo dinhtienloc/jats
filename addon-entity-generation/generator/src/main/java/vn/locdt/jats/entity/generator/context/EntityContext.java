@@ -39,8 +39,7 @@ public class EntityContext extends JavaClassContext {
             Table parentTable = relation.getParentColumn().getTable();
             javaType = importClass(packageName + "." + parentTable.getJavaName());
             variableName = parentTable.getJavaVarName();
-        }
-        else {
+        } else {
             javaType = importClass(column.getJavaType());
             variableName = column.getJavaVarName();
         }
@@ -51,10 +50,10 @@ public class EntityContext extends JavaClassContext {
         s.append("\t}").append(OsUtils.LINE_SEPARATOR);
         s.append(OsUtils.LINE_SEPARATOR);
         s.append("\tpublic void set" + javaType)
-            .append("(")
-            .append(javaType + " " + variableName)
-            .append("){")
-            .append(OsUtils.LINE_SEPARATOR);
+                .append("(")
+                .append(javaType + " " + variableName)
+                .append("){")
+                .append(OsUtils.LINE_SEPARATOR);
         s.append("\t\tthis." + variableName + " = " + variableName + ";").append(OsUtils.LINE_SEPARATOR);
         s.append("\t}");
         return s.toString();
@@ -69,8 +68,7 @@ public class EntityContext extends JavaClassContext {
             importClass("javax.persistence.JoinColumn");
             s.append("    @ManyToOne(fetch = FetchType.EAGER)").append(OsUtils.LINE_SEPARATOR);
             s.append("    @JoinColumn(name = \"" + relation.getChildColumnName() + "\")");
-        }
-        else if (column.getTable().getName().equals(relation.getParentTableName())) {
+        } else if (column.getTable().getName().equals(relation.getParentTableName())) {
             importClass("javax.persistence.OneToMany");
             importClass("javax.persistence.CascadeType");
             s.append("@OneToMany(\n" +

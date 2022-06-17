@@ -2,7 +2,11 @@ package vn.locdt.jats.module.modeling.system.mysql;
 
 import vn.locdt.jats.module.modeling.ResultSetExtractor;
 import vn.locdt.jats.module.modeling.exception.SchemaNotSupportException;
-import vn.locdt.jats.module.modeling.model.*;
+import vn.locdt.jats.module.modeling.model.Catalog;
+import vn.locdt.jats.module.modeling.model.Column;
+import vn.locdt.jats.module.modeling.model.Relation;
+import vn.locdt.jats.module.modeling.model.Schema;
+import vn.locdt.jats.module.modeling.model.Table;
 import vn.locdt.jats.module.modeling.system.SystemModeling;
 import vn.locdt.jats.module.modeling.util.DatabaseUtils;
 import vn.locdt.jats.module.modeling.util.SQL;
@@ -61,9 +65,9 @@ public class MySQLSystemModeling extends SystemModeling {
         wrapper.setCatalog(catalog.getName());
         wrapper.getAllTables().forEach(row -> modelTable(catalog, row));
         catalog.getTables().forEach(
-            table -> wrapper.getForeignKeys(table.getName()).forEach(
-                row -> modelForeignKey(catalog, row)
-            )
+                table -> wrapper.getForeignKeys(table.getName()).forEach(
+                        row -> modelForeignKey(catalog, row)
+                )
         );
 //        System.out.println(">>>>>>>>>>>> Modeling catalog: " + catalog);
         return catalog;
@@ -111,13 +115,13 @@ public class MySQLSystemModeling extends SystemModeling {
         Relation relation = extractor.relation(rs);
 
         Column pkColumn = DatabaseUtils.findColumnInTableByName(catalog,
-                                                relation.getParentTableName(),
-                                                relation.getParentColumnName());
+                relation.getParentTableName(),
+                relation.getParentColumnName());
         if (pkColumn == null) return null;
 
         Column fkColumn = DatabaseUtils.findColumnInTableByName(catalog,
-                                                relation.getChildTableName(),
-                                                relation.getChildColumnName());
+                relation.getChildTableName(),
+                relation.getChildColumnName());
         if (fkColumn == null) return null;
 
         relation.setParentColumn(pkColumn);

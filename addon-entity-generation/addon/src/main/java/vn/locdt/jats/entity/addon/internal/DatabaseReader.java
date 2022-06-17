@@ -15,6 +15,7 @@ public class DatabaseReader {
     private static final String ERROR_EXECUTING_SQL = "Error occurs when executing sql";
 
     private Connection conn;
+
     public DatabaseReader(Connection conn) {
         this.conn = conn;
     }

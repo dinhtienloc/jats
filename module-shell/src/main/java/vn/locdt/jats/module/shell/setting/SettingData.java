@@ -4,7 +4,11 @@ import vn.locdt.jats.module.shell.constants.PropertiesConstants;
 import vn.locdt.jats.util.common.FileUtils;
 import vn.locdt.jats.util.common.LogUtils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.util.Properties;
 
@@ -109,7 +113,7 @@ public class SettingData {
         }
     }
 
-    public static Connection getConnection()  {
+    public static Connection getConnection() {
         return getDatabaseSetting().getConnection();
     }
 

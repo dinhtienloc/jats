@@ -3,7 +3,6 @@ package vn.locdt.jats.module.generator.context;
 import vn.locdt.jats.module.generator.FileType;
 import vn.locdt.jats.util.common.StringUtils;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -54,7 +53,7 @@ public abstract class JavaClassContext<CM> extends GenerationContext<CM> impleme
     public String getImports() {
         return this.importsMapping.entrySet()
                 .stream()
-                .filter( e -> !e.getKey().equals(e.getValue()) && !e.getValue().contains("<"))
+                .filter(e -> !e.getKey().equals(e.getValue()) && !e.getValue().contains("<"))
                 .map(e -> String.format(IMPORT_STATEMENT, e.getValue()))
                 .collect(Collectors.joining("\n"));
     }
@@ -71,6 +70,7 @@ public abstract class JavaClassContext<CM> extends GenerationContext<CM> impleme
         this.importClass(canonicalName);
         return canonicalName;
     }
+
     public void silentImport(String... canonicalNames) {
         for (String canonicalName : canonicalNames) {
             this.importClass(canonicalName);
@@ -88,7 +88,7 @@ public abstract class JavaClassContext<CM> extends GenerationContext<CM> impleme
         String renderElementClass = this.put(elementData);
 
         String simpleValue = renderIterableClass + "<" + renderElementClass + ">";
-	    this.importsMapping.put(simpleValue, name);
+        this.importsMapping.put(simpleValue, name);
         return simpleValue;
     }
 
@@ -99,12 +99,11 @@ public abstract class JavaClassContext<CM> extends GenerationContext<CM> impleme
         String existCanonicalName = this.importsMapping.get(simpleName);
         if (existCanonicalName != null) {
             if (!existCanonicalName.equals(canonicalName)) {
-	            this.importsMapping.put(canonicalName, canonicalName);
+                this.importsMapping.put(canonicalName, canonicalName);
                 return canonicalName;
             }
-        }
-        else {
-	        this.importsMapping.put(simpleName, canonicalName);
+        } else {
+            this.importsMapping.put(simpleName, canonicalName);
         }
         return simpleName;
     }

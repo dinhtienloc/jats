@@ -14,22 +14,22 @@ import java.util.stream.StreamSupport;
 /**
  * Created by locdt on 2/2/2018.
  */
-public class ResultSetIterator<T> implements Iterable<T>{
+public class ResultSetIterator<T> implements Iterable<T> {
     private final ResultSet rs;
     private final Function<ResultSet, T> onNextFnc;
 
-    public ResultSetIterator(ResultSet rs){
+    public ResultSetIterator(ResultSet rs) {
         this.rs = rs;
         this.onNextFnc = null;
     }
 
-    public ResultSetIterator(ResultSet rs, Function<ResultSet, T> onNextFnc){
+    public ResultSetIterator(ResultSet rs, Function<ResultSet, T> onNextFnc) {
         this.rs = rs;
         this.onNextFnc = onNextFnc;
     }
 
     public ResultSet getResultSet() {
-    	return this.rs;
+        return this.rs;
     }
 
     @Override
@@ -41,24 +41,23 @@ public class ResultSetIterator<T> implements Iterable<T>{
 
                 @Override
                 public boolean hasNext() {
-	                return this.hasNext;
+                    return this.hasNext;
                 }
 
                 @Override
                 public T next() {
-	                T result = null;
-                	if (ResultSetIterator.this.onNextFnc == null) {
-		                try {
-		                    result  = (T) ResultSetIterator.this.rs;
-		                } catch (ClassCastException e) {
-		                	LogUtils.printErrorLog("Need to declare method to transform ResultSet to another class", e);
-		                }
-	                }
-	                else {
-		                result = ResultSetIterator.this.onNextFnc.apply(ResultSetIterator.this.rs);
-	                }
+                    T result = null;
+                    if (ResultSetIterator.this.onNextFnc == null) {
+                        try {
+                            result = (T) ResultSetIterator.this.rs;
+                        } catch (ClassCastException e) {
+                            LogUtils.printErrorLog("Need to declare method to transform ResultSet to another class", e);
+                        }
+                    } else {
+                        result = ResultSetIterator.this.onNextFnc.apply(ResultSetIterator.this.rs);
+                    }
                     try {
-	                    this.hasNext = ResultSetIterator.this.rs.next();
+                        this.hasNext = ResultSetIterator.this.rs.next();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }

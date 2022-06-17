@@ -9,9 +9,9 @@ import vn.locdt.jats.util.common.LogUtils;
 @Component
 public class ApplicationReadyListener implements ApplicationListener<ApplicationReadyEvent> {
 
-	@Override
-	public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
-		LogUtils.printSuccessLog("Save configs...");
-		Configuration.saveAllConfiguration();
-	}
+    @Override
+    public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
+        LogUtils.printSuccessLog("Save configs...");
+        Configuration.saveAllConfiguration();
+    }
 }

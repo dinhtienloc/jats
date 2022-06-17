@@ -11,15 +11,15 @@ import org.springframework.stereotype.Component;
 @Component
 public abstract class QuestionCommand {
 
-	@Autowired
-	@Lazy
-	private LineReader lineReader;
+    @Autowired
+    @Lazy
+    private LineReader lineReader;
 
-	public QuestionCommand() {
+    public QuestionCommand() {
 
-	}
+    }
 
-	public LineReader getLineReader() {
-		return this.lineReader;
-	}
+    public LineReader getLineReader() {
+        return this.lineReader;
+    }
 }

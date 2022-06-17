@@ -9,6 +9,7 @@ import java.util.Map;
  */
 public class DataTypeMapping {
     private static Map<Integer, String> dataMap = new HashMap<>();
+
     static {
         puts(dataMap, "java.lang.String", Types.CHAR, Types.VARCHAR, Types.NCHAR, Types.NVARCHAR, Types.LONGNVARCHAR, Types.LONGVARCHAR);
         puts(dataMap, "java.lang.Byte[]", Types.BINARY, Types.VARBINARY, Types.LONGVARBINARY);

@@ -16,15 +16,15 @@ import java.nio.file.Paths;
 @QuestionImports({})
 public class ClearConfigCommand extends QuestionCommand {
 
-	@ShellMethod(key = { "config:clear"}, value = "Clear all saved setting in current project")
-	public void runCommand() {
-		try {
-			SettingData.clearSetting();
-			Files.deleteIfExists(Paths.get(FileUtils.getConfigurationPath()));
-			LogUtils.printSuccessLog("All settings are removed!");
-		} catch (IOException e) {
-			e.printStackTrace();
-			LogUtils.printErrorLog("Could not remove settings!");
-		}
-	}
+    @ShellMethod(key = {"config:clear"}, value = "Clear all saved setting in current project")
+    public void runCommand() {
+//        try {
+//            SettingData.clearSetting();
+//            Files.deleteIfExists(Paths.get(FileUtils.getConfigurationPath()));
+//            LogUtils.printSuccessLog("All settings are removed!");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            LogUtils.printErrorLog("Could not remove settings!");
+//        }
+    }
 }

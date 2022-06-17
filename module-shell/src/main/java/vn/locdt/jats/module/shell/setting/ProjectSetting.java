@@ -15,7 +15,9 @@ public class ProjectSetting extends Setting {
     protected String entityFolder;
     protected Path rootPackagePath;
 
-    public ProjectSetting() {super();}
+    public ProjectSetting() {
+        super();
+    }
 
     public ProjectSetting(Properties prop) {
         this.entityFolder = prop.getProperty(PropertiesConstants.ENTITYFOLDER);

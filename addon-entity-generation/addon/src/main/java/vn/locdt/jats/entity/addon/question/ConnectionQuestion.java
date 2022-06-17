@@ -28,8 +28,7 @@ public class ConnectionQuestion extends QuestionCLI {
             askForDatabasePassword();
 
             SettingData.createConnection();
-        }
-        else if (SettingData.getDatabaseSetting().getConnection() != null)
+        } else if (SettingData.getDatabaseSetting().getConnection() != null)
             status = QuestionStatus.CONTINUE;
         else {
             LogUtils.createErrorLog("Could not establish connection.");

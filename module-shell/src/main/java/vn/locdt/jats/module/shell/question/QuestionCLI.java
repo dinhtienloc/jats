@@ -9,7 +9,8 @@ public abstract class QuestionCLI {
     protected QuestionStatus status;
     protected LineReader lineReader;
 
-    public QuestionCLI() {}
+    public QuestionCLI() {
+    }
 
     protected void preQuestion() {
         status = QuestionStatus.CONTINUE;

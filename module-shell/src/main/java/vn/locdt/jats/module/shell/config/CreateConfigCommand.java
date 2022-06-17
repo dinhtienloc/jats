@@ -10,15 +10,15 @@ import vn.locdt.jats.util.common.LogUtils;
 @ShellComponent
 public class CreateConfigCommand {
 
-	@ShellMethod(key = { "config:add"}, value = "Create a global config")
-	public String runCommand(
-			@ShellOption(value = {"-n", "--name"}) String propertyName,
-			@ShellOption(value = {"-p", "--prop"}) String propertyValue) {
+    @ShellMethod(key = {"config:add"}, value = "Create a global config")
+    public String runCommand(
+            @ShellOption(value = {"-n", "--name"}) String propertyName,
+            @ShellOption(value = {"-p", "--prop"}) String propertyValue) {
 
-		ContextKey key = ShellRuntimeContext.getContextKey(propertyName);
-		if (key != null) {
-			ShellRuntimeContext.addContext(key, propertyValue);
-		}
-		return LogUtils.createSuccessLog("[SUCCESS] Config " + LogUtils.bold(propertyName) + " is updated with new value: " + LogUtils.bold(propertyValue));
-	}
+        ContextKey key = ShellRuntimeContext.getContextKey(propertyName);
+        if (key != null) {
+            ShellRuntimeContext.addContext(key, propertyValue);
+        }
+        return LogUtils.createSuccessLog("[SUCCESS] Config " + LogUtils.bold(propertyName) + " is updated with new value: " + LogUtils.bold(propertyValue));
+    }
 }

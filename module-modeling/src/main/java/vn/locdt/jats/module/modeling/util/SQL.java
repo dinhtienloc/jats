@@ -20,16 +20,16 @@ public class SQL {
         };
     }
 
-    public static<T> T wrap(ThrowingCallable<T, SQLException> throwingCallable, Object returnWhenExceptionOccur) {
+    public static <T> T wrap(ThrowingCallable<T, SQLException> throwingCallable, Object returnWhenExceptionOccur) {
         try {
             return throwingCallable.call();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return (T)returnWhenExceptionOccur;
+        return (T) returnWhenExceptionOccur;
     }
 
-    public static<T> T wrap(ThrowingCallable<T, SQLException> throwingCallable) {
+    public static <T> T wrap(ThrowingCallable<T, SQLException> throwingCallable) {
         return wrap(throwingCallable, null);
     }
 }

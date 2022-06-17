@@ -1,9 +1,6 @@
 package vn.locdt.jats.synergix.generator.context;
 
-import org.apache.commons.lang.StringUtils;
 import vn.locdt.jats.module.generator.context.JavaClassContext;
-import vn.locdt.jats.synergix.generator.context.model.DashpaneModel;
-import vn.locdt.jats.synergix.generator.context.model.FormModel;
 import vn.locdt.jats.synergix.generator.context.model.SynergixFormModel;
 
 public class TH6BeanContext<M extends SynergixFormModel> extends JavaClassContext<M> {

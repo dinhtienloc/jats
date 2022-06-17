@@ -3,7 +3,6 @@ import vn.locdt.jats.module.generator.TemplateProducer;
 import vn.locdt.jats.module.generator.exception.TemplateException;
 import vn.locdt.jats.synergix.generator.TH6BeanGenerator;
 import vn.locdt.jats.synergix.generator.TH6ServiceGenerator;
-import vn.locdt.jats.synergix.generator.context.TH6BeanContext;
 import vn.locdt.jats.synergix.generator.context.TH6ServiceContext;
 import vn.locdt.jats.synergix.generator.context.model.FormModel;
 

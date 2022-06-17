@@ -18,7 +18,8 @@ public class DatabaseSetting extends Setting {
     private static String dbPass;
     private static Connection connection = null;
 
-    public DatabaseSetting() {}
+    public DatabaseSetting() {
+    }
 
     public DatabaseSetting(Properties prop) {
         this.dbType = prop.getProperty(PropertiesConstants.DBTYPE);
@@ -75,7 +76,7 @@ public class DatabaseSetting extends Setting {
         return false;
     }
 
-    public boolean createConnection(){
+    public boolean createConnection() {
         try {
             LogUtils.printLog("Establish connection...");
             this.connection = DriverManager.getConnection(dbUrl, dbUser, dbPass);
@@ -88,7 +89,7 @@ public class DatabaseSetting extends Setting {
         return false;
     }
 
-    public Connection getConnection()  {
+    public Connection getConnection() {
         try {
             if (connection != null && connection.isClosed())
                 createConnection();
